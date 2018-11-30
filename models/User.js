@@ -14,8 +14,7 @@ const UserSchema = new Schema(
       required: true
     },
     email: {
-      type: String,
-      required: true
+      type: String
     },
     avatar: {
       type: String
@@ -24,8 +23,14 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false
     },
+    googleId: {
+      type: String,
+      required: true
+    },
     eventsHosted: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
     eventsAttended: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }]
   },
   { timestamps: true }
 );
+
+module.exports = User = mongoose.model("user", UserSchema);

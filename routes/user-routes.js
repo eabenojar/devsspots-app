@@ -10,16 +10,23 @@ router.get("/login", (req, res) => {
 router.get(
   "/google",
   passport.authenticate("google", {
-    scope: ["profile"]
+    scope: ["profile", "email"]
   })
 );
 
 // callback route for google to redirect to
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  function(req, res) {
-    console.log("SUCCESS RESPONSE", res);
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    accessType: "offline",
+    prompt: "consent",
+    session: false
+  }),
+  (err, req, res) => {
+    if (err) {
+      console.log("ERROR", err);
+    }
     res.send("AYYYEEEE ITS LIT!");
   }
 );
