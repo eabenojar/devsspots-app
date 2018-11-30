@@ -15,19 +15,13 @@ router.get(
 );
 
 // callback route for google to redirect to
+// hand control to passport to use code to grab profile info
 router.get(
   "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-    accessType: "offline",
-    prompt: "consent",
-    session: false
-  }),
-  (err, req, res) => {
-    if (err) {
-      console.log("ERROR", err);
-    }
-    res.send("AYYYEEEE ITS LIT!");
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    res.send(req.user);
+    // res.redirect("/profile");
   }
 );
 
