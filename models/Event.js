@@ -1,0 +1,51 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const EventSchema = new Schema(
+  {
+    eventTitle: {
+      type: String,
+      required: true
+    },
+    eventDescription: {
+      type: String,
+      required: true
+    },
+    eventCapacity: {
+      type: Number,
+      required: true
+    },
+    eventHost: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    eventImage: {
+      type: String
+    },
+    eventLocation: {
+      type: String,
+      required: true
+    },
+    eventCategory: {
+      type: String,
+      required: true
+    },
+    timeStart: {
+      type: String,
+      required: true
+    },
+    timeEnd: {
+      type: String,
+      required: true
+    },
+    eventAttendees: {
+      type: [String]
+    },
+    typeofRoom: {
+      type: String
+    },
+    eventDate: {
+      type: Date
+    }
+  },
+  { timestamps: true }
+);
+
+module.exports = User = mongoose.model("users", UserSchema);
