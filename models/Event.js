@@ -42,7 +42,8 @@ const EventSchema = new Schema(
       type: String
     },
     eventDate: {
-      type: Date
+      type: Date,
+      required: true
     }
   },
   { timestamps: true }

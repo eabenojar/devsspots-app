@@ -10,7 +10,12 @@ cookieSession = require("cookie-session");
 // Create express app
 const app = express();
 
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // set up session cookies
+
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
@@ -23,13 +28,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // connect to mongodb
-mongoose.connect(
-  keys.mongodb.URI,
-  () => {
+mongoose
+  .connect(
+    keys.mongodb.URI,
+    { useNewUrlParser: true }
+  )
+  .then(() => {
     console.log("Success! Connected to mongodb");
-  }
-);
-
+  })
+  .catch(err => console.log(err));
 // set up routes
 app.use("/auth", userRoutes);
 const PORT = process.env.PORT || 5000;

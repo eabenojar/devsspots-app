@@ -11,7 +11,7 @@ const UserSchema = new Schema(
     },
     lastName: {
       type: String,
-      required: true
+      required: false
     },
     email: {
       type: String
@@ -25,7 +25,7 @@ const UserSchema = new Schema(
     },
     googleId: {
       type: String,
-      required: true
+      required: false
     },
     eventsHosted: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
     eventsAttended: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }]
