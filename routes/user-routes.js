@@ -5,13 +5,16 @@ const User = require("../models/User");
 // auth login
 router.get("/login", (req, res) => {
   // res.send("Login with Google Fam!");
-  res.render("login", { user: req.user });
+  console.log("LOGIN", req.cookies.session);
+  res.send({ user: req.user });
 });
 
 // auth logout
 router.get("/logout", (req, res) => {
+  console.log("REQ COOKIE BEFORE LOGOUT", req.cookies);
   req.logout();
-  res.redirect("/");
+  console.log("REQ COOKIE AFTER LOGOUT", req.cookies);
+  res.redirect("/profile");
 });
 
 // auth with google+
@@ -50,6 +53,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
     // res.send(req.user);
+    console.log("CALLBACKK SESSION", req.session.token);
     res.redirect("/profile");
   }
 );

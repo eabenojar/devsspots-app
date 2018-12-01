@@ -5,11 +5,10 @@ const User = require("../models/User");
 
 // used to serialize the user for the session
 // user.id is saved to session as req.session.passport.user = {id: '...'}
-// passport.serializeUser((user, done) => {
-//   console.log("SERIALIZE USER", user);
-//   done(null, user.id);
-// });
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
 // // used to deserialize the user
 // // id is from th req.session.passport.user from the serializeUser
 // // user object is returned. The done function attaches to the req object as req.user
@@ -19,10 +18,6 @@ const User = require("../models/User");
 //     done(null, user);
 //   });
 // });
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
 
 passport.deserializeUser(function(user, done) {
   done(null, user);
