@@ -54,6 +54,7 @@ router.get(
   (req, res) => {
     // res.send(req.user);
     console.log("CALLBACKK SESSION", req.session.token);
+    console.log("USER FROM CALLBACK", req.user);
     res.redirect("/profile");
   }
 );

@@ -55,7 +55,9 @@ passport.use(
               });
           }
         })
-        .catch(err => console.log("ERROR", err));
+        .catch(err => {
+          console.log("ERROR", err);
+        });
     }
   )
 );
