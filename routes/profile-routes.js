@@ -1,13 +1,5 @@
 const router = require("express").Router();
-
-const isUserAuth = (req, res, next) => {
-  if (!req.user) {
-    res.send("User is not logged in");
-    res.redirect("/auth/login");
-  } else {
-    next();
-  }
-};
+const isUserAuth = require("../middleware/userAuth");
 
 router.get("/profile", isUserAuth, (req, res) => {
   console.log("REQ PROFILE", req.cookies);

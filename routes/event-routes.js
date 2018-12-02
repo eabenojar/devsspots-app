@@ -1,15 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
-
-const isUserAuth = (req, res, next) => {
-  if (!req.user) {
-    res.send("USER IS NOT LOGGED IN!!!!");
-    res.redirect("/auth/login");
-  } else {
-    next();
-  }
-};
+const isUserAuth = require("../middleware/userAuth");
 
 // Event Model
 const Event = require("../models/Event");
