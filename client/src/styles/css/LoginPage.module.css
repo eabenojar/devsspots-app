@@ -1,0 +1,11 @@
+.main {
+  height: calc(100vh - 50px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+}
+.title {
+  font-size: 100px;
+}
