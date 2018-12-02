@@ -1,15 +1,28 @@
 import React, { Component } from "react";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import styless from "../styles/css/LoginPage.module.css";
+import { loginUser } from "../actions/authAction";
+import { connect } from "react-redux";
 
 class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+    this.authUser = this.authUser.bind(this);
+  }
+  authUser(event) {
+    // console.log("AUTH CLICKED");
+    // this.props.loginUser();
+    // // this.props.history.push("/auth/google");
+    // event.preventDefault();
+  }
   render() {
+    console.log("LOGIN PROPS", this.props);
     return (
       <div className={styless.main}>
         <div>
           <h1 className={styless.title}>Login Here</h1>
           <a href="/auth/google">
-            <button>Sign In</button>
+            <button onClick={this.authUser}>Sign In</button>
           </a>
         </div>
       </div>
@@ -17,4 +30,13 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+const mapStateToProps = state => {
+  return {
+    state
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(LoginPage);

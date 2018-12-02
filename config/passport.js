@@ -7,7 +7,7 @@ const User = require("../models/User");
 // user.id is saved to session as req.session.passport.user = {id: '...'}
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  done(null, user.id);
 });
 // // used to deserialize the user
 // // id is from th req.session.passport.user from the serializeUser
@@ -20,7 +20,9 @@ passport.serializeUser(function(user, done) {
 // });
 
 passport.deserializeUser(function(user, done) {
-  done(null, user);
+  User.findById(id).then(user => {
+    done(null, user);
+  });
 });
 
 // Use the GoogleStrategy within Passport.
@@ -42,7 +44,6 @@ passport.use(
             console.log("Current user is", currentUser);
             done(null, currentUser);
           } else {
-            console.log("ELSE ");
             new User({
               firstName: profile.name.givenName,
               lastName: profile.name.familyName,
@@ -61,3 +62,14 @@ passport.use(
     }
   )
 );
+
+// async (accessToken, refreshToken, profile, done) => {
+//   const existingUser = await User.findOne({ googleId: profile.id });
+
+//   if (existingUser) {
+//     return done(null, existingUser);
+//   }
+
+//   const user = await new User({ googleId: profile.id }).save();
+//   done(null, user);
+// };
