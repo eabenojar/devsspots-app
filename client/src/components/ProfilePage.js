@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import CreateEvent from "./CreateEvent";
 
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showEventForm: false
+    };
     this.renderProfile = this.renderProfile.bind(this);
+    this.createEvent = this.createEvent.bind(this);
   }
   renderProfile() {
     console.log("RENDER PROFILE");
@@ -24,12 +29,19 @@ class ProfilePage extends Component {
       );
     }
   }
+  createEvent() {
+    this.setState({
+      showEventForm: true
+    });
+  }
   render() {
     console.log("PROFILE PROPS", this.props.auth.user[0]);
     return (
       <div>
         <h1>Profile page </h1>
         {this.renderProfile()}
+        <button onClick={this.createEvent}>Create Event</button>
+        {this.state.showEventForm === false ? null : <CreateEvent />}
       </div>
     );
   }
