@@ -27,7 +27,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    state
+    auth: state.auth
   };
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Navbar, Nav, NavItem } from "react-bootstrap";
-import styless from "../styles/css/LoginPage.module.css";
+import styles from "../styles/css/LoginPage.module.css";
 import { fetchUser } from "../actions/authAction";
 import { connect } from "react-redux";
 
@@ -18,9 +18,9 @@ class LoginPage extends Component {
   render() {
     console.log("LOGIN PROPS", this.props);
     return (
-      <div className={styless.main}>
+      <div className={styles.main}>
         <div>
-          <h1 className={styless.title}>Login Here</h1>
+          <h1 className={styles.title}>Login Here</h1>
           <a href="/auth/google">
             <button onClick={this.authUser}>Sign In</button>
           </a>
