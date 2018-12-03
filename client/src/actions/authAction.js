@@ -1,17 +1,17 @@
 import axios from "axios";
-import { AUTH_USER } from "./types";
+import { FETCH_USER } from "./types";
 
-export const loginUser = () => dispatch => {
+export const fetchUser = () => dispatch => {
   axios
-    .get("/auth/google")
+    .get("/auth/current_user")
     .then(res => {
       console.log("SUCESS SENT FROM CLIENT", res.data);
       dispatch({
-        type: AUTH_USER,
+        type: FETCH_USER,
         payload: res.data
       });
     })
     .catch(err => {
-      console.log("ERROR CLIENT", err);
+      console.log("ERROR FAM", err);
     });
 };

@@ -6,23 +6,18 @@ const User = require("../models/User");
 // used to serialize the user for the session
 // user.id is saved to session as req.session.passport.user = {id: '...'}
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
+
 // // used to deserialize the user
 // // id is from th req.session.passport.user from the serializeUser
 // // user object is returned. The done function attaches to the req object as req.user
-// passport.deserializeUser((id, done) => {
-//   console.log("DESERIALIZE", id);
-//   User.findById(id).then(user => {
-//     done(null, user);
-//   });
-// });
 
-passport.deserializeUser(function(user, done) {
-  User.findById(id).then(user => {
-    done(null, user);
-  });
+passport.deserializeUser((user, done) => {
+  console.log("DESERIAL", user);
+
+  done(null, user);
 });
 
 // Use the GoogleStrategy within Passport.

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
+// import { Navbar, Nav, NavItem } from "react-bootstrap";
 import styless from "../styles/css/LoginPage.module.css";
-import { loginUser } from "../actions/authAction";
+import { fetchUser } from "../actions/authAction";
 import { connect } from "react-redux";
 
 class LoginPage extends Component {
@@ -24,6 +24,9 @@ class LoginPage extends Component {
           <a href="/auth/google">
             <button onClick={this.authUser}>Sign In</button>
           </a>
+          <a href="/auth/logout">
+            <button onClick={this.authUser}>Log Out</button>
+          </a>
         </div>
       </div>
     );
@@ -38,5 +41,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { fetchUser }
 )(LoginPage);
