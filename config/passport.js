@@ -33,6 +33,7 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
+      console.log("PROFILE USER", profile);
       User.find({ googleId: profile.id })
         .then(currentUser => {
           if (currentUser.length > 0) {
@@ -42,7 +43,9 @@ passport.use(
             new User({
               firstName: profile.name.givenName,
               lastName: profile.name.familyName,
-              googleId: profile.id
+              googleId: profile.id,
+              email: profile.emails[0].value,
+              profileImg: profile.photos[0].value
             })
               .save()
               .then(newUser => {

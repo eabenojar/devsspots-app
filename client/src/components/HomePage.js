@@ -14,8 +14,7 @@ class HomePage extends Component {
         "ANGULAR",
         "VUE",
         "NODEJS"
-      ],
-      name: "Tim"
+      ]
     };
     this.categoryEvents = this.categoryEvents.bind(this);
   }
@@ -33,9 +32,7 @@ class HomePage extends Component {
       <div className={styles.main}>
         <div className={styles.titleSection}>
           <div className={styles.titleSectionLeft}>
-            <h1 className={styles.titleLeft}>
-              Find Study Groups {this.state.name}
-            </h1>
+            <h1 className={styles.titleLeft}>Find Study Groups</h1>
           </div>
           <div className={styles.titleSectionRight}>
             {/* <h1>Home Page Right</h1> */}

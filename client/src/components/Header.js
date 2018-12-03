@@ -45,9 +45,14 @@ class Header extends Component {
                 Login
               </NavItem>
             ) : (
-              <NavItem eventKey={1} href="/auth/logout">
-                Logout
-              </NavItem>
+              <Nav>
+                <NavItem eventKey={1} href="/profile">
+                  Profile
+                </NavItem>
+                <NavItem eventKey={1} href="/auth/logout">
+                  Logout
+                </NavItem>
+              </Nav>
             )}
           </Nav>
         </Navbar.Collapse>

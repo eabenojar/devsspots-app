@@ -27,6 +27,9 @@ const UserSchema = new Schema(
       type: String,
       required: false
     },
+    profileImg: {
+      type: String
+    },
     eventsHosted: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
     eventsAttended: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }]
   },
