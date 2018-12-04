@@ -51,7 +51,7 @@ export const getUserEvents = userId => dispatch => {
     console.log("IT WORKED FROM SERVER GET USER EVENTS", res.data);
     dispatch({
       type: GET_USER_EVENTS,
-      payload: res.data
+      payload: res.data.eventsHosted
     });
   });
 };

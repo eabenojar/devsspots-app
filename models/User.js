@@ -30,8 +30,8 @@ const UserSchema = new Schema(
     profileImg: {
       type: String
     },
-    eventsHosted: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
-    eventsAttended: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }]
+    eventsHosted: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
+    eventsAttended: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }]
   },
   { timestamps: true }
 );

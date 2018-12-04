@@ -13,9 +13,10 @@ export default function(state = initialState, action) {
         event: action.paylod
       };
     case GET_USER_EVENTS:
+      console.log("GET USER EVENTS", action.payload);
       return {
         ...state,
-        eventsHosted: [...state.eventsHosted, action.paylod]
+        eventsHosted: action.payload
       };
     default:
       return state;

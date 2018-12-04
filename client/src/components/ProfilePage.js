@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 // Components
 import ManageEvents from "./ManageEvents";
 import CreateEvent from "./CreateEvent";
@@ -50,8 +52,13 @@ class ProfilePage extends Component {
         {this.renderProfile()}
         <button onClick={this.createEvent}>Create Event</button>
         <button onClick={this.onManageEvents}>Manage Events</button>
+        <Link to="/user/events">
+          <button type="button">Manage Events</button>
+        </Link>
         {this.state.showEventForm === false ? null : <CreateEvent />}
-        {this.state.manageEvents === false ? null : <ManageEvents />}
+        {this.state.manageEvents === false ? null : (
+          <ManageEvents userId={this.props.auth.user[0]._id} />
+        )}
       </div>
     );
   }
