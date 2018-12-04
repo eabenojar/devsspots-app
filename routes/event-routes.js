@@ -42,8 +42,9 @@ router.get("/new", isUserAuth, (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.get(
-  "/test",
+router.delete(
+  "/:id",
+  isUserAuth,
   (req, res, next) => {
     console.log("THIS IS MIDDLEWARE ");
     next();

@@ -9,6 +9,9 @@ import {
   Button
 } from "react-bootstrap";
 
+import { connect } from "react-redux";
+import { addEvent } from "../actions/eventActions";
+
 class CreateEvent extends Component {
   constructor(props, context) {
     super(props, context);
@@ -92,6 +95,24 @@ class CreateEvent extends Component {
             </Col>
           </FormGroup>
 
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              Start Time
+            </Col>
+            <Col sm={10}>
+              <FormControl type="time" placeholder="Password" />
+            </Col>
+          </FormGroup>
+
+          <FormGroup controlId="formHorizontalPassword">
+            <Col componentClass={ControlLabel} sm={2}>
+              End Time
+            </Col>
+            <Col sm={10}>
+              <FormControl type="datetime-local" placeholder="Password" />
+            </Col>
+          </FormGroup>
+
           <FormGroup>
             <Col smOffset={2} sm={10}>
               <Button type="submit">Sign in</Button>
@@ -104,4 +125,7 @@ class CreateEvent extends Component {
   }
 }
 
-export default CreateEvent;
+export default connect(
+  null,
+  { addEvent }
+)(CreateEvent);
