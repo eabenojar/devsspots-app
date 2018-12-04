@@ -16,11 +16,14 @@ class CreateEvent extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleChange = this.handleChange.bind(this);
-
     this.state = {
-      value: ""
+      value: "",
+      eventTitle: "",
+      eventDescription: ""
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   getValidationState() {
     const length = this.state.value.length;
@@ -29,20 +32,35 @@ class CreateEvent extends Component {
     else if (length > 0) return "error";
     return null;
   }
+  onSubmit(e) {
+    e.preventDefault();
+    const newEvent = {
+      eventTitle: this.state.eventTitle,
+      eventDescription: this.state.eventDescription,
+      eventHost: this.props.auth.user[0]._id
+    };
+    this.props.addEvent(newEvent);
+  }
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   }
   render() {
+    console.log("CREATE EVENT PROPS", this.props);
     return (
       <div>
         <h1>Create Event</h1>
-        <Form horizontal>
+        <Form horizontal onSubmit={this.onSubmit}>
           <FormGroup controlId="formHorizontalEmail">
             <Col componentClass={ControlLabel} sm={2}>
               Event Title
             </Col>
             <Col sm={10}>
-              <FormControl type="text" placeholder="Email" />
+              <FormControl
+                type="text"
+                placeholder="Title"
+                name="eventTitle"
+                onChange={this.handleChange}
+              />
             </Col>
           </FormGroup>
 
@@ -51,11 +69,16 @@ class CreateEvent extends Component {
               Event Description
             </Col>
             <Col sm={10}>
-              <FormControl componentClass="textarea" placeholder="textarea" />
+              <FormControl
+                componentClass="textarea"
+                placeholder="Description"
+                name="eventDescription"
+                onChange={this.handleChange}
+              />
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          {/* <FormGroup controlId="formHorizontalPassword">
             <Col componentClass={ControlLabel} sm={2}>
               Event Capacity
             </Col>
@@ -112,10 +135,10 @@ class CreateEvent extends Component {
               <FormControl type="datetime-local" placeholder="Password" />
             </Col>
           </FormGroup>
-
+*/}
           <FormGroup>
             <Col smOffset={2} sm={10}>
-              <Button type="submit">Sign in</Button>
+              <Button type="submit">Create Event</Button>
             </Col>
           </FormGroup>
         </Form>
@@ -125,7 +148,12 @@ class CreateEvent extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
 export default connect(
-  null,
+  mapStateToProps,
   { addEvent }
 )(CreateEvent);

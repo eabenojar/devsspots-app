@@ -10,6 +10,10 @@ const EventSchema = new Schema(
     eventDescription: {
       type: String,
       required: true
+    },
+    eventHost: {
+      type: String,
+      required: true
     }
     // eventCapacity: {
     //   type: Number,

@@ -7,6 +7,7 @@ const User = require("../models/User");
 // user.id is saved to session as req.session.passport.user = {id: '...'}
 
 passport.serializeUser((user, done) => {
+  console.log("SERIAL USER", user);
   done(null, user);
 });
 
@@ -15,8 +16,6 @@ passport.serializeUser((user, done) => {
 // // user object is returned. The done function attaches to the req object as req.user
 
 passport.deserializeUser((user, done) => {
-  console.log("DESERIAL", user);
-
   done(null, user);
 });
 
@@ -33,7 +32,6 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log("PROFILE USER", profile);
       User.find({ googleId: profile.id })
         .then(currentUser => {
           if (currentUser.length > 0) {
@@ -60,14 +58,3 @@ passport.use(
     }
   )
 );
-
-// async (accessToken, refreshToken, profile, done) => {
-//   const existingUser = await User.findOne({ googleId: profile.id });
-
-//   if (existingUser) {
-//     return done(null, existingUser);
-//   }
-
-//   const user = await new User({ googleId: profile.id }).save();
-//   done(null, user);
-// };

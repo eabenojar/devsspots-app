@@ -15,6 +15,8 @@ const keys = require("./config/keys"),
 // Create express app
 const app = express();
 
+app.use(cookieParser());
+
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,8 +29,6 @@ app.use(
     keys: [keys.session.cookieKey]
   })
 );
-
-app.use(cookieParser());
 
 // initialize passport
 app.use(passport.initialize());
@@ -48,7 +48,7 @@ mongoose
 // set up routes
 app.use("/auth", userRoutes);
 app.use("/", postRoutes);
-app.use("/event", eventRoutes);
+app.use("/api/events", eventRoutes);
 
 const PORT = process.env.PORT || 5000;
 

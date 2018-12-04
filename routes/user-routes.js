@@ -5,7 +5,6 @@ const User = require("../models/User");
 // auth login
 router.get("/login", (req, res) => {
   // res.send("Login with Google Fam!");
-  console.log("LOGIN", req.cookies.session);
   res.send({ user: req.user });
 });
 
@@ -51,13 +50,13 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    console.log("USER FROM CALLBACK", req.user);
+    // console.log("USER FROM CALLBACK", req.user);
     res.redirect("/");
   }
 );
 
 router.get("/current_user", (req, res) => {
-  console.log("HIT THIS ROUTE CURRENT USER");
+  // console.log("HIT THIS ROUTE CURRENT USER");
   res.send(req.user);
 });
 

@@ -21,13 +21,13 @@ router.get("/", isUserAuth, (req, res) => {
 
 // Create an event
 // Private Route
-router.get("/new", isUserAuth, (req, res) => {
-  console.log("EVENT POST");
-  const title = "Test";
-  const desc = "Decs Test";
+router.post("/new", isUserAuth, (req, res) => {
+  const userId = req.user._id;
+  console.log("EVENT POST SERVER", req.user[0]._id, req.user[0]);
   const newEvent = new Event({
-    eventTitle: req.body.eventTitle || title,
-    eventDescription: req.body.eventDescription || desc
+    eventTitle: req.body.eventTitle,
+    eventDescription: req.body.eventDescription,
+    eventHost: req.body.eventHost
     // eventCapacity: req.body.eventCapacity,
     // eventHost: req.body.eventHost,
     // eventLocation: req.body.eventLocation,
@@ -38,20 +38,31 @@ router.get("/new", isUserAuth, (req, res) => {
   });
   newEvent
     .save()
-    .then(event => res.json(event))
+    .then(event => {
+      console.log("SUCCES USER ID", req.user.id, userId);
+
+      User.findById(req.user[0]._id).then(user => {
+        console.log("GOT THE USER FROM POST EVENT", user);
+        user.eventsHosted.push(event._id);
+        user.save();
+      });
+      res.json(event);
+    })
     .catch(err => console.log(err));
 });
 
-router.delete(
-  "/:id",
-  isUserAuth,
-  (req, res, next) => {
-    console.log("THIS IS MIDDLEWARE ");
-    next();
-  },
-  (req, res) => {
-    res.json({ name: "Tim" });
-  }
-);
+// Delete event
+// Private route
+
+router.delete("/:id", isUserAuth, (req, res) => {
+  console.log("SERVER DELETE REQ", req.user, "SERVER EVENT ID", req.params.id);
+});
+
+// Update event
+// Private route
+
+router.patch("/:id", isUserAuth, (req, res) => {
+  Event.findOne({});
+});
 
 module.exports = router;
