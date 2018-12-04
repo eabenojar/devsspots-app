@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
 import { connect } from "react-redux";
+import { fetchUser } from "../actions/authAction";
 
 class Header extends Component {
   constructor(props) {
@@ -8,6 +9,9 @@ class Header extends Component {
     this.state = {
       auth: false
     };
+  }
+  componentDidMount() {
+    // this.props.fetchUser();
   }
   componentWillReceiveProps(nextProps) {
     console.log("HEADER WILL RECIEVE PROPS", nextProps);
@@ -69,5 +73,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {}
+  { fetchUser }
 )(Header);

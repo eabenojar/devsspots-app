@@ -46,7 +46,9 @@ export const updateEvent = id => dispatch => {
 };
 
 export const getUserEvents = userId => dispatch => {
+  console.log("GET USER EVENTS CALLED ", userId);
   axios.get(`/api/events/${userId}`).then(res => {
+    console.log("IT WORKED FROM SERVER GET USER EVENTS", res.data);
     dispatch({
       type: GET_USER_EVENTS,
       payload: res.data

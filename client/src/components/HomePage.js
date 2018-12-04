@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import styles from "../styles/css/HomePage.module.css";
+import { connect } from "react-redux";
+import { fetchUser } from "../actions/authAction";
 
 class HomePage extends Component {
   constructor(props) {
@@ -17,6 +19,9 @@ class HomePage extends Component {
       ]
     };
     this.categoryEvents = this.categoryEvents.bind(this);
+  }
+  componentDidMount() {
+    this.props.fetchUser();
   }
   categoryEvents(item) {
     console.log("TEST", item);
@@ -56,4 +61,7 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default connect(
+  null,
+  { fetchUser }
+)(HomePage);

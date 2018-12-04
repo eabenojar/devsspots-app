@@ -5,6 +5,7 @@ const isUserAuth = require("../middleware/userAuth");
 
 // Event Model
 const Event = require("../models/Event");
+const User = require("../models/User");
 
 // Event Routes
 
@@ -17,6 +18,20 @@ router.get("/", isUserAuth, (req, res) => {
       res.json(events);
     })
     .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
+});
+
+// Get all user's events
+// Private route
+
+router.get("/:id", isUserAuth, (req, res) => {
+  console.log("GOT TO SERVER FOR GET USER EVENTS", req.params.id);
+  User.findById(req.params.id)
+    .populate("eventsHosted")
+    .then(user => {
+      if (user) {
+        res.json(user);
+      }
+    });
 });
 
 // Create an event

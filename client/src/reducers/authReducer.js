@@ -9,7 +9,7 @@ export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_USER:
       return {
-        isAuthenticated: action.payload.length > 0,
+        isAuthenticated: Object.keys(action.payload).length !== 0,
         user: action.payload
       };
     default:
