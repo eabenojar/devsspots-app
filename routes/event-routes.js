@@ -35,6 +35,18 @@ router.get("/:id", isUserAuth, (req, res) => {
     });
 });
 
+// Get all events per category
+// Public route
+router.get("/category/:category", (req, res) => {
+  console.log("CATERGORY PARAMS", req.params.category);
+  Event.find({ eventCategory: req.params.category }).then(events => {
+    if (events) {
+      res.json(events);
+    }
+    console.log("SUCCESS GOT EM", events);
+  });
+});
+
 // Create an event
 // Private Route
 router.post("/new", isUserAuth, (req, res) => {
@@ -47,7 +59,8 @@ router.post("/new", isUserAuth, (req, res) => {
     // eventCapacity: req.body.eventCapacity,
     eventLocation: req.body.eventLocation,
     eventAddress: req.body.eventAddress,
-    eventCategory: req.body.eventCategory
+    eventCategory: req.body.eventCategory,
+    eventMapUrl: req.body.eventMapUrl
     // timeStart: req.body.timeStart,
     // timeEnd: req.body.timeEnd,
     // eventDate: req.body.eventDate

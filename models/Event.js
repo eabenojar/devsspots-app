@@ -32,6 +32,10 @@ const EventSchema = new Schema(
       type: String,
       required: true
     },
+    eventMapUrl: {
+      type: String,
+      required: true
+    },
     // timeStart: {
     //   type: String,
     //   required: true

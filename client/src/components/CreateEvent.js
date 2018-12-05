@@ -26,6 +26,7 @@ class CreateEvent extends Component {
       eventCategory: "html",
       eventLocation: {},
       eventAddress: "",
+      eventMapUrl: "",
       map: null
     };
 
@@ -50,20 +51,21 @@ class CreateEvent extends Component {
       eventHost: this.props.auth.user[0]._id,
       eventCategory: this.state.eventCategory,
       eventLocation: this.state.eventLocation,
-      eventAddress: this.state.eventAddress
+      eventAddress: this.state.eventAddress,
+      eventMapUrl: this.state.eventMapUrl
     };
     this.props.addEvent(newEvent);
   }
   onSuggestSelect(suggest) {
     const location = suggest.location;
     const address = suggest.gmaps.formatted_address;
+    const mapUrl = suggest.gmaps.url;
     this.setState({
       eventAddress: address,
-      eventLocation: location
+      eventLocation: location,
+      eventMapUrl: mapUrl
     });
     console.log("SELECTING GOOGLE", suggest);
-    console.log("SELECTED LOCATION", location);
-    console.log("SELECTED ADDRESS", address);
   }
   onOptionChange(e) {
     this.setState({

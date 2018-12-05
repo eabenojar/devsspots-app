@@ -6,3 +6,5 @@ export const UPDATE_EVENT = "UPDATE_EVENT";
 export const GET_EVENTS = "GET_EVENTS";
 export const JOIN_EVENT = "JOIN_EVENT";
 export const GET_USER_EVENTS = "GET_USER_EVENTS";
+export const GET_CATEGORY_EVENTS = "GET_CATEGORY_EVENTS";
+export const GET_EVENT_DETAILS = "GET_EVENT_DETAILS";

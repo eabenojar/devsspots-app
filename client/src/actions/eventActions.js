@@ -3,7 +3,9 @@ import {
   ADD_EVENT,
   DELETE_EVENT,
   UPDATE_EVENT,
-  GET_USER_EVENTS
+  GET_USER_EVENTS,
+  GET_CATEGORY_EVENTS,
+  GET_EVENT_DETAILS
 } from "./types";
 
 export const addEvent = event => dispatch => {
@@ -52,6 +54,27 @@ export const getUserEvents = userId => dispatch => {
     dispatch({
       type: GET_USER_EVENTS,
       payload: res.data.eventsHosted
+    });
+  });
+};
+
+export const getCategoryEvents = category => dispatch => {
+  console.log("GET CATEGORY EVENTS ACTION YEEEEEEE", category);
+  axios.get(`/api/events/category/${category}`).then(res => {
+    console.log("GET EVENTS BACK", res.data);
+    dispatch({
+      type: GET_CATEGORY_EVENTS,
+      payload: res.data
+    });
+  });
+};
+
+export const getEventDetails = (category, eventId) => dispatch => {
+  axios.get(`/api/events/category/${category}/${eventId}`).then(res => {
+    console.log("WE GOT THE EVENT DETAILS FAM", res.data);
+    dispatch({
+      type: GET_EVENT_DETAILS,
+      payload: res.data
     });
   });
 };

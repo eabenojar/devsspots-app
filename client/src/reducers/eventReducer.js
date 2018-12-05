@@ -1,9 +1,16 @@
-import { ADD_EVENT, GET_USER_EVENTS } from "../actions/types";
+import {
+  ADD_EVENT,
+  GET_USER_EVENTS,
+  GET_CATEGORY_EVENTS,
+  GET_EVENT_DETAILS
+} from "../actions/types";
 
 const initialState = {
   events: [],
   event: [],
-  eventsHosted: []
+  eventsHosted: [],
+  categoryEvents: [],
+  eventDetails: []
 };
 
 export default function(state = initialState, action) {
@@ -13,10 +20,17 @@ export default function(state = initialState, action) {
         event: action.paylod
       };
     case GET_USER_EVENTS:
-      console.log("GET USER EVENTS", action.payload);
       return {
         ...state,
         eventsHosted: action.payload
+      };
+    case GET_CATEGORY_EVENTS:
+      return {
+        categoryEvents: action.payload
+      };
+    case GET_EVENT_DETAILS:
+      return {
+        eventDetails: action.payload
       };
     default:
       return state;
