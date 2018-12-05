@@ -14,7 +14,7 @@ const EventSchema = new Schema(
     eventHost: {
       type: String,
       required: true
-    }
+    },
     // eventCapacity: {
     //   type: Number,
     //   required: true
@@ -27,10 +27,10 @@ const EventSchema = new Schema(
     //   type: String,
     //   required: true
     // },
-    // eventCategory: {
-    //   type: String,
-    //   required: true
-    // },
+    eventCategory: {
+      type: String,
+      required: true
+    }
     // timeStart: {
     //   type: String,
     //   required: true

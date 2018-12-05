@@ -43,11 +43,11 @@ router.post("/new", isUserAuth, (req, res) => {
   const newEvent = new Event({
     eventTitle: req.body.eventTitle,
     eventDescription: req.body.eventDescription,
-    eventHost: req.body.eventHost
+    eventHost: req.body.eventHost,
     // eventCapacity: req.body.eventCapacity,
     // eventHost: req.body.eventHost,
     // eventLocation: req.body.eventLocation,
-    // eventCategory: req.body.eventCategory,
+    eventCategory: req.body.eventCategory
     // timeStart: req.body.timeStart,
     // timeEnd: req.body.timeEnd,
     // eventDate: req.body.eventDate

@@ -50,8 +50,11 @@ class ProfilePage extends Component {
       <div>
         <h1>Profile page </h1>
         {this.renderProfile()}
-        <button onClick={this.createEvent}>Create Event</button>
-        <button onClick={this.onManageEvents}>Manage Events</button>
+        {/* <button onClick={this.createEvent}>Create Event</button>
+        <button onClick={this.onManageEvents}>Manage Events</button> */}
+        <Link to="/user/event">
+          <button type="button">Create Event</button>
+        </Link>
         <Link to="/user/events">
           <button type="button">Manage Events</button>
         </Link>

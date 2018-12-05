@@ -19,7 +19,8 @@ class CreateEvent extends Component {
     this.state = {
       value: "",
       eventTitle: "",
-      eventDescription: ""
+      eventDescription: "",
+      eventCategory: "html"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,11 +38,13 @@ class CreateEvent extends Component {
     const newEvent = {
       eventTitle: this.state.eventTitle,
       eventDescription: this.state.eventDescription,
-      eventHost: this.props.auth.user[0]._id
+      eventHost: this.props.auth.user[0]._id,
+      eventCategory: this.state.eventCategory
     };
     this.props.addEvent(newEvent);
   }
   handleChange(e) {
+    console.log("CHANGE", e.target.value, "Name", e.target.name);
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
@@ -78,6 +81,30 @@ class CreateEvent extends Component {
             </Col>
           </FormGroup>
 
+          <FormGroup controlId="formControlsSelect">
+            <Col componentClass={ControlLabel} sm={2}>
+              <ControlLabel>Category</ControlLabel>
+            </Col>
+            <Col sm={10}>
+              {/* <FormControl
+                componentClass="select"
+                placeholder="select"
+                onChange={this.handleChange.bind(this)}
+              > */}
+              <select onChange={this.handleChange.bind(this)}>
+                <option name="eventCategory" value="html">
+                  HTML
+                </option>
+                <option name="eventCategory" value="css">
+                  CSS
+                </option>
+                <option name="eventCategory" value="javascript">
+                  JAVASCRIPT
+                </option>
+              </select>
+            </Col>
+          </FormGroup>
+
           {/* <FormGroup controlId="formHorizontalPassword">
             <Col componentClass={ControlLabel} sm={2}>
               Event Capacity
@@ -105,18 +132,7 @@ class CreateEvent extends Component {
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formControlsSelect">
-            <Col componentClass={ControlLabel} sm={2}>
-              <ControlLabel>Category</ControlLabel>
-            </Col>
-            <Col sm={10}>
-              <FormControl componentClass="select" placeholder="select">
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
-                <option value="javascript">JAVASCRIPT</option>
-              </FormControl>
-            </Col>
-          </FormGroup>
+          
 
           <FormGroup controlId="formHorizontalPassword">
             <Col componentClass={ControlLabel} sm={2}>
