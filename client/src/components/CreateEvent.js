@@ -15,6 +15,9 @@ import { addEvent } from "../actions/eventActions";
 import Geosuggest from "react-geosuggest";
 import styles from "../styles/css/CreateEvent.module.css";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 class CreateEvent extends Component {
   constructor(props, context) {
     super(props, context);
@@ -95,6 +98,10 @@ class CreateEvent extends Component {
     return (
       <div className={styles.main}>
         <h1>Create Event</h1>
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleChange}
+        />
         <div className={styles.geoForm}>
           <Geosuggest
             ref={el => (this._geoSuggest = el)}
