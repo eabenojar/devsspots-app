@@ -11,26 +11,23 @@ const EventSchema = new Schema(
       type: String,
       required: true
     },
-    eventHost: {
-      type: String,
-      required: true
-    },
+
     // eventCapacity: {
     //   type: Number,
     //   required: true
     // },
-    // eventHost: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    eventHost: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     // eventImage: {
     //   type: String
     // },
-    // eventLocation: {
-    //   type: String,
-    //   required: true
-    // },
+    eventLocation: {
+      type: String,
+      required: true
+    },
     eventCategory: {
       type: String,
       required: true
-    }
+    },
     // timeStart: {
     //   type: String,
     //   required: true
@@ -39,12 +36,9 @@ const EventSchema = new Schema(
     //   type: String,
     //   required: true
     // },
-    // eventAttendees: {
-    //   type: [String]
-    // },
-    // typeofRoom: {
-    //   type: String
-    // },
+    eventAttendees: {
+      type: [String]
+    }
     // eventDate: {
     //   type: Date,
     //   required: true

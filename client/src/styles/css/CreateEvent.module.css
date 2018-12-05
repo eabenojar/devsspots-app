@@ -1,0 +1,10 @@
+.main {
+  height: calc(100vh - 50px);
+  width: 100vw;
+  background-color: lightcoral;
+}
+.geoForm {
+  height: 50vh;
+  width: 100vw;
+  background-color: lightcyan;
+}

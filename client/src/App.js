@@ -8,37 +8,45 @@ import { fetchUser } from "./actions/authAction";
 import { connect } from "react-redux";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: null
+    };
+    this.onScriptLoad = this.onScriptLoad.bind(this);
+  }
+  onScriptLoad() {
+    console.log("ON SCRIPT LOAD CALL", window.google);
+    // const map = new window.google.maps.Map(
+    //   document.getElementById(this.props.id),
+    //   this.props.options
+    // );
+    const map = new window.google.maps.LatLng(53.558572, 9.9278215);
+    console.log("SCRIPT MAP", map);
+    this.setState({
+      map
+    });
+    // this.props.onMapLoad(map);
+  }
   componentDidMount() {
-    console.log(this.props);
     this.props.fetchUser();
-  }
-  getGoogleMaps() {
-    // If we haven't already defined the promise, define it
-    if (!this.googleMapsPromise) {
-      this.googleMapsPromise = new Promise(resolve => {
-        // Add a global handler for when the API finishes loading
-        window.resolveGoogleMapsPromise = google => {
-          // Resolve the promise
-          resolve(google);
-
-          // Tidy up
-          delete window.resolveGoogleMapsPromise;
-        };
-
-        // Load the Google Maps API
-        const script = document.createElement("script");
-        const API = process.env.REACT_APP_API_KEY;
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=resolveGoogleMapsPromise`;
-        script.async = true;
-        document.body.appendChild(script);
+    console.log("DID MOUNT CREATE EVENT", window.google);
+    if (!window.google) {
+      var s = document.createElement("script");
+      s.type = "text/javascript";
+      s.src = `https://maps.googleapis.com/maps/api/js?key=${
+        process.env.REACT_APP_API_KEY
+      }&libraries=places`;
+      var x = document.getElementsByTagName("script")[0];
+      x.parentNode.insertBefore(s, x);
+      // Below is important.
+      //We cannot access google.maps until it's finished loading
+      s.addEventListener("load", e => {
+        this.onScriptLoad();
       });
+    } else {
+      this.onScriptLoad();
     }
-
-    // Return a promise for the Google Maps API
-    return this.googleMapsPromise;
-  }
-  componentWillMount() {
-    this.getGoogleMaps();
   }
   render() {
     console.log("RENDER APPJS PROPS", this.props);

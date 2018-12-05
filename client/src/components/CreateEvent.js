@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { Component } from "react";
 import {
   FormGroup,
@@ -11,6 +12,8 @@ import {
 
 import { connect } from "react-redux";
 import { addEvent } from "../actions/eventActions";
+import Geosuggest from "react-geosuggest";
+import styles from "../styles/css/CreateEvent.module.css";
 
 class CreateEvent extends Component {
   constructor(props, context) {
@@ -20,12 +23,15 @@ class CreateEvent extends Component {
       value: "",
       eventTitle: "",
       eventDescription: "",
-      eventCategory: "html"
+      eventCategory: "html",
+      map: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onOptionChange = this.onOptionChange.bind(this);
   }
+
   getValidationState() {
     const length = this.state.value.length;
     if (length > 10) return "success";
@@ -43,15 +49,52 @@ class CreateEvent extends Component {
     };
     this.props.addEvent(newEvent);
   }
+  onSuggestSelect(suggest) {
+    const location = suggest.location;
+    const address = suggest.gmaps.formatted_address;
+    console.log("SELECTING GOOGLE", suggest);
+    console.log("SELECTED LOCATION", location);
+    console.log("SELECTED ADDRESS", address);
+  }
+  onOptionChange(e) {
+    this.setState({
+      eventCategory: e.target.value
+    });
+  }
   handleChange(e) {
     console.log("CHANGE", e.target.value, "Name", e.target.name);
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
-    console.log("CREATE EVENT PROPS", this.props);
+    console.log("CREATE EVENT RENDER MAP", window.google);
+    var fixtures = [
+      // {
+      //   label: "San Francisco, CA",
+      //   location: { lat: 53.5459, lng: 9.966576 }
+      // },
+      // {
+      //   label: "New York, NY",
+      //   location: { lat: 53.5495629, lng: 9.9625838 }
+      // },
+      // {
+      //   label: "Austin, TX",
+      //   location: { lat: 53.5610398, lng: 10.0259135 }
+      // }
+    ];
     return (
-      <div>
+      <div className={styles.main}>
         <h1>Create Event</h1>
+        <div className={styles.geoForm}>
+          <Geosuggest
+            ref={el => (this._geoSuggest = el)}
+            placeholder="Start typing!"
+            // initialValue="San Francisco"
+            fixtures={fixtures}
+            onSuggestSelect={this.onSuggestSelect}
+            location={new window.google.maps.LatLng(53.558572, 9.9278215)}
+            radius="20"
+          />
+        </div>
         <Form horizontal onSubmit={this.onSubmit}>
           <FormGroup controlId="formHorizontalEmail">
             <Col componentClass={ControlLabel} sm={2}>
@@ -91,7 +134,7 @@ class CreateEvent extends Component {
                 placeholder="select"
                 onChange={this.handleChange.bind(this)}
               > */}
-              <select onChange={this.handleChange.bind(this)}>
+              <select onChange={this.onOptionChange.bind(this)}>
                 <option name="eventCategory" value="html">
                   HTML
                 </option>
