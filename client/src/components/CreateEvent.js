@@ -24,12 +24,15 @@ class CreateEvent extends Component {
       eventTitle: "",
       eventDescription: "",
       eventCategory: "html",
+      eventLocation: {},
+      eventAddress: "",
       map: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onOptionChange = this.onOptionChange.bind(this);
+    this.onSuggestSelect = this.onSuggestSelect.bind(this);
   }
 
   getValidationState() {
@@ -45,13 +48,19 @@ class CreateEvent extends Component {
       eventTitle: this.state.eventTitle,
       eventDescription: this.state.eventDescription,
       eventHost: this.props.auth.user[0]._id,
-      eventCategory: this.state.eventCategory
+      eventCategory: this.state.eventCategory,
+      eventLocation: this.state.eventLocation,
+      eventAddress: this.state.eventAddress
     };
     this.props.addEvent(newEvent);
   }
   onSuggestSelect(suggest) {
     const location = suggest.location;
     const address = suggest.gmaps.formatted_address;
+    this.setState({
+      eventAddress: address,
+      eventLocation: location
+    });
     console.log("SELECTING GOOGLE", suggest);
     console.log("SELECTED LOCATION", location);
     console.log("SELECTED ADDRESS", address);
