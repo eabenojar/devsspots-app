@@ -41,7 +41,10 @@ class CategoryEvents extends Component {
     console.log("EVENT DETAILS", event);
     this.props.history.push({
       pathname: `/event/${event.eventCategory}/${event._id}`,
-      state: event._id
+      state: {
+        id: event._id,
+        category: event.eventCategory
+      }
     });
   }
   render() {

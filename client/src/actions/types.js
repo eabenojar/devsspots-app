@@ -1,4 +1,6 @@
 export const FETCH_USER = "FETCH_USER";
+// GOOGLE MAPS
+export const FETCH_GOOGLE_MAPS = "FETCH_GOOGLE_MAPS";
 // EVENT TYPES
 export const ADD_EVENT = "ADD_EVENT";
 export const DELETE_EVENT = "DELETE_EVENT";

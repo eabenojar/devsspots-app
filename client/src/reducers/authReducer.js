@@ -1,8 +1,9 @@
-import { FETCH_USER } from "../actions/types";
+import { FETCH_USER, FETCH_GOOGLE_MAPS } from "../actions/types";
 
 const INITIAL_STATE = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  googleMaps: []
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -11,6 +12,10 @@ export default function(state = INITIAL_STATE, action) {
       return {
         isAuthenticated: Object.keys(action.payload).length !== 0,
         user: action.payload
+      };
+    case FETCH_GOOGLE_MAPS:
+      return {
+        googleMaps: action.payload
       };
     default:
       return state;

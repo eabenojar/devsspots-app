@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import routes from "./router";
-import { fetchUser } from "./actions/authAction";
+import { fetchUser, fetchGoogleMaps } from "./actions/authAction";
 
 import { connect } from "react-redux";
 
@@ -22,7 +22,8 @@ class App extends Component {
     //   this.props.options
     // );
     const map = new window.google.maps.LatLng(53.558572, 9.9278215);
-    console.log("SCRIPT MAP", map);
+    console.log("SCRIPT MAP", window.google);
+    this.props.fetchGoogleMaps(window.google);
     this.setState({
       map
     });
@@ -69,5 +70,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchUser }
+  { fetchUser, fetchGoogleMaps }
 )(App);
