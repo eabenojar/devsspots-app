@@ -39,12 +39,15 @@ router.get("/:id", isUserAuth, (req, res) => {
 // Public route
 router.get("/category/:category", (req, res) => {
   console.log("CATERGORY PARAMS", req.params.category);
-  Event.find({ eventCategory: req.params.category }).then(events => {
-    if (events) {
-      res.json(events);
-    }
-    console.log("SUCCESS GOT EM", events);
-  });
+  Event.find({ eventCategory: req.params.category })
+    .sort({ eventDate: 1 })
+    .sort({ timeStart: 1 })
+    .then(events => {
+      if (events) {
+        res.json(events);
+      }
+      console.log("SUCCESS GOT EM", events);
+    });
 });
 
 // Create an event

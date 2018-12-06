@@ -32,6 +32,8 @@ class CreateEvent extends Component {
       eventAddress: "",
       eventMapUrl: "",
       eventDate: "",
+      timeStart: "",
+      timeEnd: "",
       map: null
     };
 
@@ -40,6 +42,7 @@ class CreateEvent extends Component {
     this.onOptionChange = this.onOptionChange.bind(this);
     this.onSuggestSelect = this.onSuggestSelect.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleTimeChange = this.handleTimeChange.bind(this);
   }
 
   getValidationState() {
@@ -58,7 +61,10 @@ class CreateEvent extends Component {
       eventCategory: this.state.eventCategory,
       eventLocation: this.state.eventLocation,
       eventAddress: this.state.eventAddress,
-      eventMapUrl: this.state.eventMapUrl
+      eventMapUrl: this.state.eventMapUrl,
+      timeStart: this.state.timeStart,
+      timeEnd: this.state.timeEnd,
+      eventDate: this.state.eventDate
     };
     this.props.addEvent(newEvent);
   }
@@ -78,11 +84,17 @@ class CreateEvent extends Component {
       eventCategory: e.target.value
     });
   }
-  handleDateChange(date) {
-    console.log("DATE OR TIME", date.value);
-    console.log("FORMATED", moment(date).format("hh:mm A"));
+  handleTimeChange(name, time) {
+    console.log("DATE OR TIME", name);
+    // const timeFormatted = moment(time).format("hh:mm A");
+    // console.log("FORMATED", timeFormatted);
     this.setState({
-      eventDate: date
+      [name]: time.toString()
+    });
+  }
+  handleDateChange(name, date) {
+    this.setState({
+      [name]: date
     });
   }
   handleChange(e) {
@@ -110,28 +122,36 @@ class CreateEvent extends Component {
         <h1>Create Event</h1>
         <DatePicker
           selected={this.state.startDate}
-          onChange={this.handleDateChange}
+          onChange={this.handleDateChange.bind(this, "eventDate")}
+          name="eventDate"
+          value={this.state.eventDate.toString()}
         />
         <h1>Time Picker</h1>
         <DatePicker
           selected={this.state.startDate}
-          onChange={this.handleDateChange}
+          onChange={this.handleTimeChange.bind(this, "timeStart")}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
           dateFormat="h:mm aa"
           timeCaption="Time"
-          valeu="timeStart"
+          name="timeStart"
+          value={moment(this.state.timeStart).format("hh:mm A") || ""}
         />
         <DatePicker
           selected={this.state.startDate}
-          onChange={this.handleDateChange}
+          onChange={this.handleTimeChange.bind(this, "timeEnd")}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
           timeFormat="h:mm"
           timeCaption="Time"
-          value="timeEnd"
+          name="timeEnd"
+          value={
+            moment(this.state.timeEnd).format("hh:mm A") !== null
+              ? moment(this.state.timeEnd).format("hh:mm A")
+              : ""
+          }
         />
         <div className={styles.geoForm}>
           <Geosuggest
