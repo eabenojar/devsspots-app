@@ -17,6 +17,7 @@ import styles from "../styles/css/CreateEvent.module.css";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 class CreateEvent extends Component {
   constructor(props, context) {
@@ -30,6 +31,7 @@ class CreateEvent extends Component {
       eventLocation: {},
       eventAddress: "",
       eventMapUrl: "",
+      eventDate: "",
       map: null
     };
 
@@ -37,6 +39,7 @@ class CreateEvent extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onOptionChange = this.onOptionChange.bind(this);
     this.onSuggestSelect = this.onSuggestSelect.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   getValidationState() {
@@ -75,6 +78,13 @@ class CreateEvent extends Component {
       eventCategory: e.target.value
     });
   }
+  handleDateChange(date) {
+    console.log("DATE OR TIME", date.value);
+    console.log("FORMATED", moment(date).format("hh:mm A"));
+    this.setState({
+      eventDate: date
+    });
+  }
   handleChange(e) {
     console.log("CHANGE", e.target.value, "Name", e.target.name);
     this.setState({ [e.target.name]: e.target.value });
@@ -100,7 +110,28 @@ class CreateEvent extends Component {
         <h1>Create Event</h1>
         <DatePicker
           selected={this.state.startDate}
-          onChange={this.handleChange}
+          onChange={this.handleDateChange}
+        />
+        <h1>Time Picker</h1>
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleDateChange}
+          showTimeSelect
+          showTimeSelectOnly
+          timeIntervals={15}
+          dateFormat="h:mm aa"
+          timeCaption="Time"
+          valeu="timeStart"
+        />
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleDateChange}
+          showTimeSelect
+          showTimeSelectOnly
+          timeIntervals={15}
+          timeFormat="h:mm"
+          timeCaption="Time"
+          value="timeEnd"
         />
         <div className={styles.geoForm}>
           <Geosuggest

@@ -60,10 +60,10 @@ router.post("/new", isUserAuth, (req, res) => {
     eventLocation: req.body.eventLocation,
     eventAddress: req.body.eventAddress,
     eventCategory: req.body.eventCategory,
-    eventMapUrl: req.body.eventMapUrl
-    // timeStart: req.body.timeStart,
-    // timeEnd: req.body.timeEnd,
-    // eventDate: req.body.eventDate
+    eventMapUrl: req.body.eventMapUrl,
+    timeStart: req.body.timeStart,
+    timeEnd: req.body.timeEnd,
+    eventDate: req.body.eventDate
   });
   newEvent
     .save()

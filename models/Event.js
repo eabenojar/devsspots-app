@@ -11,7 +11,6 @@ const EventSchema = new Schema(
       type: String,
       required: true
     },
-
     // eventCapacity: {
     //   type: Number,
     //   required: true
@@ -36,21 +35,21 @@ const EventSchema = new Schema(
       type: String,
       required: true
     },
-    // timeStart: {
-    //   type: String,
-    //   required: true
-    // },
-    // timeEnd: {
-    //   type: String,
-    //   required: true
-    // },
+    timeStart: {
+      type: String,
+      required: true
+    },
+    timeEnd: {
+      type: String,
+      required: true
+    },
     eventAttendees: {
       type: [String]
+    },
+    eventDate: {
+      type: Date,
+      required: true
     }
-    // eventDate: {
-    //   type: Date,
-    //   required: true
-    // }
   },
   { timestamps: true }
 );
