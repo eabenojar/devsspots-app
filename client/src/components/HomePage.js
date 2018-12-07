@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
 import styles from "../styles/css/HomePage.module.css";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions/authAction";

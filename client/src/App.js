@@ -3,7 +3,8 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import routes from "./router";
-import { fetchUser, fetchGoogleMaps } from "./actions/authAction";
+import { fetchGoogleMaps } from "./actions/eventActions";
+import { fetchUser } from "./actions/authAction";
 
 import { connect } from "react-redux";
 

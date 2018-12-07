@@ -50,6 +50,18 @@ router.get("/category/:category", (req, res) => {
     });
 });
 
+// Get event details
+// Public Route
+router.get("/category/:category/:id", (req, res) => {
+  console.log("HIT SEVER ROUTE EVENT DETAILS");
+  Event.findById(req.params.id).then(event => {
+    console.log("WE GOT THE EVENT SERVER", event);
+    if (event) {
+      res.json(event);
+    }
+  });
+});
+
 // Create an event
 // Private Route
 router.post("/new", isUserAuth, (req, res) => {

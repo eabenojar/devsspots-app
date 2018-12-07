@@ -2,7 +2,8 @@ import {
   ADD_EVENT,
   GET_USER_EVENTS,
   GET_CATEGORY_EVENTS,
-  GET_EVENT_DETAILS
+  GET_EVENT_DETAILS,
+  FETCH_GOOGLE_MAPS
 } from "../actions/types";
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
   event: [],
   eventsHosted: [],
   categoryEvents: [],
-  eventDetails: []
+  eventDetails: [],
+  googleMaps: []
 };
 
 export default function(state = initialState, action) {
@@ -26,11 +28,17 @@ export default function(state = initialState, action) {
       };
     case GET_CATEGORY_EVENTS:
       return {
+        ...state,
         categoryEvents: action.payload
       };
     case GET_EVENT_DETAILS:
       return {
-        eventDetails: action.payload
+        eventDetails: [...state.eventDetails, action.payload]
+      };
+    case FETCH_GOOGLE_MAPS:
+      return {
+        ...state,
+        googleMaps: action.payload
       };
     default:
       return state;

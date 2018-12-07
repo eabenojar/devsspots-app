@@ -45,7 +45,7 @@ class ProfilePage extends Component {
     });
   }
   render() {
-    console.log("PROFILE PROPS", this.props.auth.user[0]);
+    console.log("PROFILE PROPS", this.props);
     return (
       <div>
         <h1>Profile page </h1>
@@ -58,10 +58,9 @@ class ProfilePage extends Component {
         <Link to="/user/events">
           <button type="button">Manage Events</button>
         </Link>
-        {this.state.showEventForm === false ? null : <CreateEvent />}
-        {this.state.manageEvents === false ? null : (
+        {/* {this.state.manageEvents === false ? null : (
           <ManageEvents userId={this.props.auth.user[0]._id} />
-        )}
+        )} */}
       </div>
     );
   }
