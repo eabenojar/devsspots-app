@@ -1,11 +1,11 @@
 .main {
-  height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
   width: 100vw;
   background-color: #fff;
 }
 
 .titleSection {
-  height: 400px;
+  height: 500px;
   background-image: linear-gradient(
     to right top,
     #bfe8cc,
@@ -36,24 +36,37 @@
 .titleLeft {
   font-size: 50px;
   font-weight: 500;
-  color: #3c3c3c;
+  color: #fff;
 }
 
 .categories {
   height: auto;
   width: 100vw;
-  background-color: #3c3c3c;
+  background-color: #fff;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
 }
 
-.category {
+.categoryButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  width: calc(25% - 10px);
+  height: 50px;
+  width: (50px);
   margin: 0px 10px 10px 0px;
   background-color: #fff;
+}
+.categoryBox {
+  width: 100%;
+  height: 400px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin: 10px;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(105, 105, 105, 1);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(105, 105, 105, 1);
+  box-shadow: 0px 0px 8px 0px rgba(105, 105, 105, 1);
 }

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styles from "../styles/css/HomePage.module.css";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions/authAction";
+import { Row, Grid, Col } from "react-bootstrap";
+import { FaHtml5 } from "react-icons/fa";
 
 class HomePage extends Component {
   constructor(props) {
@@ -42,19 +44,27 @@ class HomePage extends Component {
             {/* <h1>Home Page Right</h1> */}
           </div>
         </div>
-        <div className={styles.categories}>
-          {this.state.categories.map((item, index) => {
-            return (
-              <button
-                onClick={() => this.categoryEvents(item)}
-                key={index}
-                className={styles.category}
-              >
-                <h1>{item}</h1>
-              </button>
-            );
-          })}
-        </div>
+        {/* <div className={styles.categories}> */}
+        <Grid>
+          <Row>
+            {this.state.categories.map((item, index) => {
+              return (
+                <Col xs={12} sm={6} md={4} lg={4}>
+                  <div className={styles.categoryBox}>
+                    <button
+                      onClick={() => this.categoryEvents(item)}
+                      key={index}
+                      className={styles.categoryButton}
+                    >
+                      <h1>{item}</h1>
+                    </button>
+                  </div>
+                </Col>
+              );
+            })}
+          </Row>
+        </Grid>
+        {/* </div> */}
       </div>
     );
   }

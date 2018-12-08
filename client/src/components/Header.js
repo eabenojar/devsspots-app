@@ -35,9 +35,10 @@ class Header extends Component {
         collapseOnSelect
         staticTop
         style={{ marginBottom: 0, width: "100vw" }}
+        bsStyle="inverse"
       >
         <Navbar.Header>
-          <Navbar.Brand>
+          <Navbar.Brand style={{ color: "red" }}>
             <a href="/">Devs Spots</a>
           </Navbar.Brand>
           <Navbar.Toggle />
@@ -45,7 +46,7 @@ class Header extends Component {
         <Navbar.Collapse>
           <Nav pullRight>
             {this.state.auth === false ? (
-              <NavItem eventKey={1} href="/login">
+              <NavItem eventKey={1} href="/login" bsStyle="inverse">
                 Login
               </NavItem>
             ) : (
