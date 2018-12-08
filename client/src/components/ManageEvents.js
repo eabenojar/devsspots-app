@@ -10,10 +10,10 @@ class ManageEvents extends Component {
   }
   componentWillUpdate(nextProps, nextState) {
     console.log("WILL RECEIVE UPDATE PROPS", nextProps);
-    console.log("WILL RECEIVE UPDATE STATE", nextState);
   }
   render() {
     console.log("MANAGE EVENTS PROPS", this.props);
+    console.log("WINDOW MANAGAE STATE", window);
     const { event } = this.props;
     let eventContent;
 
