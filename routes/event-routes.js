@@ -152,13 +152,13 @@ module.exports = router;
 // Leave event
 // Private route
 router.delete("/category/join/:id/:user_id", isUserAuth, (req, res) => {
-  console.log("ARE WE HITTING LEAVE EVENTS ROUTES", req.params);
+  console.log("ARE WE HITTING LEAVE EVENTS ROUTES", req.params.id);
   Event.findById(req.params.id)
     .then(event => {
       if (event.eventAttendees.length === 0) {
         return res.json({ error: "User does not exist" });
       } else {
-        if (event.eventAttendees.indexOf(userId) !== -1) {
+        if (event.eventAttendees.indexOf(req.params.user_id) !== -1) {
           const filterAttendees = event.eventAttendees.filter(userId => {
             const userStr = userId.toString();
             return userStr !== req.params.user_id;
@@ -171,5 +171,8 @@ router.delete("/category/join/:id/:user_id", isUserAuth, (req, res) => {
         }
       }
     })
-    .catch(err => res.json({ event: "Event not found" }));
+    .catch(err => {
+      console.log("ERROR", err);
+      res.json({ event: "Event not found" });
+    });
 });
