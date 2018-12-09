@@ -124,4 +124,13 @@ router.patch("/:id", isUserAuth, (req, res) => {
   Event.findOne({});
 });
 
+// Join event
+// Private route
+router.post(
+  "/:id",
+  Event.findById(req.params.id).then(event => {
+    console.log(event);
+  })
+);
+
 module.exports = router;

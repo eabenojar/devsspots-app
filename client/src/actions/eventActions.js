@@ -6,7 +6,8 @@ import {
   GET_USER_EVENTS,
   GET_CATEGORY_EVENTS,
   GET_EVENT_DETAILS,
-  FETCH_GOOGLE_MAPS
+  FETCH_GOOGLE_MAPS,
+  JOIN_EVENT
 } from "./types";
 
 export const fetchGoogleMaps = map => dispatch => {
@@ -89,4 +90,8 @@ export const getEventDetails = (category, eventId) => dispatch => {
       payload: res.data
     });
   });
+};
+
+export const joinEvent = eventId => dispatch => {
+  console.log("JOIN EVENT ACTION", eventId);
 };
