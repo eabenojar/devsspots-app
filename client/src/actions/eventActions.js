@@ -7,7 +7,8 @@ import {
   GET_CATEGORY_EVENTS,
   GET_EVENT_DETAILS,
   FETCH_GOOGLE_MAPS,
-  JOIN_EVENT
+  JOIN_EVENT,
+  LEAVE_EVENT
 } from "./types";
 
 export const fetchGoogleMaps = map => dispatch => {
@@ -95,7 +96,7 @@ export const getEventDetails = (category, eventId) => dispatch => {
 export const joinEvent = (eventId, userId) => dispatch => {
   console.log("JOIN EVENT ACTION", eventId);
   axios
-    .post(`/api/events/join/${eventId}`, userId)
+    .post(`/api/events/category/join/${eventId}`, userId)
     .then(res => {
       console.log("SUCCES JOINED EVENT FROM ACTION", res.data);
       dispatch({
@@ -105,5 +106,21 @@ export const joinEvent = (eventId, userId) => dispatch => {
     })
     .catch(err => {
       console.log(err, "ERROR FAM!");
+    });
+};
+
+export const leaveEvent = (eventId, userId) => dispatch => {
+  console.log("GOT TO ACTION FOR LEAVE EVENT", eventId, userId);
+  axios
+    .delete(`/api/events/category/join/${eventId}/${userId}`)
+    .then(res => {
+      console.log("DELETED THE EVENT ATTENDEES FAM!", res.data);
+      dispatch({
+        type: LEAVE_EVENT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err, "ERROR LEAVE FAM FAM!");
     });
 };

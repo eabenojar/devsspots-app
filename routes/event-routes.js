@@ -128,7 +128,7 @@ router.patch("/:id", isUserAuth, (req, res) => {
 
 // Join event
 // Private route
-router.post("/join/:id", isUserAuth, (req, res) => {
+router.post("/category/join/:id", isUserAuth, (req, res) => {
   console.log("JOIN SERVER ROUTE REQ BODY", req.body);
   Event.findById(req.params.id)
     .then(event => {
@@ -148,3 +148,28 @@ router.post("/join/:id", isUserAuth, (req, res) => {
 });
 
 module.exports = router;
+
+// Leave event
+// Private route
+router.delete("/category/join/:id/:user_id", isUserAuth, (req, res) => {
+  console.log("ARE WE HITTING LEAVE EVENTS ROUTES", req.params);
+  Event.findById(req.params.id)
+    .then(event => {
+      if (event.eventAttendees.length === 0) {
+        return res.json({ error: "User does not exist" });
+      } else {
+        if (event.eventAttendees.indexOf(userId) !== -1) {
+          const filterAttendees = event.eventAttendees.filter(userId => {
+            const userStr = userId.toString();
+            return userStr !== req.params.user_id;
+          });
+          console.log("FILTER ARR", filterAttendees);
+          event.eventAttendees = filterAttendees;
+          event.save().then(event => res.json(event));
+        } else {
+          return res.json({ user: "User never joined event" });
+        }
+      }
+    })
+    .catch(err => res.json({ event: "Event not found" }));
+});

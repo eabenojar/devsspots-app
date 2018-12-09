@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getEventDetails, joinEvent } from "../actions/eventActions";
+import {
+  getEventDetails,
+  joinEvent,
+  leaveEvent
+} from "../actions/eventActions";
 import GoogleMapReact from "google-map-react";
 import styles from "../styles/css/EventDetails.module.css";
 import { FaLaptopCode, FaMapMarkerAlt } from "react-icons/fa";
@@ -12,6 +16,7 @@ class EventDetails extends Component {
 
     this.renderMap = this.renderMap.bind(this);
     this.onJoinEvent = this.onJoinEvent.bind(this);
+    this.onLeaveEvent = this.onLeaveEvent.bind(this);
   }
   componentDidMount() {
     const event = this.props.location.state;
@@ -19,6 +24,10 @@ class EventDetails extends Component {
 
     console.log("EVENT DETAILS DID MOUNT", this.props);
     console.log("EVENT DETALS MAP", window.google);
+  }
+  onLeaveEvent(event, userId) {
+    console.log("LEAVE EVENT CLICKED", event, userId);
+    this.props.leaveEvent(event._id, userId);
   }
   onJoinEvent(event, userId) {
     console.log("JOIN EVEN CLICKED EVENT", event, "USER ID", userId);
@@ -77,6 +86,13 @@ class EventDetails extends Component {
           >
             Join Event
           </button>
+          <button
+            onClick={() =>
+              this.onLeaveEvent(event, this.props.auth.user[0]._id)
+            }
+          >
+            Leave Event
+          </button>
         </div>
       );
     }
@@ -104,5 +120,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getEventDetails, joinEvent }
+  { getEventDetails, joinEvent, leaveEvent }
 )(EventDetails);
