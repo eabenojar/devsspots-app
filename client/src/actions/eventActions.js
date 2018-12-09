@@ -92,6 +92,18 @@ export const getEventDetails = (category, eventId) => dispatch => {
   });
 };
 
-export const joinEvent = eventId => dispatch => {
+export const joinEvent = (eventId, userId) => dispatch => {
   console.log("JOIN EVENT ACTION", eventId);
+  axios
+    .post(`/api/events/join/${eventId}`, userId)
+    .then(res => {
+      console.log("SUCCES JOINED EVENT FROM ACTION", res.data);
+      dispatch({
+        type: JOIN_EVENT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err, "ERROR FAM!");
+    });
 };

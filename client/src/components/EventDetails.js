@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getEventDetails } from "../actions/eventActions";
+import { getEventDetails, joinEvent } from "../actions/eventActions";
 import GoogleMapReact from "google-map-react";
 import styles from "../styles/css/EventDetails.module.css";
 import { FaLaptopCode, FaMapMarkerAlt } from "react-icons/fa";
@@ -11,6 +11,7 @@ class EventDetails extends Component {
     super(props);
 
     this.renderMap = this.renderMap.bind(this);
+    this.onJoinEvent = this.onJoinEvent.bind(this);
   }
   componentDidMount() {
     const event = this.props.location.state;
@@ -19,7 +20,13 @@ class EventDetails extends Component {
     console.log("EVENT DETAILS DID MOUNT", this.props);
     console.log("EVENT DETALS MAP", window.google);
   }
-
+  onJoinEvent(event, userId) {
+    console.log("JOIN EVEN CLICKED EVENT", event, "USER ID", userId);
+    const user = {
+      id: userId
+    };
+    this.props.joinEvent(event._id, user);
+  }
   renderMap() {
     if (this.props.event.eventDetails.length === 0) {
       return <h1>Loading fam...</h1>;
@@ -65,6 +72,11 @@ class EventDetails extends Component {
           <h1>Ends {moment(event.timeEnd).format("hh:mm A")}</h1>
 
           <h1>Date {moment(event.eventDate).format("dddd, MMMM DD, YYYY")}</h1>
+          <button
+            onClick={() => this.onJoinEvent(event, this.props.auth.user[0]._id)}
+          >
+            Join Event
+          </button>
         </div>
       );
     }
@@ -85,11 +97,12 @@ class EventDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    event: state.event
+    event: state.event,
+    auth: state.auth
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getEventDetails }
+  { getEventDetails, joinEvent }
 )(EventDetails);

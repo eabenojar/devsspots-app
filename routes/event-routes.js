@@ -54,12 +54,14 @@ router.get("/category/:category", (req, res) => {
 // Public Route
 router.get("/category/:category/:id", (req, res) => {
   console.log("HIT SEVER ROUTE EVENT DETAILS");
-  Event.findById(req.params.id).then(event => {
-    console.log("WE GOT THE EVENT SERVER", event);
-    if (event) {
-      res.json(event);
-    }
-  });
+  Event.findById(req.params.id)
+    .populate("eventAttendees")
+    .then(event => {
+      console.log("WE GOT THE EVENT SERVER", event);
+      if (event) {
+        res.json(event);
+      }
+    });
 });
 
 // Create an event
@@ -126,11 +128,23 @@ router.patch("/:id", isUserAuth, (req, res) => {
 
 // Join event
 // Private route
-router.post(
-  "/:id",
-  Event.findById(req.params.id).then(event => {
-    console.log(event);
-  })
-);
+router.post("/join/:id", isUserAuth, (req, res) => {
+  console.log("JOIN SERVER ROUTE REQ BODY", req.body);
+  Event.findById(req.params.id)
+    .then(event => {
+      const host = event.eventHost.toString();
+      if (req.body.id !== host && req.body.id !== null) {
+        if (event.eventAttendees.indexOf(req.body.id) === -1) {
+          event.eventAttendees.push(req.body.id);
+          event.save().then(event => res.json(event));
+        } else {
+          return res.json({ error: "User is already going!" });
+        }
+      } else {
+        return res.json({ error: "Cannot join your own event" });
+      }
+    })
+    .catch(err => res.status(404).json({ event: "No event found" }));
+});
 
 module.exports = router;

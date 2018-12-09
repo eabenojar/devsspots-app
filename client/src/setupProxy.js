@@ -8,4 +8,5 @@ module.exports = function(app) {
   app.use(
     proxy("/api/events/category/*/*", { target: "http://localhost:5000" })
   );
+  app.use(proxy("/api/events/join/*", { target: "http://localhost:5000" }));
 };
