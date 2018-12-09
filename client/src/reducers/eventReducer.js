@@ -3,7 +3,8 @@ import {
   GET_USER_EVENTS,
   GET_CATEGORY_EVENTS,
   GET_EVENT_DETAILS,
-  FETCH_GOOGLE_MAPS
+  FETCH_GOOGLE_MAPS,
+  DELETE_EVENT
 } from "../actions/types";
 
 const initialState = {
@@ -39,6 +40,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         googleMaps: action.payload
+      };
+    case DELETE_EVENT:
+      return {
+        ...state,
+        eventsHosted: state.eventsHosted.filter(
+          element => element !== action.payload
+        )
       };
     default:
       return state;

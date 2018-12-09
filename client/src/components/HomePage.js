@@ -49,11 +49,10 @@ class HomePage extends Component {
           <Row>
             {this.state.categories.map((item, index) => {
               return (
-                <Col xs={12} sm={6} md={4} lg={4}>
+                <Col xs={12} sm={6} md={4} lg={4} key={index}>
                   <div className={styles.categoryBox}>
                     <button
                       onClick={() => this.categoryEvents(item)}
-                      key={index}
                       className={styles.categoryButton}
                     >
                       <h1>{item}</h1>

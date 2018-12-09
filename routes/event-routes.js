@@ -99,7 +99,22 @@ router.post("/new", isUserAuth, (req, res) => {
 // Private route
 
 router.delete("/:id", isUserAuth, (req, res) => {
-  console.log("SERVER DELETE REQ", req.user, "SERVER EVENT ID", req.params.id);
+  console.log("GOT TO SERVER DELETE", req.params.id);
+  Event.findByIdAndRemove(req.params.id).then(event => {
+    console.log("EVENT DELETED", event, event._id);
+    if (event) {
+      User.findByIdAndUpdate(
+        { _id: event.eventHost },
+        {
+          $pull: { eventsHosted: event._id }
+        },
+        { new: true }
+      ).then(user => {
+        console.log("USER EVENTS", user);
+      });
+    }
+    res.json(event);
+  });
 });
 
 // Update event

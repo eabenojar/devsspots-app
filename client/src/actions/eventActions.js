@@ -34,9 +34,11 @@ export const addEvent = event => dispatch => {
 };
 
 export const deleteEvent = id => dispatch => {
+  console.log("DELETE ACTION CALLED", id);
   axios
-    .delete(`"api/event/${id}`)
+    .delete(`/api/events/${id}`)
     .then(res => {
+      console.log("GOT SOMETING BACK FROM DELETE SERVER", res.data);
       dispatch({
         type: DELETE_EVENT,
         payload: res.data
