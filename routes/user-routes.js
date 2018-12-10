@@ -56,7 +56,6 @@ router.get(
 );
 
 router.get("/current_user", (req, res) => {
-  // console.log("HIT THIS ROUTE CURRENT USER");
   res.send(req.user);
 });
 

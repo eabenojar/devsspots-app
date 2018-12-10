@@ -8,6 +8,7 @@ import {
 import GoogleMapReact from "google-map-react";
 import styles from "../styles/css/EventDetails.module.css";
 import { FaLaptopCode, FaMapMarkerAlt } from "react-icons/fa";
+
 import moment from "moment";
 
 class EventDetails extends Component {
@@ -34,9 +35,7 @@ class EventDetails extends Component {
   onLeaveEvent(event, userId) {
     console.log("LEAVE EVENT CLICKED", event, userId);
     this.props.leaveEvent(event._id, userId);
-    this.setState({
-      showJoin: true
-    });
+    this.setState(this.state);
   }
   onJoinEvent(event, userId) {
     console.log("JOIN EVEN CLICKED EVENT", event, "USER ID", userId);
@@ -86,16 +85,12 @@ class EventDetails extends Component {
           <h1>Address {event.eventAddress}</h1>
           <h1>Category {event.eventCategory}</h1>
           <h1>Category {event.eventCategory}</h1>
-
           <h1>Map Url </h1>
           <a href={event.eventMapUrl} target="_blank">
             link map
           </a>
-
           <h1>Start {moment(event.timeStart).format("hh:mm A")}</h1>
-
           <h1>Ends {moment(event.timeEnd).format("hh:mm A")}</h1>
-
           <h1>Date {moment(event.eventDate).format("dddd, MMMM DD, YYYY")}</h1>
           <h1>Attendees</h1>
           {event.eventAttendees === undefined ||
@@ -103,33 +98,29 @@ class EventDetails extends Component {
             <h1>No one is going!!!</h1>
           ) : (
             event.eventAttendees.map((person, index) => {
+              console.log("YAHAYAYAYAYAYAYA", person.profileImg);
               return (
                 <div key={index}>
-                  <img src={person.profileImg} alt="Nothing Found" />
+                  <img
+                    src={!person.profileImg ? null : person.profileImg}
+                    alt="Nothing Found"
+                  />
                 </div>
               );
             })
           )}
-          {this.state.showJoin &&
-          this.props.auth.user[0].eventsAttended.indexOf(
-            this.props.event.eventDetails[0]._id
-          ) === -1 ? (
-            <button
-              onClick={() =>
-                this.onJoinEvent(event, this.props.auth.user[0]._id)
-              }
-            >
-              Join Event
-            </button>
-          ) : (
-            <button
-              onClick={() =>
-                this.onLeaveEvent(event, this.props.auth.user[0]._id)
-              }
-            >
-              Leave Event
-            </button>
-          )}
+          <button
+            onClick={() => this.onJoinEvent(event, this.props.auth.user[0]._id)}
+          >
+            Join Event
+          </button>
+          <button
+            onClick={() =>
+              this.onLeaveEvent(event, this.props.auth.user[0]._id)
+            }
+          >
+            Leave Event
+          </button>
         </div>
       );
     }

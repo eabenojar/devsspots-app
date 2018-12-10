@@ -171,7 +171,17 @@ router.delete("/category/join/:id/:user_id", isUserAuth, (req, res) => {
           });
           console.log("FILTER ARR", filterAttendees);
           event.eventAttendees = filterAttendees;
-          event.save().then(event => res.json(event));
+          event.save().then(event => {
+            // Delete event from eventsAttended in User
+            User.findById(req.params.user_id).then(user => {
+              user.eventsAttended = user.eventsAttended.filter(eventId => {
+                const eventStr = eventId.toString();
+                return eventStr !== req.params.id;
+              });
+              user.save().then(user => res.json(user));
+            });
+            res.json(event);
+          });
         } else {
           return res.json({ user: "User never joined event" });
         }
