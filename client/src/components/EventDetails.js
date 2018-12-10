@@ -32,6 +32,9 @@ class EventDetails extends Component {
   componentWillReceiveProps(nextProps) {
     console.log("WILL RECEIVE PROPS", nextProps);
   }
+  componentDidUpdate() {
+    console.log("DID UPDATEEEEEEEEEE");
+  }
   onLeaveEvent(event, userId) {
     console.log("LEAVE EVENT CLICKED", event, userId);
     this.props.leaveEvent(event._id, userId);
@@ -97,17 +100,21 @@ class EventDetails extends Component {
           event.eventAttendees.length == 0 ? (
             <h1>No one is going!!!</h1>
           ) : (
-            event.eventAttendees.map((person, index) => {
-              console.log("YAHAYAYAYAYAYAYA", person.profileImg);
-              return (
-                <div key={index}>
-                  <img
-                    src={!person.profileImg ? null : person.profileImg}
-                    alt="Nothing Found"
-                  />
-                </div>
-              );
-            })
+            // event.eventAttendees.map((person, index) => {
+            //   if (person.profileImg === undefined) {
+            //     return null;
+            //   } else {
+            //     return (
+            //       <div key={index}>
+            //         <h1>{}</h1>
+            //       </div>
+            //     );
+            //   }
+            // })
+            <div>
+              <h1>Currently going...</h1>
+              <h1>{event.eventAttendees.length}</h1>
+            </div>
           )}
           <button
             onClick={() => this.onJoinEvent(event, this.props.auth.user[0]._id)}

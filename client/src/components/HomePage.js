@@ -10,13 +10,41 @@ class HomePage extends Component {
     super(props);
     this.state = {
       categories: [
-        "HTML",
-        "CSS",
-        "JAVASCRIPT",
-        "REACT",
-        "ANGULAR",
-        "VUE",
-        "NODEJS"
+        {
+          name: "HTML",
+          description:
+            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+        },
+        {
+          name: "CSS",
+          description:
+            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+        },
+        {
+          name: "JAVASCRIPT",
+          description:
+            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+        },
+        {
+          name: "REACT",
+          description:
+            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+        },
+        {
+          name: "ANGULAR",
+          description:
+            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+        },
+        {
+          name: "VUE",
+          description:
+            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+        },
+        {
+          name: "NODEJS",
+          description:
+            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+        }
       ]
     };
     this.categoryEvents = this.categoryEvents.bind(this);
@@ -28,7 +56,7 @@ class HomePage extends Component {
     console.log("TEST", item);
     item = item.toLowerCase();
     this.props.history.push({
-      pathname: `/event/${item}`,
+      pathname: `/event/${item.name}`,
       state: item
     });
   }
@@ -37,26 +65,32 @@ class HomePage extends Component {
     return (
       <div className={styles.main}>
         <div className={styles.titleSection}>
+          {/* <div classs={styles.layer}> */}
           <div className={styles.titleSectionLeft}>
             <h1 className={styles.titleLeft}>Find Study Groups</h1>
           </div>
-          <div className={styles.titleSectionRight}>
-            {/* <h1>Home Page Right</h1> */}
-          </div>
+          <div className={styles.titleSectionRight} />
+          {/* </div> */}
         </div>
         {/* <div className={styles.categories}> */}
-        <Grid>
+        <Grid className={styles.grid}>
           <Row>
             {this.state.categories.map((item, index) => {
               return (
                 <Col xs={12} sm={6} md={4} lg={4} key={index}>
                   <div className={styles.categoryBox}>
-                    <button
-                      onClick={() => this.categoryEvents(item)}
-                      className={styles.categoryButton}
-                    >
-                      <h1>{item}</h1>
-                    </button>
+                    <div className={styles.categoryBoxTop}>
+                      <h1 className={styles.categoryName}>{item.name}</h1>
+                      <p>{item.description}</p>
+                    </div>
+                    <div className={styles.categoryBoxBottom}>
+                      <button
+                        onClick={() => this.categoryEvents(item)}
+                        className={styles.categoryButton}
+                      >
+                        Explore
+                      </button>
+                    </div>
                   </div>
                 </Col>
               );
