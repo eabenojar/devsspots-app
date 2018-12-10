@@ -83,7 +83,6 @@ export const getCategoryEvents = category => dispatch => {
 };
 
 export const getEventDetails = (category, eventId) => dispatch => {
-  console.log("MADE IT TO GET EVENT DETAILS ACTION", category, eventId);
   axios.get(`/api/events/category/${category}/${eventId}`).then(res => {
     console.log("WE GOT THE EVENT DETAILS FAM", res.data);
     dispatch({

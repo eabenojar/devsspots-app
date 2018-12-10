@@ -114,6 +114,7 @@ router.delete("/:id", isUserAuth, (req, res) => {
       ).then(user => {
         console.log("USER EVENTS", user);
       });
+      User.find({ eventsAttended: event._id });
     }
     res.json(event);
   });
@@ -136,6 +137,11 @@ router.post("/category/join/:id", isUserAuth, (req, res) => {
       if (req.body.id !== host && req.body.id !== null) {
         if (event.eventAttendees.indexOf(req.body.id) === -1) {
           event.eventAttendees.push(req.body.id);
+          User.findById(req.body.id).then(user => {
+            console.log("FOUND USER JOIN", user);
+            user.eventsAttended.push(event._id);
+            user.save().then(user => res.json(user));
+          });
           event.save().then(event => res.json(event));
         } else {
           return res.json({ error: "User is already going!" });

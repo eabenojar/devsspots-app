@@ -13,6 +13,9 @@ import moment from "moment";
 class EventDetails extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showJoin: true
+    };
 
     this.renderMap = this.renderMap.bind(this);
     this.onJoinEvent = this.onJoinEvent.bind(this);
@@ -25,9 +28,15 @@ class EventDetails extends Component {
     console.log("EVENT DETAILS DID MOUNT", this.props);
     console.log("EVENT DETALS MAP", window.google);
   }
+  componentWillReceiveProps(nextProps) {
+    console.log("WILL RECEIVE PROPS", nextProps);
+  }
   onLeaveEvent(event, userId) {
     console.log("LEAVE EVENT CLICKED", event, userId);
     this.props.leaveEvent(event._id, userId);
+    this.setState({
+      showJoin: true
+    });
   }
   onJoinEvent(event, userId) {
     console.log("JOIN EVEN CLICKED EVENT", event, "USER ID", userId);
@@ -35,6 +44,9 @@ class EventDetails extends Component {
       id: userId
     };
     this.props.joinEvent(event._id, user);
+    this.setState({
+      showJoin: false
+    });
   }
   renderMap() {
     if (this.props.event.eventDetails.length === 0) {
@@ -59,7 +71,11 @@ class EventDetails extends Component {
     }
   }
   renderDetails() {
-    if (this.props.event.eventDetails.length === 0) {
+    console.log("RENDER DETAILS PROPS", this.props.event);
+    if (
+      this.props.event.eventDetails === undefined ||
+      this.props.event.eventDetails.length === 0
+    ) {
       return <h1>Loading...</h1>;
     } else {
       const event = this.props.event.eventDetails[0];
@@ -81,18 +97,39 @@ class EventDetails extends Component {
           <h1>Ends {moment(event.timeEnd).format("hh:mm A")}</h1>
 
           <h1>Date {moment(event.eventDate).format("dddd, MMMM DD, YYYY")}</h1>
-          <button
-            onClick={() => this.onJoinEvent(event, this.props.auth.user[0]._id)}
-          >
-            Join Event
-          </button>
-          <button
-            onClick={() =>
-              this.onLeaveEvent(event, this.props.auth.user[0]._id)
-            }
-          >
-            Leave Event
-          </button>
+          <h1>Attendees</h1>
+          {event.eventAttendees === undefined ||
+          event.eventAttendees.length == 0 ? (
+            <h1>No one is going!!!</h1>
+          ) : (
+            event.eventAttendees.map((person, index) => {
+              return (
+                <div key={index}>
+                  <img src={person.profileImg} alt="Nothing Found" />
+                </div>
+              );
+            })
+          )}
+          {this.state.showJoin &&
+          this.props.auth.user[0].eventsAttended.indexOf(
+            this.props.event.eventDetails[0]._id
+          ) === -1 ? (
+            <button
+              onClick={() =>
+                this.onJoinEvent(event, this.props.auth.user[0]._id)
+              }
+            >
+              Join Event
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                this.onLeaveEvent(event, this.props.auth.user[0]._id)
+              }
+            >
+              Leave Event
+            </button>
+          )}
         </div>
       );
     }

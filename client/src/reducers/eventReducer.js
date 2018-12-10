@@ -4,7 +4,9 @@ import {
   GET_CATEGORY_EVENTS,
   GET_EVENT_DETAILS,
   FETCH_GOOGLE_MAPS,
-  DELETE_EVENT
+  DELETE_EVENT,
+  JOIN_EVENT,
+  LEAVE_EVENT
 } from "../actions/types";
 
 const initialState = {
@@ -40,6 +42,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         googleMaps: action.payload
+      };
+    case JOIN_EVENT:
+      return {
+        eventDetails: [action.payload]
+      };
+    case LEAVE_EVENT:
+      return {
+        eventDetails: [action.payload]
       };
     case DELETE_EVENT:
       return {
