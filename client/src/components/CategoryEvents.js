@@ -19,7 +19,7 @@ class CategoryEvents extends Component {
     } else if (this.props.event.categoryEvents.length > 0) {
       const events = this.props.event.categoryEvents;
       return (
-        <div>
+        <div className={styles.container}>
           {events.map((event, index) => {
             return (
               <div
@@ -50,8 +50,12 @@ class CategoryEvents extends Component {
   render() {
     console.log("CATEGORY EVENTS RENDER", this.props);
     return (
-      <div>
-        <h1>CategoryEvents</h1>
+      <div className={styles.main}>
+        <h1>
+          {this.props.location.state.charAt(0).toUpperCase() +
+            this.props.location.state.slice(1)}
+          Study Groups
+        </h1>
         {this.renderEvents()}
       </div>
     );

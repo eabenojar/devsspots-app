@@ -18,32 +18,32 @@ class HomePage extends Component {
         {
           name: "CSS",
           description:
-            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+            "CSS is a language that describes the style of an HTML document"
         },
         {
           name: "JAVASCRIPT",
           description:
-            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+            "JavaScript often abbreviated as JS, is a high-level, interpreted programming language"
         },
         {
           name: "REACT",
           description:
-            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+            "React is a JavaScript library for building user interfaces"
         },
         {
           name: "ANGULAR",
           description:
-            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+            "Angular is a TypeScript-based open-source front-end web application framework"
         },
         {
           name: "VUE",
           description:
-            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+            "Vue.js is an open-source JavaScript framework for building user interfaces and single-page applications"
         },
         {
           name: "NODEJS",
           description:
-            "Hypertext Markup Language (HTML) is the standard markup language for creating web pages"
+            "Node.js is an open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser"
         }
       ]
     };
@@ -54,9 +54,9 @@ class HomePage extends Component {
   }
   categoryEvents(item) {
     console.log("TEST", item);
-    item = item.toLowerCase();
+    item = item.name.toLowerCase();
     this.props.history.push({
-      pathname: `/event/${item.name}`,
+      pathname: `/event/${item}`,
       state: item
     });
   }
@@ -81,7 +81,7 @@ class HomePage extends Component {
                   <div className={styles.categoryBox}>
                     <div className={styles.categoryBoxTop}>
                       <h1 className={styles.categoryName}>{item.name}</h1>
-                      <p>{item.description}</p>
+                      <p className={styles.categoryDesc}>{item.description}</p>
                     </div>
                     <div className={styles.categoryBoxBottom}>
                       <button

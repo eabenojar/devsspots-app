@@ -23,7 +23,6 @@ class ManageEvents extends Component {
   }
   render() {
     console.log("MANAGE EVENTS PROPS", this.props);
-    console.log("WINDOW MANAGAE STATE", window);
     const { event } = this.props;
     let eventContent;
 

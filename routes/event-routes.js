@@ -111,10 +111,32 @@ router.delete("/:id", isUserAuth, (req, res) => {
           $pull: { eventsHosted: event._id }
         },
         { new: true }
-      ).then(user => {
-        console.log("USER EVENTS", user);
+      ).then(userUpdate => {
+        console.log("USER EVENTSSSSS", userUpdate);
+        User.find({ eventsAttended: { $in: [event._id] } })
+          .then(users => {
+            console.log("USERS THAT WENT TO EVENT SERVER", users.length);
+            if (users.length === 1) {
+              users[0].eventsAttended = users[0].eventsAttended.filter(
+                eventId => eventId !== req.params.id
+              );
+              console.log("FILTER EVENT", users);
+              users
+                .save()
+                .then(user => console.log("SUCCESS EVENT DELETE", user));
+            } else {
+              users = users.map(user => {
+                user.eventsAttended = user.eventsAttended.filter(
+                  eventId => eventId !== req.params.id
+                );
+              });
+              users
+                .save()
+                .then(users => console.log("ALL USERS EVENTS DELETED", users));
+            }
+          })
+          .catch(err => console.log("ERRORROROROROORO", err));
       });
-      User.find({ eventsAttended: event._id });
     }
     res.json(event);
   });
