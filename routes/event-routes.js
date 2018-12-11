@@ -56,6 +56,7 @@ router.get("/category/:category/:id", (req, res) => {
   console.log("HIT SEVER ROUTE EVENT DETAILS");
   Event.findById(req.params.id)
     .populate("eventAttendees")
+    .populate("eventHost")
     .then(event => {
       console.log("WE GOT THE EVENT SERVER", event);
       if (event) {

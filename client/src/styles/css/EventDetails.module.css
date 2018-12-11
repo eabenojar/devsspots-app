@@ -7,11 +7,59 @@
   justify-content: space-around;
   align-items: center;
 }
+.hostImage {
+  border-radius: 25px;
+}
 .details {
   height: 600px;
   width: 500px;
   background-color: #fff;
   border-radius: 10px;
+}
+.detailsHeader {
+  height: 125px;
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2px dashed lightgray;
+}
+.detailsHeaderHost,
+.detailsHeaderDesc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.detailsHeaderHost {
+  height: 125px;
+  width: 150px;
+  background-color: green;
+  justify-content: space-around;
+}
+
+.detailsHeaderDesc {
+  height: 125px;
+  width: 350px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 15px;
+}
+.detailsCategory {
+  font-size: 16px;
+  font-weight: 800;
+  color: #5b5b5b;
+  margin-bottom: 10px;
+}
+.detailsTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #000;
+  text-align: left;
+}
+.detailsMain {
+  height: 475px;
+  width: 100%;
+  /* background-color: yellow; */
 }
 .map {
   height: 425px;

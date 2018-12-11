@@ -15,7 +15,7 @@ const EventSchema = new Schema(
     //   type: Number,
     //   required: true
     // },
-    eventHost: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    eventHost: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     // eventImage: {
     //   type: String
     // },

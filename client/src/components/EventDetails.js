@@ -97,7 +97,7 @@ class EventDetails extends Component {
       const { eventLocation } = this.props.event.eventDetails[0];
       const Marker = props => (
         <div>
-          <FaMapMarkerAlt size={25} color={"#82C4FF"} />
+          <FaMapMarkerAlt size={25} color={"#FF0000"} />
         </div>
       );
 
@@ -123,44 +123,63 @@ class EventDetails extends Component {
       const event = this.props.event.eventDetails[0];
       return (
         <div>
-          <h1>Title {event.eventTitle}</h1>
-          <h1>Desc {event.eventDescription}</h1>
-          <h1>Address {event.eventAddress}</h1>
-          <h1>Category {event.eventCategory}</h1>
-
-          <h1>Attendees</h1>
-          {event.eventAttendees === undefined ||
-          event.eventAttendees.length == 0 ? (
-            <h1>No one is going!!!</h1>
-          ) : (
-            // event.eventAttendees.map((person, index) => {
-            //   if (person.profileImg === undefined) {
-            //     return null;
-            //   } else {
-            //     return (
-            //       <div key={index}>
-            //         <h1>{}</h1>
-            //       </div>
-            //     );
-            //   }
-            // })
-            <div>
-              <h1>Currently going...</h1>
-              <h1>{event.eventAttendees.length}</h1>
+          <div className={styles.detailsHeader}>
+            <div className={styles.detailsHeaderHost}>
+              <img
+                src={event.eventHost.profileImg}
+                alt="None"
+                className={styles.hostImage}
+              />
+              <h1>{event.eventHost.firstName.toUpperCase()}</h1>
             </div>
-          )}
-          <button
-            onClick={() => this.onJoinEvent(event, this.props.auth.user[0]._id)}
-          >
-            Join Event
-          </button>
-          <button
-            onClick={() =>
-              this.onLeaveEvent(event, this.props.auth.user[0]._id)
-            }
-          >
-            Leave Event
-          </button>
+            <div className={styles.detailsHeaderDesc}>
+              <h1 className={styles.detailsCategory}>
+                {event.eventCategory.toUpperCase()}
+              </h1>
+
+              <h1 className={styles.detailsTitle}>Title {event.eventTitle}</h1>
+            </div>
+          </div>
+          <div className={styles.detailsMain}>
+            <h1>Description</h1>
+            <h1>Desc {event.eventDescription}</h1>
+
+            <h1>Attendees</h1>
+            {event.eventAttendees === undefined ||
+            event.eventAttendees.length == 0 ? (
+              <h1>No one is going!!!</h1>
+            ) : (
+              // event.eventAttendees.map((person, index) => {
+              //   if (person.profileImg === undefined) {
+              //     return null;
+              //   } else {
+              //     return (
+              //       <div key={index}>
+              //         <h1>{}</h1>
+              //       </div>
+              //     );
+              //   }
+              // })
+              <div>
+                <h1>Currently going...</h1>
+                <h1>{event.eventAttendees.length}</h1>
+              </div>
+            )}
+            <button
+              onClick={() =>
+                this.onJoinEvent(event, this.props.auth.user[0]._id)
+              }
+            >
+              Join Event
+            </button>
+            <button
+              onClick={() =>
+                this.onLeaveEvent(event, this.props.auth.user[0]._id)
+              }
+            >
+              Leave Event
+            </button>
+          </div>
         </div>
       );
     }
