@@ -33,8 +33,13 @@
 .detailsHeaderHost {
   height: 125px;
   width: 150px;
-  background-color: green;
   justify-content: space-around;
+  padding: 15px;
+}
+.hostTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #5b5b5b;
 }
 
 .detailsHeaderDesc {
@@ -59,7 +64,45 @@
 .detailsMain {
   height: 475px;
   width: 100%;
-  /* background-color: yellow; */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.detailsMainTop {
+  height: 70%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 15px;
+}
+.detailsMainTopTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.detailsMainTopDesc {
+  font-size: 18px;
+  font-weight: 200;
+  color: #5b5b5b;
+  text-align: left;
+}
+.detailsMainBottom {
+  height: 30%;
+  width: 100%;
+  /* background-color: green; */
+  padding: 15px;
+}
+.membersGoing {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000;
+  text-align: left;
+  margin-bottom: 10px;
 }
 .map {
   height: 425px;
@@ -106,4 +149,19 @@
   flex-direction: column;
   width: 80%;
   height: 100%;
+}
+.joinButton,
+.leaveButton {
+  height: 40px;
+  width: 200px;
+  background-color: #32cc5f;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 400;
+  margin: 10px;
+}
+
+.leaveButton {
+  background-color: #e74040;
 }

@@ -125,60 +125,55 @@ class EventDetails extends Component {
         <div>
           <div className={styles.detailsHeader}>
             <div className={styles.detailsHeaderHost}>
+              <h1 className={styles.hostTitle}>Host</h1>
+
               <img
                 src={event.eventHost.profileImg}
                 alt="None"
                 className={styles.hostImage}
               />
-              <h1>{event.eventHost.firstName.toUpperCase()}</h1>
+              <h1 className={styles.hostTitle}>
+                {event.eventHost.firstName.charAt(0).toUpperCase() +
+                  event.eventHost.firstName.slice(1)}
+              </h1>
             </div>
             <div className={styles.detailsHeaderDesc}>
               <h1 className={styles.detailsCategory}>
                 {event.eventCategory.toUpperCase()}
               </h1>
 
-              <h1 className={styles.detailsTitle}>Title {event.eventTitle}</h1>
+              <h1 className={styles.detailsTitle}>{event.eventTitle}</h1>
             </div>
           </div>
           <div className={styles.detailsMain}>
-            <h1>Description</h1>
-            <h1>Desc {event.eventDescription}</h1>
+            <div className={styles.detailsMainTop}>
+              <h1 className={styles.detailsMainTopTitle}>Description</h1>
+              <h1 className={styles.detailsMainTopDesc}>
+                Desc {event.eventDescription}
+              </h1>
+            </div>
+            <div className={styles.detailsMainBottom}>
+              <h1 className={styles.membersGoing}>
+                Developers going - {event.eventAttendees.length}
+              </h1>
 
-            <h1>Attendees</h1>
-            {event.eventAttendees === undefined ||
-            event.eventAttendees.length == 0 ? (
-              <h1>No one is going!!!</h1>
-            ) : (
-              // event.eventAttendees.map((person, index) => {
-              //   if (person.profileImg === undefined) {
-              //     return null;
-              //   } else {
-              //     return (
-              //       <div key={index}>
-              //         <h1>{}</h1>
-              //       </div>
-              //     );
-              //   }
-              // })
-              <div>
-                <h1>Currently going...</h1>
-                <h1>{event.eventAttendees.length}</h1>
-              </div>
-            )}
-            <button
-              onClick={() =>
-                this.onJoinEvent(event, this.props.auth.user[0]._id)
-              }
-            >
-              Join Event
-            </button>
-            <button
-              onClick={() =>
-                this.onLeaveEvent(event, this.props.auth.user[0]._id)
-              }
-            >
-              Leave Event
-            </button>
+              <button
+                onClick={() =>
+                  this.onJoinEvent(event, this.props.auth.user[0]._id)
+                }
+                className={styles.joinButton}
+              >
+                Join Event
+              </button>
+              <button
+                className={styles.leaveButton}
+                onClick={() =>
+                  this.onLeaveEvent(event, this.props.auth.user[0]._id)
+                }
+              >
+                Leave Event
+              </button>
+            </div>
           </div>
         </div>
       );
