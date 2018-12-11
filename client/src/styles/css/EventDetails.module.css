@@ -21,10 +21,41 @@
   height: 600px;
   width: 50%;
 }
+.mapHeaderContainer {
+  height: 100%;
+  width: 100%;
+}
 .mapContainerHeader {
   height: 125px;
   width: 100%;
   background-color: #fff;
   margin-bottom: 50px;
   border-radius: 10px;
+}
+.mapContainerHeaderDate,
+.mapContainerHeaderLocation {
+  height: 62.5px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.mapContainerHeaderLocation {
+  background-color: none;
+}
+.clock,
+.markerIcon {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dateAndTime,
+.locationAddress {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
 }

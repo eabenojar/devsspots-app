@@ -7,7 +7,7 @@ import {
 } from "../actions/eventActions";
 import GoogleMapReact from "google-map-react";
 import styles from "../styles/css/EventDetails.module.css";
-import { FaLaptopCode, FaMapMarkerAlt } from "react-icons/fa";
+import { FaLaptopCode, FaMapMarkerAlt, FaRegClock } from "react-icons/fa";
 
 import moment from "moment";
 
@@ -60,13 +60,32 @@ class EventDetails extends Component {
     } else {
       const event = this.props.event.eventDetails[0];
       return (
-        <div>
-          <h1>{event.eventAddress}</h1>
-          <h1>Map Link </h1>
+        <div className={styles.mapHeaderContainer}>
+          <div className={styles.mapContainerHeaderDate}>
+            <div className={styles.clock}>
+              <FaRegClock size={25} color={"#82C4FF"} />
+            </div>
+            <div className={styles.dateAndTime}>
+              <h1>{moment(event.eventDate).format("dddd, MMMM DD, YYYY")}</h1>
 
-          <a href={event.eventMapUrl} target="_blank">
-            {event.eventAddress}
-          </a>
+              <h1>
+                {moment(event.timeStart).format("hh:mm A")} to{" "}
+                {moment(event.timeEnd).format("hh:mm A")}
+              </h1>
+            </div>
+          </div>
+          <div className={styles.mapContainerHeaderLocation}>
+            <div className={styles.markerIcon}>
+              <FaMapMarkerAlt size={25} color={"#82C4FF"} />
+            </div>
+            <div className={styles.locationAddress}>
+              <h1>{event.eventAddress}</h1>
+
+              <a href={event.eventMapUrl} target="_blank">
+                View map link
+              </a>
+            </div>
+          </div>
         </div>
       );
     }
@@ -109,9 +128,6 @@ class EventDetails extends Component {
           <h1>Address {event.eventAddress}</h1>
           <h1>Category {event.eventCategory}</h1>
 
-          <h1>Start {moment(event.timeStart).format("hh:mm A")}</h1>
-          <h1>Ends {moment(event.timeEnd).format("hh:mm A")}</h1>
-          <h1>Date {moment(event.eventDate).format("dddd, MMMM DD, YYYY")}</h1>
           <h1>Attendees</h1>
           {event.eventAttendees === undefined ||
           event.eventAttendees.length == 0 ? (
