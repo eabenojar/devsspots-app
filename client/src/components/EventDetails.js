@@ -21,6 +21,7 @@ class EventDetails extends Component {
     this.renderMap = this.renderMap.bind(this);
     this.onJoinEvent = this.onJoinEvent.bind(this);
     this.onLeaveEvent = this.onLeaveEvent.bind(this);
+    this.renderMapHeader = this.renderMapHeader.bind(this);
   }
   componentDidMount() {
     const event = this.props.location.state;
@@ -49,6 +50,26 @@ class EventDetails extends Component {
     this.setState({
       showJoin: false
     });
+  }
+  renderMapHeader() {
+    if (
+      this.props.event.eventDetails === undefined ||
+      this.props.event.eventDetails.length === 0
+    ) {
+      return <h1>Loading...</h1>;
+    } else {
+      const event = this.props.event.eventDetails[0];
+      return (
+        <div>
+          <h1>{event.eventAddress}</h1>
+          <h1>Map Link </h1>
+
+          <a href={event.eventMapUrl} target="_blank">
+            {event.eventAddress}
+          </a>
+        </div>
+      );
+    }
   }
   renderMap() {
     if (this.props.event.eventDetails.length === 0) {
@@ -87,11 +108,7 @@ class EventDetails extends Component {
           <h1>Desc {event.eventDescription}</h1>
           <h1>Address {event.eventAddress}</h1>
           <h1>Category {event.eventCategory}</h1>
-          <h1>Category {event.eventCategory}</h1>
-          <h1>Map Url </h1>
-          <a href={event.eventMapUrl} target="_blank">
-            link map
-          </a>
+
           <h1>Start {moment(event.timeStart).format("hh:mm A")}</h1>
           <h1>Ends {moment(event.timeEnd).format("hh:mm A")}</h1>
           <h1>Date {moment(event.eventDate).format("dddd, MMMM DD, YYYY")}</h1>
@@ -139,7 +156,12 @@ class EventDetails extends Component {
       <div>
         <div className={styles.container}>
           <div className={styles.details}>{this.renderDetails()}</div>
-          <div className={styles.map}>{this.renderMap()}</div>
+          <div className={styles.mapContainer}>
+            <div className={styles.mapContainerHeader}>
+              {this.renderMapHeader()}
+            </div>
+            <div className={styles.map}>{this.renderMap()}</div>
+          </div>
         </div>
       </div>
     );

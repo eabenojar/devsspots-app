@@ -27,9 +27,23 @@ class CategoryEvents extends Component {
                 className={styles.box}
                 onClick={() => this.getEventDetails(event)}
               >
-                <h1>{event.eventTitle}</h1>
-                <h1>{moment(event.eventDate).format("MM-DD-YYYY")}</h1>
-                <h1>{moment(event.timeStart).format("hh:mm A")}</h1>
+                <div className={styles.boxLeft}>
+                  <h1 className={styles.boxLeftCategory}>
+                    {event.eventCategory.toUpperCase()}
+                  </h1>
+                  <h1 className={styles.boxLeftTime}>
+                    {moment(event.timeStart).format("hh:mm A")}
+                  </h1>
+                </div>
+                <div className={styles.boxRight}>
+                  <h1 className={styles.boxRightDate}>
+                    {moment(event.eventDate).format("MMMM, DD YYYY")}
+                  </h1>
+                  <h1 className={styles.boxRightTitle}>{event.eventTitle}</h1>
+                  <h1 className={styles.boxRightMembers}>
+                    Members going {event.eventAttendees.length}
+                  </h1>
+                </div>
               </div>
             );
           })}
@@ -51,10 +65,11 @@ class CategoryEvents extends Component {
     console.log("CATEGORY EVENTS RENDER", this.props);
     return (
       <div className={styles.main}>
-        <h1>
+        <h1 className={styles.mainTitle}>
           {this.props.location.state.charAt(0).toUpperCase() +
-            this.props.location.state.slice(1)}
-          Study Groups
+            this.props.location.state.slice(1).toUpperCase() +
+            " "}
+          STUDY GROUPS
         </h1>
         {this.renderEvents()}
       </div>

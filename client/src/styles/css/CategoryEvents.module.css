@@ -1,3 +1,10 @@
+.mainTitle {
+  font-size: 36px;
+  font-weight: 800;
+  color: #000;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
 .box {
   height: 100px;
   width: 70%;
@@ -8,11 +15,61 @@
   -webkit-box-shadow: 0px 0px 15px 1px rgba(181, 181, 181, 1);
   -moz-box-shadow: 0px 0px 15px 1px rgba(181, 181, 181, 1);
   box-shadow: 0px 0px 15px 1px rgba(181, 181, 181, 1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
 }
+.boxLeft,
+.boxRight {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.boxLeft {
+  width: 20%;
+  height: 100%;
+  justify-content: space-between;
+  border-right: 2px dashed lightgray;
+  padding-right: 20px;
+}
+.boxLeftCategory {
+  font-size: 18px;
+  font-weight: 800;
+  color: grey;
+}
+.boxLeftTime {
+  font-size: 14px;
+  font-weight: 600;
+}
+.boxRight {
+  width: 80%;
+  height: 100%;
+  /* background-color: red; */
+  justify-content: space-between;
+  padding-left: 20px;
+}
+.boxRightDate {
+  font-size: 18px;
+  font-weight: 600;
+  color: grey;
+}
+.boxRightTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #000;
+}
+.boxRightMembers {
+  font-size: 18px;
+  font-weight: 400;
+  color: grey;
+}
+
 .main {
   background-color: #d7e9f7;
   height: auto;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -24,4 +81,58 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+/* Media Queries Section */
+@media only screen and (max-width: 500px) {
+  .boxLeftCategory {
+    font-size: 14px;
+    font-weight: 800;
+    color: grey;
+  }
+  .boxLeftTime {
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .boxRightDate {
+    font-size: 16px;
+    font-weight: 600;
+    color: grey;
+  }
+  .boxRightTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+  }
+  .boxRightMembers {
+    font-size: 12px;
+    font-weight: 400;
+    color: grey;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .boxLeftCategory {
+    font-size: 11px;
+    font-weight: 800;
+    color: grey;
+  }
+  .boxLeftTime {
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .boxRightDate {
+    font-size: 14px;
+    font-weight: 600;
+    color: grey;
+  }
+  .boxRightTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+  }
+  .boxRightMembers {
+    font-size: 10px;
+    font-weight: 400;
+    color: grey;
+  }
 }

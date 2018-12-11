@@ -9,11 +9,22 @@
 }
 .details {
   height: 600px;
-  width: 400px;
+  width: 500px;
   background-color: #fff;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 .map {
-  height: 300px;
-  width: 350px;
+  height: 425px;
+  width: 100%;
+}
+.mapContainer {
+  height: 600px;
+  width: 50%;
+}
+.mapContainerHeader {
+  height: 125px;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 50px;
+  border-radius: 10px;
 }
