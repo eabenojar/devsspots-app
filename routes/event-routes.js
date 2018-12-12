@@ -27,6 +27,7 @@ router.get("/:id", isUserAuth, (req, res) => {
   console.log("GOT TO SERVER FOR GET USER EVENTS", req.params.id);
   User.findById(req.params.id)
     .populate("eventsHosted")
+    .populate("eventsAttended")
     .then(user => {
       console.log("WE GOT IT FAM", user);
       if (user) {

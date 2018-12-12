@@ -1,0 +1,66 @@
+.profileContainer {
+  height: calc(100vh - 80px);
+  width: 100vw;
+  background-color: #d7e9f7;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.name {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+.profileDetails {
+  height: 60vh;
+  min-height: 400px;
+  min-width: 300px;
+  width: 20%;
+  background-color: #fff;
+}
+.profileEvents {
+  height: 60vh;
+  min-height: 400px;
+  min-width: 300px;
+  width: 60%;
+  background-color: #fff;
+}
+.profileImage {
+  border-radius: 25px;
+}
+.profileDetailsHeader,
+.profileDetailsEvents,
+.profileDetailsButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profileDetailsHeader {
+  height: 150px;
+  min-width: 300px;
+  width: 100%;
+  /* background-color: green; */
+}
+.profileDetailsEvents {
+  height: 75px;
+  min-width: 300px;
+  width: 100%;
+  /* background-color: red; */
+  flex-direction: row;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+.profileDetailsButtons {
+  height: 175px;
+  min-width: 300px;
+  width: 100%;
+  background-color: orange;
+}
+.eventsAttended,
+.eventsHosted {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 5px 10px 0px 10px;
+}

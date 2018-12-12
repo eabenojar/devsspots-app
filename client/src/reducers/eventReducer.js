@@ -14,6 +14,7 @@ const initialState = {
   event: [],
   eventsHosted: [],
   categoryEvents: [],
+  eventsAttended: [],
   eventDetails: [],
   googleMaps: []
 };
@@ -27,7 +28,8 @@ export default function(state = initialState, action) {
     case GET_USER_EVENTS:
       return {
         ...state,
-        eventsHosted: action.payload
+        eventsHosted: action.payload.eventsHosted,
+        eventsAttended: action.payload.eventsAttended
       };
     case GET_CATEGORY_EVENTS:
       return {

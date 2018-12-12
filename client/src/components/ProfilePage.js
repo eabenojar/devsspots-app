@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import styles from "../styles/css/ProfilePage.module.css";
 
 // Components
 import ManageEvents from "./ManageEvents";
@@ -19,11 +20,39 @@ class ProfilePage extends Component {
   }
   renderProfile() {
     if (this.props.auth.user[0]) {
-      const { profileImg, firstName } = this.props.auth.user[0];
+      const {
+        profileImg,
+        firstName,
+        lastName,
+        eventsAttended,
+        eventsHosted
+      } = this.props.auth.user[0];
       return (
         <div>
-          <h1>{firstName}</h1>
-          <img src={profileImg} alt="" />
+          <div className={styles.profileDetailsHeader}>
+            <img src={profileImg} alt="" className={styles.profileImage} />
+            <h1 className={styles.name}>
+              {firstName} {lastName}
+            </h1>
+          </div>
+          <div className={styles.profileDetailsEvents}>
+            <div>
+              <h1>{eventsAttended.length}</h1>
+              <h1 className={styles.eventsAttended}>Events Attended</h1>
+            </div>
+            <div>
+              <h1>{eventsHosted.length}</h1>
+              <h1 className={styles.eventsHosted}>Events Hosted</h1>
+            </div>
+          </div>
+          <div className={styles.profileDetailsButtons}>
+            <Link to="/user/event">
+              <button type="button">Create Event</button>
+            </Link>
+            <Link to="/user/events">
+              <button type="button">Manage Events</button>
+            </Link>
+          </div>
         </div>
       );
     } else {
@@ -40,27 +69,18 @@ class ProfilePage extends Component {
     });
   }
   onManageEvents() {
-    this.setState({
-      manageEvents: true
-    });
+    if (this.props.auth.user[0]) {
+      return <ManageEvents />;
+    } else {
+      return null;
+    }
   }
   render() {
     console.log("PROFILE PROPS", this.props);
     return (
-      <div>
-        <h1>Profile page </h1>
-        {this.renderProfile()}
-        {/* <button onClick={this.createEvent}>Create Event</button>
-        <button onClick={this.onManageEvents}>Manage Events</button> */}
-        <Link to="/user/event">
-          <button type="button">Create Event</button>
-        </Link>
-        <Link to="/user/events">
-          <button type="button">Manage Events</button>
-        </Link>
-        {/* {this.state.manageEvents === false ? null : (
-          <ManageEvents userId={this.props.auth.user[0]._id} />
-        )} */}
+      <div className={styles.profileContainer}>
+        <div className={styles.profileDetails}>{this.renderProfile()}</div>
+        <div className={styles.profileEvents}>{this.onManageEvents()}</div>
       </div>
     );
   }

@@ -133,8 +133,10 @@ class EventDetails extends Component {
                 className={styles.hostImage}
               />
               <h1 className={styles.hostTitle}>
-                {event.eventHost.firstName.charAt(0).toUpperCase() +
-                  event.eventHost.firstName.slice(1)}
+                {typeof event.eventHost !== "string"
+                  ? event.eventHost.firstName.charAt(0).toUpperCase() +
+                    event.eventHost.firstName.slice(1)
+                  : null}
               </h1>
             </div>
             <div className={styles.detailsHeaderDesc}>

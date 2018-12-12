@@ -15,3 +15,5 @@ export const fetchUser = () => dispatch => {
       console.log("ERROR FAM", err);
     });
 };
+
+export const getProfile = userId => dispatch => {};
