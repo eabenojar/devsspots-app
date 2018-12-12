@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getUserEvents, deleteEvent } from "../actions/eventActions";
 import { Row, Grid, Col } from "react-bootstrap";
 import styles from "../styles/css/ManageEvents.module.css";
+import { FaTrashAlt } from "react-icons/fa";
 
 class ManageEvents extends Component {
   constructor(props) {
@@ -60,69 +61,35 @@ class ManageEvents extends Component {
               Events Attended
             </button>
           </div>
-          {this.state.showHosted ? (
-            <Grid>
-              <Row>
-                {event.eventsHosted.map((event, index) => {
-                  return (
-                    <Col xs={12} sm={6} md={4} lg={4} key={index}>
-                      <div className={styles.box}>
-                        <div>
-                          <h1>{event.eventTitle}</h1>
-                        </div>
-                        <div>
-                          <button onClick={() => this.onDeleteEvent(event)}>
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    </Col>
-                  );
-                })}
-              </Row>
-            </Grid>
-          ) : (
-            <Grid>
-              <Row>
-                {event.eventsAttended.map((event, index) => {
-                  return (
-                    <Col xs={12} sm={6} md={4} lg={4} key={index}>
-                      <div className={styles.box}>
-                        <div>
-                          <h1>{event.eventTitle}</h1>
-                        </div>
-                        <div>
-                          <button onClick={() => this.onDeleteEvent(event)}>
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    </Col>
-                  );
-                })}
-              </Row>
-            </Grid>
-          )}
-          <Grid>
-            <Row>
-              {event.eventsHosted.map((event, index) => {
+          {this.state.showHosted
+            ? event.eventsHosted.map((event, index) => {
                 return (
-                  <Col xs={12} sm={6} md={4} lg={4} key={index}>
-                    <div className={styles.box}>
-                      <div>
-                        <h1>{event.eventTitle}</h1>
-                      </div>
-                      <div>
-                        <button onClick={() => this.onDeleteEvent(event)}>
-                          Delete
-                        </button>
-                      </div>
+                  <div className={styles.box} key={index}>
+                    <div>
+                      <h1>{event.eventTitle}</h1>
                     </div>
-                  </Col>
+                    <div>
+                      <button onClick={() => this.onDeleteEvent(event)}>
+                        <FaTrashAlt />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            : event.eventsAttended.map((event, index) => {
+                return (
+                  <div className={styles.box} key={index}>
+                    <div>
+                      <h1>{event.eventTitle}</h1>
+                    </div>
+                    <div>
+                      <button onClick={() => this.onDeleteEvent(event)}>
+                        Delete
+                      </button>
+                    </div>
+                  </div>
                 );
               })}
-            </Row>
-          </Grid>
         </div>
       );
     }

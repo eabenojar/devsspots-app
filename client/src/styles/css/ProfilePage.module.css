@@ -18,6 +18,7 @@
   min-width: 300px;
   width: 20%;
   background-color: #fff;
+  margin-right: 10px;
 }
 .profileEvents {
   height: 60vh;
@@ -49,8 +50,8 @@
   width: 100%;
   /* background-color: red; */
   flex-direction: row;
-  border-top: 1px solid grey;
-  border-bottom: 1px solid grey;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 .profileDetailsButtons {
   height: 175px;
