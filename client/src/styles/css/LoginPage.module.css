@@ -4,8 +4,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: #d7e9f7;
 }
 .title {
-  font-size: 100px;
+  font-size: 50px;
+  text-align: left;
+  margin-bottom: 50px;
+  font-weight: 400;
+}
+.loginContainer {
+  height: 400px;
+  width: 375px;
+  border-radius: 10px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.googleLoginButton {
+  height: 50px;
+  width: 250px;
+  background-color: #ff5252;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #fff;
 }

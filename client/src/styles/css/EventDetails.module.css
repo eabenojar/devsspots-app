@@ -90,6 +90,8 @@
   font-weight: 200;
   color: #5b5b5b;
   text-align: left;
+  line-height: 1.5;
+  overflow-y: auto;
 }
 .detailsMainBottom {
   height: 30%;

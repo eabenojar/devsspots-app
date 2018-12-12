@@ -7,25 +7,21 @@ import { connect } from "react-redux";
 class LoginPage extends Component {
   constructor(props) {
     super(props);
-    this.authUser = this.authUser.bind(this);
   }
-  authUser(event) {
-    // console.log("AUTH CLICKED");
-    // this.props.loginUser();
-    // // this.props.history.push("/auth/google");
-    // event.preventDefault();
-  }
+
   render() {
     console.log("LOGIN PROPS", this.props);
     return (
       <div className={styles.main}>
-        <div>
-          <h1 className={styles.title}>Login Here</h1>
+        <div className={styles.loginContainer}>
+          <h1 className={styles.title}>Login </h1>
           <a href="/auth/google">
-            <button onClick={this.authUser}>Sign In</button>
-          </a>
-          <a href="/auth/logout">
-            <button onClick={this.authUser}>Log Out</button>
+            <button
+              className={styles.googleLoginButton}
+              onClick={this.authUser}
+            >
+              Sign in with Google
+            </button>
           </a>
         </div>
       </div>
