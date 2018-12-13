@@ -4,12 +4,15 @@ import { getUserEvents, deleteEvent } from "../actions/eventActions";
 import { Row, Grid, Col } from "react-bootstrap";
 import styles from "../styles/css/ManageEvents.module.css";
 import { FaTrashAlt } from "react-icons/fa";
+import moment from "moment";
 
 class ManageEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHosted: true
+      showHosted: true,
+      hosted: true,
+      attended: false
     };
     this.onDeleteEvent = this.onDeleteEvent.bind(this);
     this.onshowAttended = this.onshowAttended.bind(this);
@@ -29,12 +32,16 @@ class ManageEvents extends Component {
   }
   onshowAttended() {
     this.setState({
-      showHosted: false
+      showHosted: false,
+      attended: true,
+      hosted: false
     });
   }
   onshowHosted() {
     this.setState({
-      showHosted: true
+      showHosted: true,
+      hosted: true,
+      attended: false
     });
   }
   render() {
@@ -51,12 +58,18 @@ class ManageEvents extends Component {
             <button
               onClick={this.onshowHosted}
               className={styles.eventHeaderButton}
+              style={{
+                backgroundColor: this.state.hosted ? "#F1F1F1" : "#FFF"
+              }}
             >
               Events Hosted
             </button>
             <button
               onClick={this.onshowAttended}
               className={styles.eventHeaderButton}
+              style={{
+                backgroundColor: this.state.attended ? "#F1F1F1" : "#FFF"
+              }}
             >
               Events Attended
             </button>
@@ -65,12 +78,25 @@ class ManageEvents extends Component {
             ? event.eventsHosted.map((event, index) => {
                 return (
                   <div className={styles.box} key={index}>
-                    <div>
-                      <h1>{event.eventTitle}</h1>
+                    <div className={styles.manageEventsDesc}>
+                      <h1 className={styles.date}>
+                        {moment(event.eventDate).format("MMMM, DD YYYY")}
+                      </h1>
+                      <h1 className={styles.title}>{event.eventTitle}</h1>
+                      <h1 className={styles.going}>
+                        {" "}
+                        Members going {event.eventAttendees.length}
+                      </h1>
                     </div>
-                    <div>
-                      <button onClick={() => this.onDeleteEvent(event)}>
-                        <FaTrashAlt />
+                    <div className={styles.manageEventDelete}>
+                      <button
+                        className={styles.deleteButton}
+                        onClick={() => this.onDeleteEvent(event)}
+                      >
+                        <FaTrashAlt
+                          color={"#5A5A5A"}
+                          style={{ backgroundColor: "transparent" }}
+                        />
                       </button>
                     </div>
                   </div>
@@ -79,12 +105,25 @@ class ManageEvents extends Component {
             : event.eventsAttended.map((event, index) => {
                 return (
                   <div className={styles.box} key={index}>
-                    <div>
-                      <h1>{event.eventTitle}</h1>
+                    <div className={styles.manageEventsDesc}>
+                      <h1 className={styles.date}>
+                        {moment(event.eventDate).format("MMMM, DD YYYY")}
+                      </h1>
+                      <h1 className={styles.title}>{event.eventTitle}</h1>
+                      <h1 className={styles.going}>
+                        {" "}
+                        Members going {event.eventAttendees.length}
+                      </h1>
                     </div>
-                    <div>
-                      <button onClick={() => this.onDeleteEvent(event)}>
-                        Delete
+                    <div className={styles.manageEventDelete}>
+                      <button
+                        className={styles.deleteButton}
+                        onClick={() => this.onDeleteEvent(event)}
+                      >
+                        <FaTrashAlt
+                          color={"#5A5A5A"}
+                          style={{ backgroundColor: "transparent" }}
+                        />
                       </button>
                     </div>
                   </div>

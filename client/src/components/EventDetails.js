@@ -8,6 +8,7 @@ import {
 import GoogleMapReact from "google-map-react";
 import styles from "../styles/css/EventDetails.module.css";
 import { FaLaptopCode, FaMapMarkerAlt, FaRegClock } from "react-icons/fa";
+import { ClipLoader } from "react-spinners";
 
 import moment from "moment";
 
@@ -56,7 +57,7 @@ class EventDetails extends Component {
       this.props.event.eventDetails === undefined ||
       this.props.event.eventDetails.length === 0
     ) {
-      return <h1>Loading...</h1>;
+      return null;
     } else {
       const event = this.props.event.eventDetails[0];
       return (
@@ -92,7 +93,7 @@ class EventDetails extends Component {
   }
   renderMap() {
     if (this.props.event.eventDetails.length === 0) {
-      return <h1>Loading fam...</h1>;
+      return null;
     } else {
       const { eventLocation } = this.props.event.eventDetails[0];
       const Marker = props => (
@@ -118,7 +119,7 @@ class EventDetails extends Component {
       this.props.event.eventDetails === undefined ||
       this.props.event.eventDetails.length === 0
     ) {
-      return <h1>Loading...</h1>;
+      return null;
     } else {
       const event = this.props.event.eventDetails[0];
       return (

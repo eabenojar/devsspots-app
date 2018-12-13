@@ -47,10 +47,9 @@ class ProfilePage extends Component {
           </div>
           <div className={styles.profileDetailsButtons}>
             <Link to="/user/event">
-              <button type="button">Create Event</button>
-            </Link>
-            <Link to="/user/events">
-              <button type="button">Manage Events</button>
+              <button className={styles.createEventButton} type="button">
+                Create Event
+              </button>
             </Link>
           </div>
         </div>

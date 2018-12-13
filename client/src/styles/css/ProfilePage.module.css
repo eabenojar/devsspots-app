@@ -57,11 +57,22 @@
   height: 175px;
   min-width: 300px;
   width: 100%;
-  background-color: orange;
 }
 .eventsAttended,
 .eventsHosted {
   font-size: 14px;
   font-weight: 400;
   margin: 5px 10px 0px 10px;
+}
+.createEventButton {
+  height: 50px;
+  width: 200px;
+  background-color: #82e0aa;
+  border: 1px solid transparent;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 400;
+}
+.createEventButton:hover {
+  opacity: 0.9;
 }

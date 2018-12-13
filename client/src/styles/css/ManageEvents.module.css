@@ -11,6 +11,7 @@
   background-color: #fff;
   margin-top: 1px;
   border: 1px solid transparent;
+  display: flex;
   /* -webkit-box-shadow: 0px 0px 10px 0px rgba(204, 204, 204, 1);
   -moz-box-shadow: 0px 0px 10px 0px rgba(204, 204, 204, 1);
   box-shadow: 0px 0px 10px 0px rgba(204, 204, 204, 1); */
@@ -24,8 +25,9 @@
   height: 50px;
   width: 50%;
   border: 1px solid transparent;
-  border-right: 1px solid lightgrey;
-  font-size: 14px;
+  border-right: 1px solid #f1f1f1;
+  font-size: 16px;
+  font-weight: 600;
 }
 .eventHeaderButton:focus {
   outline: 0;
@@ -36,4 +38,42 @@
 }
 .eventHeaderButton:hover {
   opacity: 0.6;
+}
+.manageEventsDesc,
+.manageEventDelete {
+  display: flex;
+  height: 100%;
+}
+.manageEventsDesc {
+  width: 90%;
+  padding-left: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+.manageEventDelete {
+  width: 10%;
+  justify-content: center;
+}
+.manageEventDelete:hover {
+  margin-top: 3px;
+}
+.deleteButton {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+.date {
+  font-size: 16px;
+  font-family: 400;
+  color: #959595;
+}
+.title {
+  font-size: 18px;
+  font-family: 600;
+  color: #000;
+}
+.going {
+  font-size: 12px;
+  font-family: 600;
+  color: #3d3d3d;
 }
