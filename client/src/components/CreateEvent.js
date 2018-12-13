@@ -7,7 +7,8 @@ import {
   Form,
   Col,
   Checkbox,
-  Button
+  Button,
+  HelpBlock
 } from "react-bootstrap";
 
 import { connect } from "react-redux";
@@ -27,14 +28,15 @@ class CreateEvent extends Component {
       value: "",
       eventTitle: "",
       eventDescription: "",
-      eventCategory: "html",
+      eventCategory: "",
       eventLocation: {},
       eventAddress: "",
       eventMapUrl: "",
       eventDate: "",
       timeStart: "",
       timeEnd: "",
-      map: null
+      map: null,
+      error: {}
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,6 +45,7 @@ class CreateEvent extends Component {
     this.onSuggestSelect = this.onSuggestSelect.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.getValidationEvent = this.getValidationEvent.bind(this);
   }
 
   getValidationState() {
@@ -51,6 +54,20 @@ class CreateEvent extends Component {
     else if (length > 5) return "warning";
     else if (length > 0) return "error";
     return null;
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log("WILL RECEIEVE", nextProps);
+    if (Object.keys(nextProps.error).length !== 0) {
+      this.setState({ error: nextProps.error });
+    }
+  }
+  getValidationEvent() {
+    console.log("GET VALIDATION METHODDSSSSSS", this.state.error);
+    if (Object.keys(this.state.error).length === 0) {
+      return null;
+    } else {
+      return "error";
+    }
   }
   onSubmit(e) {
     e.preventDefault();
@@ -103,6 +120,7 @@ class CreateEvent extends Component {
   }
   render() {
     console.log("CREATE EVENT RENDER MAP", window.google);
+    console.log("CREATE EVENT PROPSSSSS", this.props);
     var fixtures = [
       {
         label: "San Francisco, CA",
@@ -125,7 +143,10 @@ class CreateEvent extends Component {
           </div>
 
           <Form onSubmit={this.onSubmit} className={styles.form}>
-            <FormGroup controlId="formHorizontalEmail">
+            <FormGroup
+              controlId="formHorizontalEmail"
+              validationState={this.getValidationEvent()}
+            >
               <Col>
                 <ControlLabel className={styles.inputEventTitle}>
                   Event Title
@@ -138,11 +159,16 @@ class CreateEvent extends Component {
                   name="eventTitle"
                   onChange={this.handleChange}
                   className={styles.inputTitle}
+                  maxLength={60}
                 />
+                <HelpBlock>Help text with validation state.</HelpBlock>
               </Col>
             </FormGroup>
 
-            <FormGroup controlId="formControlsSelect">
+            <FormGroup
+              controlId="formControlsSelect"
+              validationState={this.getValidationEvent()}
+            >
               <ControlLabel className={styles.inputEventCategory}>
                 Category
               </ControlLabel>
@@ -151,6 +177,9 @@ class CreateEvent extends Component {
                 placeholder="select"
                 onChange={this.onOptionChange.bind(this)}
               >
+                <option name="eventCategory" value="">
+                  SELECT
+                </option>
                 <option name="eventCategory" value="html">
                   HTML
                 </option>
@@ -163,7 +192,10 @@ class CreateEvent extends Component {
               </FormControl>
             </FormGroup>
 
-            <FormGroup controlId="formHorizontalPassword">
+            <FormGroup
+              controlId="formHorizontalPassword"
+              validationState={this.getValidationEvent()}
+            >
               <ControlLabel className={styles.inputEventDesc}>
                 Event Description
               </ControlLabel>
@@ -172,6 +204,7 @@ class CreateEvent extends Component {
                 placeholder="Description"
                 name="eventDescription"
                 onChange={this.handleChange}
+                maxLength={160}
               />
             </FormGroup>
             <h1 className={styles.dateTitle}>Date </h1>
@@ -222,7 +255,7 @@ class CreateEvent extends Component {
                 // initialValue="San Francisco"
                 fixtures={fixtures}
                 onSuggestSelect={this.onSuggestSelect}
-                // location={new window.google.maps.LatLng(53.558572, 9.9278215)}
+                location={new window.google.maps.LatLng(53.558572, 9.9278215)}
                 radius="20"
               />
             </div>
@@ -243,7 +276,8 @@ class CreateEvent extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    error: state.error
   };
 };
 export default connect(

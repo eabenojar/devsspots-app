@@ -8,7 +8,8 @@ import {
   GET_EVENT_DETAILS,
   FETCH_GOOGLE_MAPS,
   JOIN_EVENT,
-  LEAVE_EVENT
+  LEAVE_EVENT,
+  GET_ERRORS
 } from "./types";
 
 export const fetchGoogleMaps = map => dispatch => {
@@ -31,7 +32,11 @@ export const addEvent = event => dispatch => {
       });
     })
     .catch(err => {
-      console.log("ERROR FAM", err);
+      console.log("ADD EVENT ERRORS");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
     });
 };
 

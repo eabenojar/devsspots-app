@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const isUserAuth = require("../middleware/userAuth");
 
+const validateEvent = require("../validation/event");
+
 // Event Model
 const Event = require("../models/Event");
 const User = require("../models/User");
@@ -70,6 +72,13 @@ router.get("/category/:category/:id", (req, res) => {
 // Private Route
 router.post("/new", isUserAuth, (req, res) => {
   const userId = req.user._id;
+  // Check Validation
+  const { errors, isValid } = validateEvent(req.body);
+
+  if (!isValid) {
+    console.log("ERRORS IN CREATE EVENT", errors);
+    return res.status(400).json(errors);
+  }
   console.log("EVENT POST SERVER", req.user[0]._id, req.user[0]);
   const newEvent = new Event({
     eventTitle: req.body.eventTitle,
