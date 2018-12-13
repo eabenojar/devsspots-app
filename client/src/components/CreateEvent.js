@@ -104,106 +104,53 @@ class CreateEvent extends Component {
   render() {
     console.log("CREATE EVENT RENDER MAP", window.google);
     var fixtures = [
-      // {
-      //   label: "San Francisco, CA",
-      //   location: { lat: 53.5459, lng: 9.966576 }
-      // },
-      // {
-      //   label: "New York, NY",
-      //   location: { lat: 53.5495629, lng: 9.9625838 }
-      // },
-      // {
-      //   label: "Austin, TX",
-      //   location: { lat: 53.5610398, lng: 10.0259135 }
-      // }
+      {
+        label: "San Francisco, CA",
+        location: { lat: 53.5459, lng: 9.966576 }
+      },
+      {
+        label: "New York, NY",
+        location: { lat: 53.5495629, lng: 9.9625838 }
+      },
+      {
+        label: "Austin, TX",
+        location: { lat: 53.5610398, lng: 10.0259135 }
+      }
     ];
     return (
       <div className={styles.main}>
-        <h1>Create Event</h1>
-        <DatePicker
-          selected={this.state.startDate}
-          onChange={this.handleDateChange.bind(this, "eventDate")}
-          name="eventDate"
-          value={this.state.eventDate.toString()}
-        />
-        <h1>Time Picker</h1>
-        <DatePicker
-          selected={this.state.startDate}
-          onChange={this.handleTimeChange.bind(this, "timeStart")}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={15}
-          dateFormat="h:mm aa"
-          timeCaption="Time"
-          name="timeStart"
-          value={moment(this.state.timeStart).format("hh:mm A") || ""}
-        />
-        <DatePicker
-          selected={this.state.startDate}
-          onChange={this.handleTimeChange.bind(this, "timeEnd")}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={15}
-          timeFormat="h:mm"
-          timeCaption="Time"
-          name="timeEnd"
-          value={
-            moment(this.state.timeEnd).format("hh:mm A") !== null
-              ? moment(this.state.timeEnd).format("hh:mm A")
-              : ""
-          }
-        />
-        <div className={styles.geoForm}>
-          <Geosuggest
-            ref={el => (this._geoSuggest = el)}
-            placeholder="Start typing!"
-            // initialValue="San Francisco"
-            fixtures={fixtures}
-            onSuggestSelect={this.onSuggestSelect}
-            location={new window.google.maps.LatLng(53.558572, 9.9278215)}
-            radius="20"
-          />
-        </div>
-        <Form horizontal onSubmit={this.onSubmit}>
-          <FormGroup controlId="formHorizontalEmail">
-            <Col componentClass={ControlLabel} sm={2}>
-              Event Title
-            </Col>
-            <Col sm={10}>
-              <FormControl
-                type="text"
-                placeholder="Title"
-                name="eventTitle"
-                onChange={this.handleChange}
-              />
-            </Col>
-          </FormGroup>
+        <div className={styles.formContainer}>
+          <div className={styles.formHeader}>
+            <h1 className={styles.formTitle}>Create Event</h1>
+          </div>
 
-          <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
-              Event Description
-            </Col>
-            <Col sm={10}>
-              <FormControl
-                componentClass="textarea"
-                placeholder="Description"
-                name="eventDescription"
-                onChange={this.handleChange}
-              />
-            </Col>
-          </FormGroup>
+          <Form onSubmit={this.onSubmit} className={styles.form}>
+            <FormGroup controlId="formHorizontalEmail">
+              <Col>
+                <ControlLabel className={styles.inputEventTitle}>
+                  Event Title
+                </ControlLabel>
+              </Col>
+              <Col>
+                <FormControl
+                  type="text"
+                  placeholder="Title"
+                  name="eventTitle"
+                  onChange={this.handleChange}
+                  className={styles.inputTitle}
+                />
+              </Col>
+            </FormGroup>
 
-          <FormGroup controlId="formControlsSelect">
-            <Col componentClass={ControlLabel} sm={2}>
-              <ControlLabel>Category</ControlLabel>
-            </Col>
-            <Col sm={10}>
-              {/* <FormControl
+            <FormGroup controlId="formControlsSelect">
+              <ControlLabel className={styles.inputEventCategory}>
+                Category
+              </ControlLabel>
+              <FormControl
                 componentClass="select"
                 placeholder="select"
-                onChange={this.handleChange.bind(this)}
-              > */}
-              <select onChange={this.onOptionChange.bind(this)}>
+                onChange={this.onOptionChange.bind(this)}
+              >
                 <option name="eventCategory" value="html">
                   HTML
                 </option>
@@ -213,64 +160,82 @@ class CreateEvent extends Component {
                 <option name="eventCategory" value="javascript">
                   JAVASCRIPT
                 </option>
-              </select>
-            </Col>
-          </FormGroup>
+              </FormControl>
+            </FormGroup>
 
-          {/* <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
-              Event Capacity
-            </Col>
-            <Col sm={10}>
-              <FormControl type="number" placeholder="Password" />
-            </Col>
-          </FormGroup>
+            <FormGroup controlId="formHorizontalPassword">
+              <ControlLabel className={styles.inputEventDesc}>
+                Event Description
+              </ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                placeholder="Description"
+                name="eventDescription"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <h1 className={styles.dateTitle}>Date </h1>
+            <DatePicker
+              className={styles.datePicker}
+              selected={this.state.startDate}
+              onChange={this.handleDateChange.bind(this, "eventDate")}
+              name="eventDate"
+              value={this.state.eventDate.toString()}
+            />
 
-          <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
-              Event Location
-            </Col>
-            <Col sm={10}>
-              <FormControl type="number" placeholder="Password" />
-            </Col>
-          </FormGroup>
+            <h1 className={styles.timeTitle}>Time Picker</h1>
+            <DatePicker
+              selected={this.state.startDate}
+              className={styles.dateTimePicker}
+              onChange={this.handleTimeChange.bind(this, "timeStart")}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              dateFormat="h:mm aa"
+              timeCaption="Time"
+              name="timeStart"
+              value={moment(this.state.timeStart).format("hh:mm A") || ""}
+            />
+            <DatePicker
+              selected={this.state.startDate}
+              className={styles.dateTimePicker}
+              onChange={this.handleTimeChange.bind(this, "timeEnd")}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              timeFormat="h:mm"
+              timeCaption="Time"
+              name="timeEnd"
+              value={
+                moment(this.state.timeEnd).format("hh:mm A") !== null
+                  ? moment(this.state.timeEnd).format("hh:mm A")
+                  : ""
+              }
+            />
+            <h1 className={styles.timeTitle}>Location (Address)</h1>
 
-          <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
-              Event Category
-            </Col>
-            <Col sm={10}>
-              <FormControl type="number" placeholder="Password" />
-            </Col>
-          </FormGroup>
+            <div className={styles.geoForm}>
+              <Geosuggest
+                className={styles.geoForm}
+                ref={el => (this._geoSuggest = el)}
+                placeholder="Start typing!"
+                // initialValue="San Francisco"
+                fixtures={fixtures}
+                onSuggestSelect={this.onSuggestSelect}
+                // location={new window.google.maps.LatLng(53.558572, 9.9278215)}
+                radius="20"
+              />
+            </div>
 
-          
-
-          <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
-              Start Time
-            </Col>
-            <Col sm={10}>
-              <FormControl type="time" placeholder="Password" />
-            </Col>
-          </FormGroup>
-
-          <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} sm={2}>
-              End Time
-            </Col>
-            <Col sm={10}>
-              <FormControl type="datetime-local" placeholder="Password" />
-            </Col>
-          </FormGroup>
-*/}
-          <FormGroup>
-            <Col smOffset={2} sm={10}>
-              <Button type="submit">Create Event</Button>
-            </Col>
-          </FormGroup>
-        </Form>
-        ;
+            <FormGroup>
+              <Col>
+                <Button type="submit" className={styles.createEventButton}>
+                  Create Event
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </div>
       </div>
     );
   }

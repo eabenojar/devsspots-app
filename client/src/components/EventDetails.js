@@ -8,7 +8,6 @@ import {
 import GoogleMapReact from "google-map-react";
 import styles from "../styles/css/EventDetails.module.css";
 import { FaLaptopCode, FaMapMarkerAlt, FaRegClock } from "react-icons/fa";
-import { ClipLoader } from "react-spinners";
 
 import moment from "moment";
 
