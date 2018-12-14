@@ -44,7 +44,8 @@
   padding: 5px;
 }
 .formContainer {
-  height: 800px;
+  min-height: 800px;
+  height: auto;
   width: 500px;
   background-color: #f4f4f4;
 }
@@ -98,15 +99,13 @@
   padding-left: 10px;
 }
 .dateTimePicker:first-child {
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 .dateTimePicker {
   height: 40px;
   border-radius: 5px;
-  width: 210px;
-  margin-bottom: 10px;
+  width: 100%;
   border: none;
-  padding-left: 10px;
 }
 
 .dateTitle {
@@ -127,4 +126,65 @@
   border: 1px solid transparent;
   margin-top: 20px;
   height: 50px;
+}
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  display: block;
+}
+.datePickerWrapper {
+  width: 100%;
+}
+.datePickerWrapper div {
+  display: block;
+}
+.timePickerWrapper {
+  width: 50%;
+  float: left;
+  padding: 10px 5px;
+}
+.timePickerWrapper:first-child {
+  margin-right: 5px;
+}
+.timePickerWrapper div {
+  display: block;
+}
+@media only screen and (max-width: 540px) {
+  .main {
+    min-height: calc(100vh - 50px);
+    height: auto;
+    width: 100vw;
+    background-color: #d7e9f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .formContainer {
+    min-height: 800px;
+    height: auto;
+    width: 100%;
+    background-color: #f4f4f4;
+  }
+  .datePicker {
+    height: 40px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+    padding-left: 10px;
+  }
+  .geoForm {
+    height: auto;
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 10px 0px;
+  }
+  .geoForm input {
+    width: 100%;
+    border: none;
+    height: 50px;
+    border-radius: 5px;
+    padding-left: 10px;
+  }
 }

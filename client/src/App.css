@@ -2,6 +2,7 @@
   text-align: center;
   overflow-y: hidden;
   height: auto;
+  width: 100vw;
   background-color: orange;
 }
 

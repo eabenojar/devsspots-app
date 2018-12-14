@@ -217,51 +217,58 @@ class CreateEvent extends Component {
               />
             </FormGroup>
             <h1 className={styles.dateTitle}>Date </h1>
-            <DatePicker
-              className={styles.datePicker}
-              selected={this.state.eventDate}
-              onChange={this.handleDateChange.bind(this, "eventDate")}
-              name="eventDate"
-              value={
-                this.state.eventDate.toString() === ""
-                  ? ""
-                  : moment(this.state.eventDate).format("dddd, MMMM DD, YYYY")
-              }
-            />
+            <div className={styles.datePickerWrapper}>
+              <DatePicker
+                className={styles.datePicker}
+                selected={this.state.eventDate}
+                onChange={this.handleDateChange.bind(this, "eventDate")}
+                name="eventDate"
+                value={
+                  this.state.eventDate.toString() === ""
+                    ? ""
+                    : moment(this.state.eventDate).format("dddd, MMMM DD, YYYY")
+                }
+              />
+            </div>
 
             <h1 className={styles.timeTitle}>Time Picker</h1>
-            <DatePicker
-              selected={this.state.startDate}
-              className={styles.dateTimePicker}
-              onChange={this.handleTimeChange.bind(this, "timeStart")}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={15}
-              dateFormat="h:mm aa"
-              timeCaption="Time"
-              name="timeStart"
-              value={
-                this.state.timeStart === ""
-                  ? ""
-                  : moment(this.state.timeStart).format("hh:mm A")
-              }
-            />
-            <DatePicker
-              selected={this.state.startDate}
-              className={styles.dateTimePicker}
-              onChange={this.handleTimeChange.bind(this, "timeEnd")}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={15}
-              timeFormat="h:mm"
-              timeCaption="Time"
-              name="timeEnd"
-              value={
-                this.state.timeEnd === ""
-                  ? ""
-                  : moment(this.state.timeEnd).format("hh:mm A")
-              }
-            />
+            <div className={styles.timePickerWrapper}>
+              <DatePicker
+                selected={this.state.startDate}
+                className={styles.dateTimePicker}
+                onChange={this.handleTimeChange.bind(this, "timeStart")}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                dateFormat="h:mm aa"
+                timeCaption="Time"
+                name="timeStart"
+                value={
+                  this.state.timeStart === ""
+                    ? ""
+                    : moment(this.state.timeStart).format("hh:mm A")
+                }
+              />
+            </div>
+            <div className={styles.timePickerWrapper}>
+              <DatePicker
+                selected={this.state.startDate}
+                className={styles.dateTimePicker}
+                onChange={this.handleTimeChange.bind(this, "timeEnd")}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                timeFormat="h:mm"
+                timeCaption="Time"
+                name="timeEnd"
+                value={
+                  this.state.timeEnd === ""
+                    ? ""
+                    : moment(this.state.timeEnd).format("hh:mm A")
+                }
+              />
+            </div>
+
             <h1 className={styles.timeTitle}>Location (Address)</h1>
 
             <div className={styles.geoForm}>
@@ -274,7 +281,7 @@ class CreateEvent extends Component {
                 onSuggestSelect={this.onSuggestSelect}
                 suggestsHiddenClassName={styles.geoformHidden}
                 suggestItemClassName={styles.geoformActive}
-                location={new window.google.maps.LatLng(53.558572, 9.9278215)}
+                // location={new window.google.maps.LatLng(53.558572, 9.9278215)}
                 radius="20"
               />
             </div>
