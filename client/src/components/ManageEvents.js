@@ -59,7 +59,8 @@ class ManageEvents extends Component {
               onClick={this.onshowHosted}
               className={styles.eventHeaderButton}
               style={{
-                backgroundColor: this.state.hosted ? "#F1F1F1" : "#FFF"
+                backgroundColor: this.state.hosted ? "#313131" : "#FFF",
+                color: this.state.attended ? "#000" : "#fff"
               }}
             >
               Events Hosted
@@ -68,7 +69,8 @@ class ManageEvents extends Component {
               onClick={this.onshowAttended}
               className={styles.eventHeaderButton}
               style={{
-                backgroundColor: this.state.attended ? "#F1F1F1" : "#FFF"
+                backgroundColor: this.state.attended ? "#313131" : "#FFF",
+                color: this.state.attended ? "#FFF" : "#000"
               }}
             >
               Events Attended

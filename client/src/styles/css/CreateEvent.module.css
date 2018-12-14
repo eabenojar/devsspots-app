@@ -1,5 +1,6 @@
 .main {
-  height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
+  height: auto;
   width: 100vw;
   background-color: #d7e9f7;
   display: flex;
@@ -19,8 +20,30 @@
   height: 50px;
   border-radius: 5px;
 }
+.geoForm li {
+  border: 1px solid #f0f0f0;
+  height: 40px;
+  font-size: 14px;
+  background-color: #fff;
+  text-align: left;
+  padding: 5px;
+}
+
+.geoformHidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+.geoformActive {
+  border: 1px solid #f0f0f0;
+  height: 40px;
+  font-size: 14px;
+  background-color: #fff;
+  text-align: left;
+  padding: 5px;
+}
 .formContainer {
-  height: 700px;
+  height: 800px;
   width: 500px;
   background-color: #f4f4f4;
 }

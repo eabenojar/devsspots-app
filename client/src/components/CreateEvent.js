@@ -32,7 +32,7 @@ class CreateEvent extends Component {
       eventLocation: {},
       eventAddress: "",
       eventMapUrl: "",
-      eventDate: "",
+      eventDate: new Date(),
       timeStart: "",
       timeEnd: "",
       map: null,
@@ -86,14 +86,18 @@ class CreateEvent extends Component {
     this.props.addEvent(newEvent);
   }
   onSuggestSelect(suggest) {
-    const location = suggest.location;
-    const address = suggest.gmaps.formatted_address;
-    const mapUrl = suggest.gmaps.url;
-    this.setState({
-      eventAddress: address,
-      eventLocation: location,
-      eventMapUrl: mapUrl
-    });
+    console.log("SUGGGGESST", suggest);
+    if (window.google && suggest !== undefined) {
+      const location = suggest.location;
+      const address = suggest.gmaps.formatted_address;
+      const mapUrl = suggest.gmaps.url;
+      this.setState({
+        eventAddress: address,
+        eventLocation: location,
+        eventMapUrl: mapUrl
+      });
+    }
+
     console.log("SELECTING GOOGLE", suggest);
   }
   onOptionChange(e) {
@@ -121,6 +125,11 @@ class CreateEvent extends Component {
   render() {
     console.log("CREATE EVENT RENDER MAP", window.google);
     console.log("CREATE EVENT PROPSSSSS", this.props);
+    console.log(
+      "CHECK TIME CREATE EVENT",
+      moment(this.state.timeEnd).format("hh:mm A"),
+      this.state.timeEnd
+    );
     var fixtures = [
       {
         label: "San Francisco, CA",
@@ -210,10 +219,14 @@ class CreateEvent extends Component {
             <h1 className={styles.dateTitle}>Date </h1>
             <DatePicker
               className={styles.datePicker}
-              selected={this.state.startDate}
+              selected={this.state.eventDate}
               onChange={this.handleDateChange.bind(this, "eventDate")}
               name="eventDate"
-              value={this.state.eventDate.toString()}
+              value={
+                this.state.eventDate.toString() === ""
+                  ? ""
+                  : moment(this.state.eventDate).format("dddd, MMMM DD, YYYY")
+              }
             />
 
             <h1 className={styles.timeTitle}>Time Picker</h1>
@@ -227,7 +240,11 @@ class CreateEvent extends Component {
               dateFormat="h:mm aa"
               timeCaption="Time"
               name="timeStart"
-              value={moment(this.state.timeStart).format("hh:mm A") || ""}
+              value={
+                this.state.timeStart === ""
+                  ? ""
+                  : moment(this.state.timeStart).format("hh:mm A")
+              }
             />
             <DatePicker
               selected={this.state.startDate}
@@ -240,9 +257,9 @@ class CreateEvent extends Component {
               timeCaption="Time"
               name="timeEnd"
               value={
-                moment(this.state.timeEnd).format("hh:mm A") !== null
-                  ? moment(this.state.timeEnd).format("hh:mm A")
-                  : ""
+                this.state.timeEnd === ""
+                  ? ""
+                  : moment(this.state.timeEnd).format("hh:mm A")
               }
             />
             <h1 className={styles.timeTitle}>Location (Address)</h1>
@@ -255,6 +272,8 @@ class CreateEvent extends Component {
                 // initialValue="San Francisco"
                 fixtures={fixtures}
                 onSuggestSelect={this.onSuggestSelect}
+                suggestsHiddenClassName={styles.geoformHidden}
+                suggestItemClassName={styles.geoformActive}
                 location={new window.google.maps.LatLng(53.558572, 9.9278215)}
                 radius="20"
               />
