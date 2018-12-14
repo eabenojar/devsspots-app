@@ -6,6 +6,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 .name {
   font-size: 14px;
@@ -39,13 +40,15 @@
   flex-direction: column;
 }
 .profileDetailsHeader {
-  height: 150px;
+  min-height: 150px;
+  height: auto;
   min-width: 300px;
   width: 100%;
   /* background-color: green; */
 }
 .profileDetailsEvents {
-  height: 75px;
+  min-height: 75px;
+  height: auto;
   min-width: 300px;
   width: 100%;
   /* background-color: red; */
@@ -75,4 +78,122 @@
 }
 .createEventButton:hover {
   opacity: 0.9;
+}
+
+@media only screen and (max-width: 768px) {
+  .profileContainer {
+    min-height: calc(100vh - 80px);
+    height: auto;
+    width: 100vw;
+    background-color: #d7e9f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .profileDetails {
+    height: auto;
+    min-height: 300px;
+    min-width: 300px;
+    width: 85%;
+    background-color: #fff;
+    margin: 10px;
+  }
+  .profileDetailsHeader {
+    min-height: 125px;
+    height: auto;
+    min-width: 300px;
+    width: 100%;
+    /* background-color: green; */
+  }
+  .profileDetailsEvents {
+    min-height: 75px;
+    height: auto;
+    min-width: 300px;
+    width: 100%;
+    /* background-color: red; */
+    flex-direction: row;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+  }
+  .profileDetailsButtons {
+    min-height: 100px;
+    height: auto;
+    min-width: 300px;
+    width: 100%;
+  }
+  .profileEvents {
+    height: 60vh;
+    min-height: 400px;
+    min-width: 300px;
+    margin: 10px;
+    width: 85%;
+    background-color: #fff;
+  }
+  .eventsAttended,
+  .eventsHosted {
+    font-size: 12px;
+    font-weight: 400;
+    margin: 5px 10px 0px 10px;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .profileContainer {
+    min-height: calc(100vh - 80px);
+    height: auto;
+    width: 100vw;
+    background-color: #d7e9f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .profileDetails {
+    height: auto;
+    min-height: 300px;
+    min-width: 300px;
+    width: 85%;
+    background-color: #fff;
+    margin: 10px;
+  }
+  .profileDetailsHeader {
+    min-height: 125px;
+    height: auto;
+    min-width: 300px;
+    width: 100%;
+    /* background-color: green; */
+  }
+  .profileDetailsEvents {
+    min-height: 75px;
+    height: auto;
+    min-width: 300px;
+    width: 100%;
+    /* background-color: red; */
+    flex-direction: row;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+  }
+  .profileDetailsButtons {
+    min-height: 100px;
+    height: auto;
+    min-width: 300px;
+    width: 100%;
+  }
+  .profileEvents {
+    height: 60vh;
+    min-height: 400px;
+    min-width: 300px;
+    margin: 10px;
+    width: 85%;
+    background-color: #fff;
+  }
+  .eventsAttended,
+  .eventsHosted {
+    font-size: 12px;
+    font-weight: 400;
+    margin: 5px 10px 0px 10px;
+  }
 }
