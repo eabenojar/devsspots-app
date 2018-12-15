@@ -52,15 +52,30 @@
   justify-content: space-around;
 }
 .manageEventDelete {
+  min-width: 100px;
   width: 10%;
   justify-content: center;
 }
-.manageEventDelete:hover {
-  margin-top: 3px;
-}
-.deleteButton {
+
+.deleteButton,
+.editButton {
   background-color: transparent;
   border: 1px solid transparent;
+}
+.deleteButton {
+  height: 100%;
+  width: 100%;
+}
+.editButton {
+  /* margin: 20px; */
+  height: 100%;
+  width: 100%;
+}
+.deleteButton:hover {
+  background-color: #e53434;
+}
+.editButton:hover {
+  background-color: #52be80;
 }
 .date {
   font-size: 16px;

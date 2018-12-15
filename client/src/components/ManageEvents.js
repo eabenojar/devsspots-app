@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getUserEvents, deleteEvent } from "../actions/eventActions";
 import { Row, Grid, Col } from "react-bootstrap";
 import styles from "../styles/css/ManageEvents.module.css";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaPen } from "react-icons/fa";
 import moment from "moment";
 
 class ManageEvents extends Component {
@@ -17,6 +17,10 @@ class ManageEvents extends Component {
     this.onDeleteEvent = this.onDeleteEvent.bind(this);
     this.onshowAttended = this.onshowAttended.bind(this);
     this.onshowHosted = this.onshowHosted.bind(this);
+    this.onEditEvent = this.onEditEvent.bind(this);
+  }
+  onEditEvent(event) {
+    console.log("EDIT EVENTS", event);
   }
   componentDidMount() {
     const userId = this.props.auth.user[0]._id;
@@ -96,6 +100,15 @@ class ManageEvents extends Component {
                         onClick={() => this.onDeleteEvent(event)}
                       >
                         <FaTrashAlt
+                          color={"#5A5A5A"}
+                          style={{ backgroundColor: "transparent" }}
+                        />
+                      </button>
+                      <button
+                        className={styles.editButton}
+                        onClick={() => this.onEditEvent(event)}
+                      >
+                        <FaPen
                           color={"#5A5A5A"}
                           style={{ backgroundColor: "transparent" }}
                         />
