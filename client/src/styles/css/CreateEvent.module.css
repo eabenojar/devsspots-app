@@ -7,6 +7,17 @@
   justify-content: center;
   align-items: center;
 }
+.dateErrorTitle {
+  color: #a94442;
+}
+.timeErrorTitle {
+  color: #a94442;
+  margin-top: 5px;
+}
+.mapErrorTitle {
+  color: #a94442;
+  margin-top: 2px;
+}
 .geoForm {
   height: auto;
   width: 460px;
@@ -14,12 +25,17 @@
   border-bottom-right-radius: 5px;
   margin: 10px 0px;
 }
-.geoForm input {
+
+.geoForm input,
+.geoFormError input {
   width: 100%;
   border: none;
   height: 50px;
   border-radius: 5px;
   padding-left: 10px;
+}
+.geoFormError input {
+  border: 1px solid #a94442;
 }
 .geoForm li {
   border: 1px solid #f0f0f0;
@@ -90,7 +106,8 @@
   width: 100%;
 }
 
-.datePicker {
+.datePicker,
+.datePickerError {
   height: 40px;
   border-radius: 5px;
   width: 460px;
@@ -98,14 +115,21 @@
   border: none;
   padding-left: 10px;
 }
+.datePickerError {
+  border: 1px solid #a94442;
+}
 .dateTimePicker:first-child {
   /* margin-right: 20px; */
 }
-.dateTimePicker {
+.dateTimePicker,
+.dateTimePickerError {
   height: 40px;
   border-radius: 5px;
   width: 100%;
   border: none;
+}
+.dateTimePickerError {
+  border: 1px solid #a94442;
 }
 
 .dateTitle {
@@ -133,6 +157,8 @@
 }
 .datePickerWrapper {
   width: 100%;
+  height: auto;
+  display: block;
 }
 .datePickerWrapper div {
   display: block;

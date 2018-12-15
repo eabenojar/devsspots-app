@@ -49,7 +49,7 @@ module.exports = function validateCreateEventForm(data) {
     errors.timeStart = "Time Start must be before Time End";
   }
   if (second < first) {
-    errors.timeEnd = "Time end must be after time start";
+    errors.timeEnd = "Time End must be after Time Start";
   }
   console.log("CHECK TIMES BEGIN AND END", first, second);
   if (!validator.isAfter(data.eventDate)) {
