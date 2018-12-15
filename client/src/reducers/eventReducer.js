@@ -3,7 +3,6 @@ import {
   GET_USER_EVENTS,
   GET_CATEGORY_EVENTS,
   GET_EVENT_DETAILS,
-  FETCH_GOOGLE_MAPS,
   DELETE_EVENT,
   JOIN_EVENT,
   LEAVE_EVENT
@@ -15,8 +14,7 @@ const initialState = {
   eventsHosted: [],
   categoryEvents: [],
   eventsAttended: [],
-  eventDetails: [],
-  googleMaps: []
+  eventDetails: []
 };
 
 export default function(state = initialState, action) {
@@ -40,11 +38,7 @@ export default function(state = initialState, action) {
       return {
         eventDetails: [...state.eventDetails, action.payload]
       };
-    case FETCH_GOOGLE_MAPS:
-      return {
-        ...state,
-        googleMaps: action.payload
-      };
+
     case JOIN_EVENT:
       return {
         eventDetails: [action.payload]

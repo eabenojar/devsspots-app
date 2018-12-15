@@ -50,7 +50,11 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    // console.log("USER FROM CALLBACK", req.user);
+    console.log(
+      "USER FROM CALLBACK SESSION SUCCCSSSSSS",
+      req.session.passport.user,
+      req.cookies.session
+    );
     res.redirect("/");
   }
 );
@@ -60,3 +64,4 @@ router.get("/current_user", (req, res) => {
 });
 
 module.exports = router;
+// eyJwYXNzcG9ydCI6e319

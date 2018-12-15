@@ -47,6 +47,9 @@ class CreateEvent extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getValidationEvent = this.getValidationEvent.bind(this);
   }
+  componentDidMount() {
+    console.log("DID MOUNT CREAT EVENT", window.g);
+  }
 
   getValidationState() {
     const length = this.state.value.length;
@@ -144,6 +147,8 @@ class CreateEvent extends Component {
         location: { lat: 53.5610398, lng: 10.0259135 }
       }
     ];
+    const googleMap = this.props.auth.googleMaps.maps;
+    console.log("RENDER REFESH MAP", googleMap);
     return (
       <div className={styles.main}>
         <div className={styles.formContainer}>
@@ -281,7 +286,7 @@ class CreateEvent extends Component {
                 onSuggestSelect={this.onSuggestSelect}
                 suggestsHiddenClassName={styles.geoformHidden}
                 suggestItemClassName={styles.geoformActive}
-                // location={new window.google.maps.LatLng(53.558572, 9.9278215)}
+                location={new googleMap.LatLng(53.558572, 9.9278215)}
                 radius="20"
               />
             </div>
@@ -303,7 +308,8 @@ class CreateEvent extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    error: state.error
+    error: state.error,
+    event: state.event
   };
 };
 export default connect(

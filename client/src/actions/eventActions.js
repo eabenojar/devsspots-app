@@ -6,19 +6,10 @@ import {
   GET_USER_EVENTS,
   GET_CATEGORY_EVENTS,
   GET_EVENT_DETAILS,
-  FETCH_GOOGLE_MAPS,
   JOIN_EVENT,
   LEAVE_EVENT,
   GET_ERRORS
 } from "./types";
-
-export const fetchGoogleMaps = map => dispatch => {
-  console.log("GOOGLE MAPS ACTION", map);
-  dispatch({
-    type: FETCH_GOOGLE_MAPS,
-    payload: map
-  });
-};
 
 export const addEvent = event => dispatch => {
   console.log("CREATE EVENT ACTION", event);

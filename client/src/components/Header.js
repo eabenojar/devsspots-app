@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchUser } from "../actions/authAction";
+import { fetchUser, logoutUser } from "../actions/authAction";
 
 class Header extends Component {
   constructor(props) {
@@ -9,9 +9,13 @@ class Header extends Component {
     this.state = {
       auth: false
     };
+    this.onLogout = this.onLogout.bind(this);
   }
   componentDidMount() {
     // this.props.fetchUser();
+  }
+  onLogout() {
+    this.props.logoutUser();
   }
   componentWillReceiveProps(nextProps) {
     console.log("HEADER WILL RECIEVE PROPS", nextProps);
@@ -53,7 +57,11 @@ class Header extends Component {
                 <NavItem eventKey={1} href="/profile">
                   Profile
                 </NavItem>
-                <NavItem eventKey={1} href="/auth/logout">
+                <NavItem
+                  eventKey={1}
+                  href="/auth/logout"
+                  onClick={this.onLogout}
+                >
                   Logout
                 </NavItem>
               </Nav>
@@ -73,5 +81,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchUser }
+  { fetchUser, logoutUser }
 )(Header);
