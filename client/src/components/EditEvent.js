@@ -6,7 +6,6 @@ import {
   FormControl,
   Form,
   Col,
-  Checkbox,
   Button,
   HelpBlock
 } from "react-bootstrap";
@@ -20,7 +19,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
-class CreateEvent extends Component {
+class EditEvent extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -48,15 +47,7 @@ class CreateEvent extends Component {
     this.getValidationEvent = this.getValidationEvent.bind(this);
   }
   componentDidMount() {
-    console.log("DID MOUNT CREAT EVENT", window.g);
-  }
-
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return "success";
-    else if (length > 5) return "warning";
-    else if (length > 0) return "error";
-    return null;
+    console.log("DID MOUNT EDIT EVENT", window.g);
   }
   componentWillReceiveProps(nextProps) {
     console.log("WILL RECEIEVE", nextProps);
@@ -432,4 +423,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { addEvent }
-)(CreateEvent);
+)(EditEvent);

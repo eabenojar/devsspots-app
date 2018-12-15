@@ -51,7 +51,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         eventsHosted: state.eventsHosted.filter(
-          element => element !== action.payload
+          element => element._id !== action.payload._id
         )
       };
     default:

@@ -125,14 +125,14 @@ router.delete("/:id", isUserAuth, (req, res) => {
       ).then(userUpdate => {
         console.log("USER EVENTSSSSS", userUpdate);
         User.find({ eventsAttended: { $in: [event._id] } })
-          .then(users => {
-            console.log("USERS THAT WENT TO EVENT SERVER", users.length);
-            if (users.length === 1) {
-              users[0].eventsAttended = users[0].eventsAttended.filter(
+          .then(user => {
+            console.log("USERS THAT WENT TO EVENT SERVER", user.length);
+            if (user.length === 1) {
+              user[0].eventsAttended = user[0].eventsAttended.filter(
                 eventId => eventId !== req.params.id
               );
-              console.log("FILTER EVENT", users);
-              users
+              console.log("FILTER EVENT", user);
+              user
                 .save()
                 .then(user => console.log("SUCCESS EVENT DELETE", user));
             } else {
@@ -156,7 +156,7 @@ router.delete("/:id", isUserAuth, (req, res) => {
 // Update event
 // Private route
 
-router.patch("/:id", isUserAuth, (req, res) => {
+router.patch("/update/:id", isUserAuth, (req, res) => {
   Event.findOne({});
 });
 
