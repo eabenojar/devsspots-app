@@ -8,6 +8,7 @@ import CategoryEvents from "./components/CategoryEvents";
 import ProfilePage from "./components/ProfilePage";
 import CreateEvent from "./components/CreateEvent";
 import EventDetails from "./components/EventDetails";
+import EditEvent from "./components/EditEvent";
 
 export default (
   <Switch>
@@ -17,5 +18,6 @@ export default (
     <Route component={ProfilePage} exact path="/profile" />
     <Route component={CreateEvent} exact path="/user/event" />
     <Route component={EventDetails} exact path="/event/:category/:id" />
+    <Route component={EditEvent} exact path="/profile/edit/:id" />
   </Switch>
 );

@@ -47,7 +47,7 @@ class EditEvent extends Component {
     this.getValidationEvent = this.getValidationEvent.bind(this);
   }
   componentDidMount() {
-    console.log("DID MOUNT EDIT EVENT", window.g);
+    console.log("DID MOUNT EDIT EVENT", this.props);
   }
   componentWillReceiveProps(nextProps) {
     console.log("WILL RECEIEVE", nextProps);
@@ -138,6 +138,7 @@ class EditEvent extends Component {
         location: { lat: 53.5610398, lng: 10.0259135 }
       }
     ];
+    const event = this.props.location.state;
     const googleMap = this.props.auth.googleMaps.maps;
     console.log("RENDER REFESH MAP", googleMap);
     return (
@@ -167,6 +168,7 @@ class EditEvent extends Component {
                   onChange={this.handleChange}
                   className={styles.inputTitle}
                   maxLength={60}
+                  value={event.eventTitle}
                 />
                 {this.props.error.eventTitle !== undefined ? (
                   <HelpBlock>{this.props.error.eventTitle}</HelpBlock>
@@ -187,6 +189,7 @@ class EditEvent extends Component {
                 componentClass="select"
                 placeholder="select"
                 onChange={this.onOptionChange.bind(this)}
+                value={event.eventCategory}
               >
                 <option name="eventCategory" value="">
                   SELECT
@@ -221,6 +224,7 @@ class EditEvent extends Component {
                 name="eventDescription"
                 onChange={this.handleChange}
                 maxLength={160}
+                value={event.eventDescription}
               />
               {this.props.error.eventDescription !== undefined ? (
                 <HelpBlock>{this.props.error.eventDescription}</HelpBlock>
@@ -240,7 +244,7 @@ class EditEvent extends Component {
                   style={{ border: "1px solid red" }}
                   value={
                     this.state.eventDate.toString() === ""
-                      ? ""
+                      ? moment(event.eventDate).format("dddd, MMMM DD, YYYY")
                       : moment(this.state.eventDate).format(
                           "dddd, MMMM DD, YYYY"
                         )
@@ -261,7 +265,7 @@ class EditEvent extends Component {
                 style={{ border: "1px solid red" }}
                 value={
                   this.state.eventDate.toString() === ""
-                    ? ""
+                    ? moment(event.eventDate).format("dddd, MMMM DD, YYYY")
                     : moment(this.state.eventDate).format("dddd, MMMM DD, YYYY")
                 }
               />
@@ -286,7 +290,7 @@ class EditEvent extends Component {
                   name="timeStart"
                   value={
                     this.state.timeStart === ""
-                      ? ""
+                      ? moment(event.timeStart).format("hh:mm A")
                       : moment(this.state.timeStart).format("hh:mm A")
                   }
                 />
@@ -310,7 +314,7 @@ class EditEvent extends Component {
                   name="timeStart"
                   value={
                     this.state.timeStart === ""
-                      ? ""
+                      ? moment(event.timeStart).format("hh:mm A")
                       : moment(this.state.timeStart).format("hh:mm A")
                   }
                 />
@@ -332,7 +336,7 @@ class EditEvent extends Component {
                   name="timeEnd"
                   value={
                     this.state.timeEnd === ""
-                      ? ""
+                      ? moment(event.timeEnd).format("hh:mm A")
                       : moment(this.state.timeEnd).format("hh:mm A")
                   }
                 />
@@ -356,7 +360,7 @@ class EditEvent extends Component {
                   name="timeEnd"
                   value={
                     this.state.timeEnd === ""
-                      ? ""
+                      ? moment(event.timeEnd).format("hh:mm A")
                       : moment(this.state.timeEnd).format("hh:mm A")
                   }
                 />
@@ -377,6 +381,7 @@ class EditEvent extends Component {
                   suggestItemClassName={styles.geoformActive}
                   location={new googleMap.LatLng(53.558572, 9.9278215)}
                   radius="20"
+                  value={event.eventAddress}
                 />
                 <p className={styles.mapErrorTitle}>
                   {this.props.error.eventAddress}

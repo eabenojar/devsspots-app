@@ -5,6 +5,7 @@ import { Row, Grid, Col } from "react-bootstrap";
 import styles from "../styles/css/ManageEvents.module.css";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
 import moment from "moment";
+import { withRouter } from "react-router";
 
 class ManageEvents extends Component {
   constructor(props) {
@@ -21,6 +22,10 @@ class ManageEvents extends Component {
   }
   onEditEvent(event) {
     console.log("EDIT EVENTS", event);
+    this.props.history.push({
+      pathname: `/profile/edit/${event._id}`,
+      state: event
+    });
   }
   componentDidMount() {
     const userId = this.props.auth.user[0]._id;
@@ -130,17 +135,7 @@ class ManageEvents extends Component {
                         Members going {event.eventAttendees.length}
                       </h1>
                     </div>
-                    <div className={styles.manageEventDelete}>
-                      <button
-                        className={styles.deleteButton}
-                        onClick={() => this.onDeleteEvent(event)}
-                      >
-                        <FaTrashAlt
-                          color={"#5A5A5A"}
-                          style={{ backgroundColor: "transparent" }}
-                        />
-                      </button>
-                    </div>
+                    <div className={styles.manageEventDelete} />
                   </div>
                 );
               })}
@@ -158,7 +153,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { getUserEvents, deleteEvent }
-)(ManageEvents);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getUserEvents, deleteEvent }
+  )(ManageEvents)
+);
