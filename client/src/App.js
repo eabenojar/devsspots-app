@@ -49,6 +49,7 @@ class App extends Component {
       this.onScriptLoad();
     }
   }
+
   render() {
     console.log("RENDER APPJS PROPS", this.props);
     return (

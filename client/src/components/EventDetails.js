@@ -28,7 +28,6 @@ class EventDetails extends Component {
     this.props.getEventDetails(event.category, event.id);
 
     console.log("EVENT DETAILS DID MOUNT", this.props);
-    console.log("EVENT DETALS MAP", window.google);
   }
   componentWillReceiveProps(nextProps) {
     console.log("WILL RECEIVE PROPS", nextProps);
@@ -91,6 +90,7 @@ class EventDetails extends Component {
     }
   }
   renderMap() {
+    console.log("RENDER MAPPPPPP", window.google);
     if (this.props.event.eventDetails.length === 0) {
       return null;
     } else {
@@ -102,7 +102,11 @@ class EventDetails extends Component {
       );
 
       return (
-        <GoogleMapReact defaultCenter={eventLocation} defaultZoom={12}>
+        <GoogleMapReact
+          defaultCenter={eventLocation}
+          defaultZoom={12}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
+        >
           <Marker
             lat={eventLocation.lat}
             lng={eventLocation.lng}
