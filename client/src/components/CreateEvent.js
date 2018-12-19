@@ -133,20 +133,7 @@ class CreateEvent extends Component {
       moment(this.state.timeEnd).format("hh:mm A"),
       this.state.timeEnd
     );
-    var fixtures = [
-      {
-        label: "San Francisco, CA",
-        location: { lat: 53.5459, lng: 9.966576 }
-      },
-      {
-        label: "New York, NY",
-        location: { lat: 53.5495629, lng: 9.9625838 }
-      },
-      {
-        label: "Austin, TX",
-        location: { lat: 53.5610398, lng: 10.0259135 }
-      }
-    ];
+
     const googleMap = this.props.auth.googleMaps.maps;
     console.log("RENDER REFESH MAP", googleMap);
     if (window.google !== undefined) {
@@ -386,7 +373,6 @@ class CreateEvent extends Component {
                     ref={el => (this._geoSuggest = el)}
                     placeholder="Start typing!"
                     // initialValue="San Francisco"
-                    fixtures={fixtures}
                     onSuggestSelect={this.onSuggestSelect}
                     suggestsHiddenClassName={styles.geoformHidden}
                     suggestItemClassName={styles.geoformActive}
@@ -408,7 +394,6 @@ class CreateEvent extends Component {
                     ref={el => (this._geoSuggest = el)}
                     placeholder="Start typing!"
                     // initialValue="San Francisco"
-                    fixtures={fixtures}
                     onSuggestSelect={this.onSuggestSelect}
                     suggestsHiddenClassName={styles.geoformHidden}
                     suggestItemClassName={styles.geoformActive}

@@ -158,15 +158,22 @@ router.delete("/:id", isUserAuth, (req, res) => {
 
 router.patch("/update/:id", isUserAuth, (req, res) => {
   console.log("SERVER UPDATE EVENT", req.body);
-  Event.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then(event => {
-      console.log("UPDATED EVENT", event);
-      res.json(event);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(404);
-    });
+  const { errors, isValid } = validateEvent(req.body);
+
+  if (!isValid) {
+    console.log("ERRORS IN EDIT EVENT", errors);
+    return res.status(400).json(errors);
+  } else {
+    Event.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .then(event => {
+        console.log("UPDATED EVENT", event);
+        res.json(event);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(404);
+      });
+  }
 });
 
 // Join event

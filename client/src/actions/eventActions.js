@@ -49,13 +49,22 @@ export const deleteEvent = id => dispatch => {
 
 export const updateEvent = (id, event) => dispatch => {
   console.log("GOT UPDATED EVENT", event);
-  axios.patch(`/api/events/update/${id}`, event).then(res => {
-    console.log("GOT UPDATE EVENT IN ACTION", res.data);
-    dispatch({
-      type: UPDATE_EVENT,
-      payload: res.data
+  axios
+    .patch(`/api/events/update/${id}`, event)
+    .then(res => {
+      console.log("GOT UPDATE EVENT IN ACTION", res.data);
+      dispatch({
+        type: UPDATE_EVENT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log("EDIT EVENT ERRORS");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
     });
-  });
 };
 
 export const getUserEvents = userId => dispatch => {
