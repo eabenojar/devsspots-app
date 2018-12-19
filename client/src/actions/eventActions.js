@@ -48,6 +48,7 @@ export const deleteEvent = id => dispatch => {
 };
 
 export const updateEvent = (id, event) => dispatch => {
+  console.log("GOT UPDATED EVENT", event);
   axios.patch(`api/event/${id}`, event).then(res => {
     dispatch({
       type: UPDATE_EVENT,

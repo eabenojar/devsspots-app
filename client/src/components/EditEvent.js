@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 
 import { connect } from "react-redux";
-import { addEvent } from "../actions/eventActions";
+import { updateEvent } from "../actions/eventActions";
 import Geosuggest from "react-geosuggest";
 import styles from "../styles/css/CreateEvent.module.css";
 
@@ -22,18 +22,19 @@ import moment from "moment";
 class EditEvent extends Component {
   constructor(props, context) {
     super(props, context);
+    const event = this.props.location.state;
 
     this.state = {
       value: "",
-      eventTitle: "",
-      eventDescription: "",
-      eventCategory: "",
-      eventLocation: {},
-      eventAddress: "",
-      eventMapUrl: "",
+      eventTitle: event.eventTitle,
+      eventDescription: event.eventDescription,
+      eventCategory: event.eventCategory,
+      eventLocation: event.eventLocation,
+      eventAddress: event.eventAddress,
+      eventMapUrl: event.eventMapUrl,
       eventDate: new Date(),
-      timeStart: "",
-      timeEnd: "",
+      timeStart: event.timeStart,
+      timeEnd: event.timeEnd,
       map: null,
       error: {}
     };
@@ -47,7 +48,7 @@ class EditEvent extends Component {
     this.getValidationEvent = this.getValidationEvent.bind(this);
   }
   componentDidMount() {
-    console.log("DID MOUNT EDIT EVENT", this.props);
+    console.log("DID MOUNT EEEEEEEEEEEDIT EVENT", this.props);
   }
   componentWillReceiveProps(nextProps) {
     console.log("WILL RECEIEVE", nextProps);
@@ -77,7 +78,8 @@ class EditEvent extends Component {
       timeEnd: this.state.timeEnd,
       eventDate: this.state.eventDate
     };
-    this.props.addEvent(newEvent);
+    console.log("BOOO YAAAAA", newEvent);
+    // this.props.updateEvent(newEvent);
   }
   onSuggestSelect(suggest) {
     console.log("SUGGGGESST", suggest);
@@ -141,101 +143,125 @@ class EditEvent extends Component {
     const event = this.props.location.state;
     const googleMap = this.props.auth.googleMaps.maps;
     console.log("RENDER REFESH MAP", googleMap);
-    return (
-      <div className={styles.main}>
-        <div className={styles.formContainer}>
-          <div className={styles.formHeader}>
-            <h1 className={styles.formTitle}>Create Event</h1>
-          </div>
+    if (window.google !== undefined) {
+      return (
+        <div className={styles.main}>
+          <div className={styles.formContainer}>
+            <div className={styles.formHeader}>
+              <h1 className={styles.formTitle}>Create Event</h1>
+            </div>
 
-          <Form onSubmit={this.onSubmit} className={styles.form}>
-            <FormGroup
-              controlId="formHorizontalEmail"
-              validationState={
-                this.props.error.eventTitle !== undefined ? "error" : null
-              }
-            >
-              <Col>
-                <ControlLabel className={styles.inputEventTitle}>
-                  Event Title
-                </ControlLabel>
-              </Col>
-              <Col>
-                <FormControl
-                  type="text"
-                  placeholder="Title"
-                  name="eventTitle"
-                  onChange={this.handleChange}
-                  className={styles.inputTitle}
-                  maxLength={60}
-                  value={event.eventTitle}
-                />
-                {this.props.error.eventTitle !== undefined ? (
-                  <HelpBlock>{this.props.error.eventTitle}</HelpBlock>
-                ) : null}
-              </Col>
-            </FormGroup>
-
-            <FormGroup
-              controlId="formControlsSelect"
-              validationState={
-                this.props.error.eventCategory !== undefined ? "error" : null
-              }
-            >
-              <ControlLabel className={styles.inputEventCategory}>
-                Category
-              </ControlLabel>
-              <FormControl
-                componentClass="select"
-                placeholder="select"
-                onChange={this.onOptionChange.bind(this)}
-                value={event.eventCategory}
+            <Form onSubmit={this.onSubmit} className={styles.form}>
+              <FormGroup
+                controlId="formHorizontalEmail"
+                validationState={
+                  this.props.error.eventTitle !== undefined ? "error" : null
+                }
               >
-                <option name="eventCategory" value="">
-                  SELECT
-                </option>
-                <option name="eventCategory" value="html">
-                  HTML
-                </option>
-                <option name="eventCategory" value="css">
-                  CSS
-                </option>
-                <option name="eventCategory" value="javascript">
-                  JAVASCRIPT
-                </option>
-              </FormControl>
-              {this.props.error.eventCategory !== undefined ? (
-                <HelpBlock>{this.props.error.eventCategory}</HelpBlock>
-              ) : null}
-            </FormGroup>
+                <Col>
+                  <ControlLabel className={styles.inputEventTitle}>
+                    Event Title
+                  </ControlLabel>
+                </Col>
+                <Col>
+                  <FormControl
+                    type="text"
+                    placeholder="Title"
+                    name="eventTitle"
+                    onChange={this.handleChange}
+                    className={styles.inputTitle}
+                    maxLength={60}
+                    value={event.eventTitle}
+                  />
+                  {this.props.error.eventTitle !== undefined ? (
+                    <HelpBlock>{this.props.error.eventTitle}</HelpBlock>
+                  ) : null}
+                </Col>
+              </FormGroup>
 
-            <FormGroup
-              controlId="formHorizontalPassword"
-              validationState={
-                this.props.error.eventDescription !== undefined ? "error" : null
-              }
-            >
-              <ControlLabel className={styles.inputEventDesc}>
-                Event Description
-              </ControlLabel>
-              <FormControl
-                componentClass="textarea"
-                placeholder="Description"
-                name="eventDescription"
-                onChange={this.handleChange}
-                maxLength={160}
-                value={event.eventDescription}
-              />
-              {this.props.error.eventDescription !== undefined ? (
-                <HelpBlock>{this.props.error.eventDescription}</HelpBlock>
-              ) : null}
-            </FormGroup>
-            <h1 className={styles.dateTitle}>Date </h1>
-            {/* <div className={styles.datePickerWrapper}> */}
-            {this.props.error.eventDate !== undefined ? (
-              <div>
+              <FormGroup
+                controlId="formControlsSelect"
+                validationState={
+                  this.props.error.eventCategory !== undefined ? "error" : null
+                }
+              >
+                <ControlLabel className={styles.inputEventCategory}>
+                  Category
+                </ControlLabel>
+                <FormControl
+                  componentClass="select"
+                  placeholder="select"
+                  onChange={this.onOptionChange.bind(this)}
+                  value={event.eventCategory}
+                >
+                  <option name="eventCategory" value="">
+                    SELECT
+                  </option>
+                  <option name="eventCategory" value="html">
+                    HTML
+                  </option>
+                  <option name="eventCategory" value="css">
+                    CSS
+                  </option>
+                  <option name="eventCategory" value="javascript">
+                    JAVASCRIPT
+                  </option>
+                </FormControl>
+                {this.props.error.eventCategory !== undefined ? (
+                  <HelpBlock>{this.props.error.eventCategory}</HelpBlock>
+                ) : null}
+              </FormGroup>
+
+              <FormGroup
+                controlId="formHorizontalPassword"
+                validationState={
+                  this.props.error.eventDescription !== undefined
+                    ? "error"
+                    : null
+                }
+              >
+                <ControlLabel className={styles.inputEventDesc}>
+                  Event Description
+                </ControlLabel>
+                <FormControl
+                  componentClass="textarea"
+                  placeholder="Description"
+                  name="eventDescription"
+                  onChange={this.handleChange}
+                  maxLength={160}
+                  value={event.eventDescription}
+                />
+                {this.props.error.eventDescription !== undefined ? (
+                  <HelpBlock>{this.props.error.eventDescription}</HelpBlock>
+                ) : null}
+              </FormGroup>
+              <h1 className={styles.dateTitle}>Date </h1>
+              {/* <div className={styles.datePickerWrapper}> */}
+              {this.props.error.eventDate !== undefined ? (
+                <div>
+                  <DatePicker
+                    className={styles.datePickerError}
+                    selected={this.state.eventDate}
+                    autoComplete="off"
+                    type="hidden"
+                    onChange={this.handleDateChange.bind(this, "eventDate")}
+                    name="eventDate"
+                    style={{ border: "1px solid red" }}
+                    value={
+                      this.state.eventDate.toString() === ""
+                        ? moment(event.eventDate).format("dddd, MMMM DD, YYYY")
+                        : moment(this.state.eventDate).format(
+                            "dddd, MMMM DD, YYYY"
+                          )
+                    }
+                  />
+                  <p className={styles.dateErrorTitle}>
+                    {this.props.error.eventDate}
+                  </p>
+                </div>
+              ) : (
                 <DatePicker
-                  className={styles.datePickerError}
+                  className={styles.datePicker}
                   selected={this.state.eventDate}
                   autoComplete="off"
                   type="hidden"
@@ -250,171 +276,155 @@ class EditEvent extends Component {
                         )
                   }
                 />
-                <p className={styles.dateErrorTitle}>
-                  {this.props.error.eventDate}
-                </p>
-              </div>
-            ) : (
-              <DatePicker
-                className={styles.datePicker}
-                selected={this.state.eventDate}
-                autoComplete="off"
-                type="hidden"
-                onChange={this.handleDateChange.bind(this, "eventDate")}
-                name="eventDate"
-                style={{ border: "1px solid red" }}
-                value={
-                  this.state.eventDate.toString() === ""
-                    ? moment(event.eventDate).format("dddd, MMMM DD, YYYY")
-                    : moment(this.state.eventDate).format("dddd, MMMM DD, YYYY")
-                }
-              />
-            )}
+              )}
 
-            {/* </div> */}
+              {/* </div> */}
 
-            <h1 className={styles.timeTitle}>Time Picker</h1>
-            {this.props.error.timeStart !== undefined ? (
-              <div className={styles.timePickerWrapper}>
-                <DatePicker
-                  selected={this.state.startDate}
-                  className={styles.dateTimePickerError}
-                  onChange={this.handleTimeChange.bind(this, "timeStart")}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  autoComplete="off"
-                  type="hidden"
-                  timeIntervals={15}
-                  dateFormat="h:mm aa"
-                  timeCaption="Time"
-                  name="timeStart"
-                  value={
-                    this.state.timeStart === ""
-                      ? moment(event.timeStart).format("hh:mm A")
-                      : moment(this.state.timeStart).format("hh:mm A")
-                  }
-                />
-                <p className={styles.timeErrorTitle}>
-                  {this.props.error.timeStart}
-                </p>
-              </div>
-            ) : (
-              <div className={styles.timePickerWrapper}>
-                <DatePicker
-                  selected={this.state.startDate}
-                  className={styles.dateTimePicker}
-                  onChange={this.handleTimeChange.bind(this, "timeStart")}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  autoComplete="off"
-                  type="hidden"
-                  timeIntervals={15}
-                  dateFormat="h:mm aa"
-                  timeCaption="Time"
-                  name="timeStart"
-                  value={
-                    this.state.timeStart === ""
-                      ? moment(event.timeStart).format("hh:mm A")
-                      : moment(this.state.timeStart).format("hh:mm A")
-                  }
-                />
-              </div>
-            )}
-            {this.props.error.timeEnd !== undefined ? (
-              <div className={styles.timePickerWrapper}>
-                <DatePicker
-                  selected={this.state.startDate}
-                  className={styles.dateTimePickerError}
-                  onChange={this.handleTimeChange.bind(this, "timeEnd")}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  autoComplete="off"
-                  type="hidden"
-                  timeIntervals={15}
-                  timeFormat="h:mm"
-                  timeCaption="Time"
-                  name="timeEnd"
-                  value={
-                    this.state.timeEnd === ""
-                      ? moment(event.timeEnd).format("hh:mm A")
-                      : moment(this.state.timeEnd).format("hh:mm A")
-                  }
-                />
-                <p className={styles.timeErrorTitle}>
-                  {this.props.error.timeEnd}
-                </p>
-              </div>
-            ) : (
-              <div className={styles.timePickerWrapper}>
-                <DatePicker
-                  selected={this.state.startDate}
-                  className={styles.dateTimePicker}
-                  onChange={this.handleTimeChange.bind(this, "timeEnd")}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  autoComplete="off"
-                  type="hidden"
-                  timeIntervals={15}
-                  timeFormat="h:mm"
-                  timeCaption="Time"
-                  name="timeEnd"
-                  value={
-                    this.state.timeEnd === ""
-                      ? moment(event.timeEnd).format("hh:mm A")
-                      : moment(this.state.timeEnd).format("hh:mm A")
-                  }
-                />
-              </div>
-            )}
+              <h1 className={styles.timeTitle}>Time Picker</h1>
+              {this.props.error.timeStart !== undefined ? (
+                <div className={styles.timePickerWrapper}>
+                  <DatePicker
+                    selected={this.state.startDate}
+                    className={styles.dateTimePickerError}
+                    onChange={this.handleTimeChange.bind(this, "timeStart")}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    autoComplete="off"
+                    type="hidden"
+                    timeIntervals={15}
+                    dateFormat="h:mm aa"
+                    timeCaption="Time"
+                    name="timeStart"
+                    value={
+                      this.state.timeStart === ""
+                        ? moment(event.timeStart).format("hh:mm A")
+                        : moment(this.state.timeStart).format("hh:mm A")
+                    }
+                  />
+                  <p className={styles.timeErrorTitle}>
+                    {this.props.error.timeStart}
+                  </p>
+                </div>
+              ) : (
+                <div className={styles.timePickerWrapper}>
+                  <DatePicker
+                    selected={this.state.startDate}
+                    className={styles.dateTimePicker}
+                    onChange={this.handleTimeChange.bind(this, "timeStart")}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    autoComplete="off"
+                    type="hidden"
+                    timeIntervals={15}
+                    dateFormat="h:mm aa"
+                    timeCaption="Time"
+                    name="timeStart"
+                    value={
+                      this.state.timeStart === ""
+                        ? moment(event.timeStart).format("hh:mm A")
+                        : moment(this.state.timeStart).format("hh:mm A")
+                    }
+                  />
+                </div>
+              )}
+              {this.props.error.timeEnd !== undefined ? (
+                <div className={styles.timePickerWrapper}>
+                  <DatePicker
+                    selected={this.state.startDate}
+                    className={styles.dateTimePickerError}
+                    onChange={this.handleTimeChange.bind(this, "timeEnd")}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    autoComplete="off"
+                    type="hidden"
+                    timeIntervals={15}
+                    timeFormat="h:mm"
+                    timeCaption="Time"
+                    name="timeEnd"
+                    value={
+                      this.state.timeEnd === ""
+                        ? moment(event.timeEnd).format("hh:mm A")
+                        : moment(this.state.timeEnd).format("hh:mm A")
+                    }
+                  />
+                  <p className={styles.timeErrorTitle}>
+                    {this.props.error.timeEnd}
+                  </p>
+                </div>
+              ) : (
+                <div className={styles.timePickerWrapper}>
+                  <DatePicker
+                    selected={this.state.startDate}
+                    className={styles.dateTimePicker}
+                    onChange={this.handleTimeChange.bind(this, "timeEnd")}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    autoComplete="off"
+                    type="hidden"
+                    timeIntervals={15}
+                    timeFormat="h:mm"
+                    timeCaption="Time"
+                    name="timeEnd"
+                    value={
+                      this.state.timeEnd === ""
+                        ? moment(event.timeEnd).format("hh:mm A")
+                        : moment(this.state.timeEnd).format("hh:mm A")
+                    }
+                  />
+                </div>
+              )}
 
-            <h1 className={styles.timeTitle}>Location (Address)</h1>
-            {this.props.error.eventAddress !== undefined ? (
-              <div className={styles.geoForm}>
-                <Geosuggest
-                  className={styles.geoFormError}
-                  ref={el => (this._geoSuggest = el)}
-                  placeholder="Start typing!"
-                  // initialValue="San Francisco"
-                  fixtures={fixtures}
-                  onSuggestSelect={this.onSuggestSelect}
-                  suggestsHiddenClassName={styles.geoformHidden}
-                  suggestItemClassName={styles.geoformActive}
-                  location={new googleMap.LatLng(53.558572, 9.9278215)}
-                  radius="20"
-                  value={event.eventAddress}
-                />
-                <p className={styles.mapErrorTitle}>
-                  {this.props.error.eventAddress}
-                </p>
-              </div>
-            ) : (
-              <div className={styles.geoForm}>
-                <Geosuggest
-                  className={styles.geoForm}
-                  ref={el => (this._geoSuggest = el)}
-                  placeholder="Start typing!"
-                  // initialValue="San Francisco"
-                  fixtures={fixtures}
-                  onSuggestSelect={this.onSuggestSelect}
-                  suggestsHiddenClassName={styles.geoformHidden}
-                  suggestItemClassName={styles.geoformActive}
-                  location={new googleMap.LatLng(53.558572, 9.9278215)}
-                  radius="20"
-                />
-              </div>
-            )}
+              <h1 className={styles.timeTitle}>Location (Address)</h1>
+              {this.props.error.eventAddress !== undefined ? (
+                <div className={styles.geoForm}>
+                  <Geosuggest
+                    className={styles.geoFormError}
+                    ref={el => (this._geoSuggest = el)}
+                    placeholder="Start typing!"
+                    // initialValue="San Francisco"
+                    fixtures={fixtures}
+                    onSuggestSelect={this.onSuggestSelect}
+                    suggestsHiddenClassName={styles.geoformHidden}
+                    suggestItemClassName={styles.geoformActive}
+                    location={new googleMap.LatLng(53.558572, 9.9278215)}
+                    radius="20"
+                    value={event.eventAddress}
+                  />
+                  <p className={styles.mapErrorTitle}>
+                    {this.props.error.eventAddress}
+                  </p>
+                </div>
+              ) : (
+                <div className={styles.geoForm}>
+                  <Geosuggest
+                    className={styles.geoForm}
+                    ref={el => (this._geoSuggest = el)}
+                    placeholder="Start typing!"
+                    // initialValue="San Francisco"
+                    fixtures={fixtures}
+                    onSuggestSelect={this.onSuggestSelect}
+                    suggestsHiddenClassName={styles.geoformHidden}
+                    suggestItemClassName={styles.geoformActive}
+                    location={new googleMap.LatLng(53.558572, 9.9278215)}
+                    radius="20"
+                  />
+                </div>
+              )}
 
-            <FormGroup>
-              <Col>
-                <Button type="submit" className={styles.createEventButton}>
-                  Create Event
-                </Button>
-              </Col>
-            </FormGroup>
-          </Form>
+              <FormGroup>
+                <Col>
+                  <Button type="submit" className={styles.createEventButton}>
+                    Create Event
+                  </Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 
@@ -427,5 +437,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { addEvent }
+  { updateEvent }
 )(EditEvent);
