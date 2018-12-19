@@ -435,3 +435,24 @@ export default connect(
   mapStateToProps,
   { addEvent }
 )(CreateEvent);
+
+
+
+function findNonRepeat(str){
+  var single = [];
+  var multi = [];
+  for(var char of str){
+    if(!single.includes(char)){
+      single.push(char)
+    } else if (single.includes(char)){
+      single.pop()
+      multi.push(char)
+    }
+  }
+  return single[0];
+}
+
+var str = "eellbbttw"
+console.time('someFunction');
+findNonRepeat(str);
+console.timeEnd('someFunction')
