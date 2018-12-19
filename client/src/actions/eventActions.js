@@ -49,7 +49,8 @@ export const deleteEvent = id => dispatch => {
 
 export const updateEvent = (id, event) => dispatch => {
   console.log("GOT UPDATED EVENT", event);
-  axios.patch(`api/event/${id}`, event).then(res => {
+  axios.patch(`/api/events/update/${id}`, event).then(res => {
+    console.log("GOT UPDATE EVENT IN ACTION", res.data);
     dispatch({
       type: UPDATE_EVENT,
       payload: res.data

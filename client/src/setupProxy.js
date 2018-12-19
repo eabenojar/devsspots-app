@@ -14,4 +14,5 @@ module.exports = function(app) {
   app.use(
     proxy("/api/events/category/join/*/*", { target: "http://localhost:5000" })
   );
+  app.use(proxy("/api/events/update/*", { target: "http://localhost:5000" }));
 };

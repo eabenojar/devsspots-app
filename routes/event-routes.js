@@ -157,7 +157,16 @@ router.delete("/:id", isUserAuth, (req, res) => {
 // Private route
 
 router.patch("/update/:id", isUserAuth, (req, res) => {
-  Event.findOne({});
+  console.log("SERVER UPDATE EVENT", req.body);
+  Event.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(event => {
+      console.log("UPDATED EVENT", event);
+      res.json(event);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404);
+    });
 });
 
 // Join event
