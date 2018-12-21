@@ -18,6 +18,7 @@ class ProfilePage extends Component {
     this.createEvent = this.createEvent.bind(this);
     this.onManageEvents = this.onManageEvents.bind(this);
   }
+
   renderProfile() {
     if (this.props.auth.user[0]) {
       const {

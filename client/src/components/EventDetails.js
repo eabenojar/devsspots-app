@@ -11,6 +11,25 @@ import { FaLaptopCode, FaMapMarkerAlt, FaRegClock } from "react-icons/fa";
 
 import moment from "moment";
 
+// const mapEnvironment = compose(GoogleMapReact);
+
+// const Marker = props => (
+//   <div>
+//     <FaMapMarkerAlt size={25} color={"#FF0000"} />
+//   </div>
+// );
+
+// const MapLayout = props => (
+//   <GoogleMapReact
+//     defaultCenter={props}
+//     defaultZoom={12}
+//     bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
+//   >
+//     <Marker lat={props.lat} lng={props.lng} text={"Marker"} />
+//   </GoogleMapReact>
+// );
+// const MapComponent = mapEnvironment(MapLayout);
+
 class EventDetails extends Component {
   constructor(props) {
     super(props);
@@ -26,22 +45,20 @@ class EventDetails extends Component {
   componentDidMount() {
     const event = this.props.location.state;
     this.props.getEventDetails(event.category, event.id);
-
-    console.log("EVENT DETAILS DID MOUNT", this.props);
   }
   componentWillReceiveProps(nextProps) {
-    console.log("WILL RECEIVE PROPS", nextProps);
+    // console.log("WILL RECEIVE PROPS", nextProps);
   }
   componentDidUpdate() {
-    console.log("DID UPDATEEEEEEEEEE");
+    // console.log("DID UPDATEEEEEEEEEE");
   }
   onLeaveEvent(event, userId) {
-    console.log("LEAVE EVENT CLICKED", event, userId);
+    // console.log("LEAVE EVENT CLICKED", event, userId);
     this.props.leaveEvent(event._id, userId);
     this.setState(this.state);
   }
   onJoinEvent(event, userId) {
-    console.log("JOIN EVEN CLICKED EVENT", event, "USER ID", userId);
+    // console.log("JOIN EVEN CLICKED EVENT", event, "USER ID", userId);
     const user = {
       id: userId
     };
@@ -95,6 +112,7 @@ class EventDetails extends Component {
       return null;
     } else {
       const { eventLocation } = this.props.event.eventDetails[0];
+
       const Marker = props => (
         <div>
           <FaMapMarkerAlt size={25} color={"#FF0000"} />
@@ -117,7 +135,7 @@ class EventDetails extends Component {
     }
   }
   renderDetails() {
-    console.log("RENDER DETAILS PROPS", this.props.event);
+    // console.log("RENDER DETAILS PROPS", this.props.event);
     if (
       this.props.event.eventDetails === undefined ||
       this.props.event.eventDetails.length === 0

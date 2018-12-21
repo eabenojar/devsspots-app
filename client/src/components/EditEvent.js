@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { updateEvent } from "../actions/eventActions";
 import Geosuggest from "react-geosuggest";
 import styles from "../styles/css/CreateEvent.module.css";
+import { fetchGoogleMaps } from "../actions/authAction";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -47,8 +48,38 @@ class EditEvent extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getValidationEvent = this.getValidationEvent.bind(this);
   }
+  onScriptLoad() {
+    console.log("ON SCRIPT LOAD CALL", window.google);
+    // const map = new window.google.maps.Map(
+    //   document.getElementById(this.props.id),
+    //   this.props.options
+    // );
+    const map = new window.google.maps.LatLng(53.558572, 9.9278215);
+    console.log("SCRIPT MAP", window.google);
+    this.props.fetchGoogleMaps(window.google);
+    this.setState({
+      map
+    });
+    // this.props.onMapLoad(map);
+  }
   componentDidMount() {
-    console.log("DID MOUNT EEEEEEEEEEEDIT EVENT", this.props);
+    console.log("DID MOUNT CREATE EVENT", window.google);
+    if (!window.google) {
+      var s = document.createElement("script");
+      s.type = "text/javascript";
+      s.src = `https://maps.googleapis.com/maps/api/js?key=${
+        process.env.REACT_APP_API_KEY
+      }&libraries=places`;
+      var x = document.getElementsByTagName("script")[0];
+      x.parentNode.insertBefore(s, x);
+      // Below is important.
+      //We cannot access google.maps until it's finished loading
+      s.addEventListener("load", e => {
+        this.onScriptLoad();
+      });
+    } else {
+      this.onScriptLoad();
+    }
   }
   componentWillReceiveProps(nextProps) {
     console.log("WILL RECEIEVE", nextProps);
@@ -441,5 +472,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { updateEvent }
+  { updateEvent, fetchGoogleMaps }
 )(EditEvent);

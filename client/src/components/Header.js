@@ -18,7 +18,7 @@ class Header extends Component {
     this.props.logoutUser();
   }
   componentWillReceiveProps(nextProps) {
-    console.log("HEADER WILL RECIEVE PROPS", nextProps);
+    // console.log("HEADER WILL RECIEVE PROPS", nextProps);
     if (nextProps.auth.isAuthenticated === true) {
       console.log("SUCESS");
       this.setState({
@@ -32,7 +32,7 @@ class Header extends Component {
     }
   }
   render() {
-    console.log("HEADER PROPS", this.props);
+    // console.log("HEADER PROPS", this.props);
     return (
       <Navbar
         inverse
