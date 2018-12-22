@@ -95,6 +95,9 @@ class CreateEvent extends Component {
     if (Object.keys(nextProps.error).length !== 0) {
       this.setState({ error: nextProps.error });
     }
+    if (nextProps.event.event.length > 0) {
+      this.props.history.push("/");
+    }
   }
   getValidationEvent() {
     console.log("GET VALIDATION METHODDSSSSSS", this.state.error);

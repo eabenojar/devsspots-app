@@ -22,11 +22,11 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_EVENT:
       return {
-        event: action.paylod
+        event: [...state.event, action.payload]
       };
     case UPDATE_EVENT:
       return {
-        event: action.paylod
+        event: [...state.event, action.payload]
       };
     case GET_USER_EVENTS:
       return {

@@ -59,7 +59,7 @@ export const updateEvent = (id, event) => dispatch => {
       });
     })
     .catch(err => {
-      console.log("EDIT EVENT ERRORS");
+      console.log("EDIT EVENT ERRORS", err.response.data);
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data

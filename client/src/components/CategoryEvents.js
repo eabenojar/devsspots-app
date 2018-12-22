@@ -14,7 +14,10 @@ class CategoryEvents extends Component {
     this.getEventDetails = this.getEventDetails.bind(this);
   }
   renderEvents() {
-    if (this.props.event.categoryEvents.length === 0) {
+    if (
+      this.props.event.categoryEvents == undefined ||
+      this.props.event.categoryEvents.length === 0
+    ) {
       return null;
     } else if (this.props.event.categoryEvents.length > 0) {
       const events = this.props.event.categoryEvents;

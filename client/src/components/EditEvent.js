@@ -33,7 +33,7 @@ class EditEvent extends Component {
       eventLocation: event.eventLocation,
       eventAddress: event.eventAddress,
       eventMapUrl: event.eventMapUrl,
-      eventDate: new Date(),
+      eventDate: new Date(event.eventDate),
       timeStart: new Date(event.timeStart),
       timeEnd: new Date(event.timeEnd),
       map: null,
@@ -85,6 +85,9 @@ class EditEvent extends Component {
     console.log("WILL RECEIEVE", nextProps);
     if (Object.keys(nextProps.error).length !== 0) {
       this.setState({ error: nextProps.error });
+    }
+    if (nextProps.event.event.length > 0) {
+      this.props.history.push("/");
     }
   }
   getValidationEvent() {
