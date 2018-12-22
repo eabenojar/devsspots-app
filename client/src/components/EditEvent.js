@@ -34,8 +34,8 @@ class EditEvent extends Component {
       eventAddress: event.eventAddress,
       eventMapUrl: event.eventMapUrl,
       eventDate: new Date(),
-      timeStart: event.timeStart,
-      timeEnd: event.timeEnd,
+      timeStart: new Date(event.timeStart),
+      timeEnd: new Date(event.timeEnd),
       map: null,
       error: {}
     };
@@ -157,20 +157,7 @@ class EditEvent extends Component {
       moment(this.state.timeEnd).format("hh:mm A"),
       this.state.timeEnd
     );
-    var fixtures = [
-      {
-        label: "San Francisco, CA",
-        location: { lat: 53.5459, lng: 9.966576 }
-      },
-      {
-        label: "New York, NY",
-        location: { lat: 53.5495629, lng: 9.9625838 }
-      },
-      {
-        label: "Austin, TX",
-        location: { lat: 53.5610398, lng: 10.0259135 }
-      }
-    ];
+
     const event = this.props.location.state;
     const googleMap = this.props.auth.googleMaps.maps;
     console.log("RENDER REFESH MAP", googleMap);
@@ -417,7 +404,6 @@ class EditEvent extends Component {
                     ref={el => (this._geoSuggest = el)}
                     placeholder="Start typing!"
                     // initialValue="San Francisco"
-                    fixtures={fixtures}
                     onSuggestSelect={this.onSuggestSelect}
                     suggestsHiddenClassName={styles.geoformHidden}
                     suggestItemClassName={styles.geoformActive}
@@ -436,7 +422,6 @@ class EditEvent extends Component {
                     ref={el => (this._geoSuggest = el)}
                     placeholder="Start typing!"
                     // initialValue="San Francisco"
-                    fixtures={fixtures}
                     onSuggestSelect={this.onSuggestSelect}
                     suggestsHiddenClassName={styles.geoformHidden}
                     suggestItemClassName={styles.geoformActive}

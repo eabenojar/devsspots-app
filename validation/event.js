@@ -51,9 +51,39 @@ module.exports = function validateCreateEventForm(data) {
   if (second < first) {
     errors.timeEnd = "Time End must be after Time Start";
   }
+  if (first === second) {
+    errors.timeStart = "Cannot be equal";
+    errors.timeEnd = "Cannot be equal";
+  }
   console.log("CHECK TIMES BEGIN AND END", first, second);
-  if (!validator.isAfter(data.eventDate)) {
+  if (validator.equals(data.eventDate)) {
+    errors.eventDate = "Event must be at a later date";
+  }
+  const eventDateObj = new Date(data.eventDate);
+  console.log("EVENT", eventDateObj.getDate() === today.getDate());
+
+  if (
+    today.getDate() !== eventDateObj.getDate() &&
+    !validator.isAfter(data.eventDate)
+  ) {
     errors.eventDate = "Event cannot be in the past";
+  }
+  console.log(
+    "HOURS",
+    new Date(data.timeStart).getHours(),
+    new Date().getHours()
+  );
+  if (today.getDate() == eventDateObj.getDate()) {
+    if (new Date(data.timeStart).getHours() <= new Date().getHours()) {
+      errors.timeStart = "Time must be an hour after current time";
+    } else if (first > second) {
+      errors.timeStart = "Time Start must be before Time End";
+    } else if (second < first) {
+      errors.timeEnd = "Time End must be after Time Start";
+    } else if (first === second) {
+      errors.timeStart = "Cannot be equal";
+      errors.timeEnd = "Cannot be equal";
+    }
   }
 
   return {

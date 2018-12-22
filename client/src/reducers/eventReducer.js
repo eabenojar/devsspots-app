@@ -5,7 +5,8 @@ import {
   GET_EVENT_DETAILS,
   DELETE_EVENT,
   JOIN_EVENT,
-  LEAVE_EVENT
+  LEAVE_EVENT,
+  UPDATE_EVENT
 } from "../actions/types";
 
 const initialState = {
@@ -20,6 +21,10 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_EVENT:
+      return {
+        event: action.paylod
+      };
+    case UPDATE_EVENT:
       return {
         event: action.paylod
       };
