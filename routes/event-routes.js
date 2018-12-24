@@ -181,7 +181,9 @@ router.patch("/update/:id", isUserAuth, (req, res) => {
 router.post("/category/join/:id", isUserAuth, (req, res) => {
   console.log("JOIN SERVER ROUTE REQ BODY", req.body);
   Event.findById(req.params.id)
+    .populate("eventHost")
     .then(event => {
+      console.log("EVENT JOINNEEED SEERRRR", event);
       const host = event.eventHost.toString();
       if (req.body.id !== host && req.body.id !== null) {
         if (event.eventAttendees.indexOf(req.body.id) === -1) {
@@ -209,6 +211,7 @@ module.exports = router;
 router.delete("/category/join/:id/:user_id", isUserAuth, (req, res) => {
   console.log("ARE WE HITTING LEAVE EVENTS ROUTES", req.params.id);
   Event.findById(req.params.id)
+    .populate("eventHost")
     .then(event => {
       if (event.eventAttendees.length === 0) {
         return res.json({ error: "User does not exist" });
