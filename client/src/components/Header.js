@@ -38,7 +38,12 @@ class Header extends Component {
         inverse
         collapseOnSelect
         staticTop
-        style={{ marginBottom: 0, width: "100vw" }}
+        style={{
+          marginBottom: 0,
+          width: "100vw",
+          height: "auto",
+          minHeight: "80px"
+        }}
       >
         <Navbar.Header>
           <Navbar.Brand style={{ color: "red" }}>
