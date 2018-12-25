@@ -4,6 +4,42 @@
   height: auto;
   width: 100vw;
 }
+/* Navbar override css */
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #deeaef;
+}
+.navbar-inverse .navbar-toggle {
+  border-color: #deeaef;
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  /* width: 100%; */
+}
+.navbar-collapse.in {
+  overflow-x: hidden;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #000;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  background-color: rgba(43, 136, 255, 0.8);
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: transparent;
+}
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  margin-left: 10px;
+}
 
 .App-header {
   background-color: #282c34;
