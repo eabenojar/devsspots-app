@@ -20,14 +20,9 @@ class ProfilePage extends Component {
   }
 
   renderProfile() {
-    if (this.props.auth.user[0]) {
-      const {
-        profileImg,
-        firstName,
-        lastName,
-        eventsAttended,
-        eventsHosted
-      } = this.props.auth.user[0];
+    if (this.props.auth.user[0] && this.props.event) {
+      const { profileImg, firstName, lastName } = this.props.auth.user[0];
+      const { eventsAttended, eventsHosted } = this.props.event;
       return (
         <div>
           <div className={styles.profileDetailsHeader}>
@@ -76,7 +71,7 @@ class ProfilePage extends Component {
     }
   }
   render() {
-    console.log("PROFILE PROPS", this.props);
+    console.log("PROFILE PROPS", this.props, this.props.event);
     return (
       <div className={styles.profileContainer}>
         <div className={styles.profileDetails}>{this.renderProfile()}</div>
@@ -88,7 +83,8 @@ class ProfilePage extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    event: state.event
   };
 };
 

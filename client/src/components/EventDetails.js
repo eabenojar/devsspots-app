@@ -108,9 +108,12 @@ class EventDetails extends Component {
   }
   renderMap() {
     console.log("RENDER MAPPPPPP", window.google);
-    if (this.props.event.eventDetails.length === 0) {
+    if (
+      this.props.event.eventDetails[0] === undefined ||
+      this.props.event.eventDetails.length === 0
+    ) {
       return null;
-    } else {
+    } else if (this.props.event.eventDetails[0].eventLocation) {
       const { eventLocation } = this.props.event.eventDetails[0];
 
       const Marker = props => (
@@ -135,13 +138,16 @@ class EventDetails extends Component {
     }
   }
   renderDetails() {
-    // console.log("RENDER DETAILS PROPS", this.props.event);
+    console.log(
+      "RENDER DETAILS METHOD PROPS",
+      this.props.event.eventDetails[0]
+    );
     if (
-      this.props.event.eventDetails === undefined ||
+      this.props.event.eventDetails[0] === undefined ||
       this.props.event.eventDetails.length === 0
     ) {
       return null;
-    } else {
+    } else if (this.props.event.eventDetails[0].eventHost) {
       const event = this.props.event.eventDetails[0];
       return (
         <div>
@@ -180,23 +186,28 @@ class EventDetails extends Component {
               <h1 className={styles.membersGoing}>
                 Developers going - {event.eventAttendees.length}
               </h1>
-
-              <button
-                onClick={() =>
-                  this.onJoinEvent(event, this.props.auth.user[0]._id)
-                }
-                className={styles.joinButton}
-              >
-                Join Event
-              </button>
-              <button
-                className={styles.leaveButton}
-                onClick={() =>
-                  this.onLeaveEvent(event, this.props.auth.user[0]._id)
-                }
-              >
-                Leave Event
-              </button>
+              <div />
+              {this.props.auth.user[0]._id !==
+              this.props.event.eventDetails[0].eventHost._id ? (
+                <div>
+                  <button
+                    onClick={() =>
+                      this.onJoinEvent(event, this.props.auth.user[0]._id)
+                    }
+                    className={styles.joinButton}
+                  >
+                    Join Event
+                  </button>
+                  <button
+                    className={styles.leaveButton}
+                    onClick={() =>
+                      this.onLeaveEvent(event, this.props.auth.user[0]._id)
+                    }
+                  >
+                    Leave Event
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

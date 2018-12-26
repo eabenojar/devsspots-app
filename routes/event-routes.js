@@ -184,7 +184,13 @@ router.post("/category/join/:id", isUserAuth, (req, res) => {
     .populate("eventHost")
     .then(event => {
       console.log("EVENT JOINNEEED SEERRRR", event);
-      const host = event.eventHost.toString();
+      const host = event.eventHost._id.toString();
+      console.log(
+        "CHECK IF SAME HOST",
+        host,
+        req.body.id,
+        host === req.body.id
+      );
       if (req.body.id !== host && req.body.id !== null) {
         if (event.eventAttendees.indexOf(req.body.id) === -1) {
           event.eventAttendees.push(req.body.id);
