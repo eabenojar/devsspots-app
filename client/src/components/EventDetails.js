@@ -7,7 +7,7 @@ import {
 } from "../actions/eventActions";
 import GoogleMapReact from "google-map-react";
 import styles from "../styles/css/EventDetails.module.css";
-import { FaLaptopCode, FaMapMarkerAlt, FaRegClock } from "react-icons/fa";
+import { FaMapMarkerAlt, FaRegClock } from "react-icons/fa";
 
 import moment from "moment";
 
@@ -45,13 +45,21 @@ class EventDetails extends Component {
   componentDidMount() {
     const event = this.props.location.state;
     this.props.getEventDetails(event.category, event.id);
+    console.log("EVENT DETAILS DID MOUNT", this.props);
   }
   componentWillReceiveProps(nextProps) {
     // console.log("WILL RECEIVE PROPS", nextProps);
   }
-  componentDidUpdate() {
-    // console.log("DID UPDATEEEEEEEEEE");
+  componentDidUpdate(prevProps) {
+    // console.log(
+    //   "DID UPDATEEEEEEEEEE EVENNNTNNTNTNTNTNTTN DETAILS",
+    //   this.props.location.state,
+    //   prevProps
+    // );
+    // const event = this.props.location.state;
+    // this.props.getEventDetails(event.category, event.id);
   }
+
   onLeaveEvent(event, userId) {
     // console.log("LEAVE EVENT CLICKED", event, userId);
     this.props.leaveEvent(event._id, userId);
@@ -107,7 +115,7 @@ class EventDetails extends Component {
     }
   }
   renderMap() {
-    console.log("RENDER MAPPPPPP", window.google);
+    // console.log("RENDER MAPPPPPP", window.google);
     if (
       this.props.event.eventDetails[0] === undefined ||
       this.props.event.eventDetails.length === 0
@@ -138,10 +146,10 @@ class EventDetails extends Component {
     }
   }
   renderDetails() {
-    console.log(
-      "RENDER DETAILS METHOD PROPS",
-      this.props.event.eventDetails[0]
-    );
+    // console.log(
+    //   "RENDER DETAILS METHOD PROPS",
+    //   this.props.event.eventDetails[0]
+    // );
     if (
       this.props.event.eventDetails[0] === undefined ||
       this.props.event.eventDetails.length === 0
@@ -215,7 +223,7 @@ class EventDetails extends Component {
     }
   }
   render() {
-    console.log("EVENT DETAILS PROPS", this.props);
+    // console.log("EVENT DETAILS PROPS", this.props);
 
     return (
       <div>
