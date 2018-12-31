@@ -42,7 +42,14 @@ router.get("/:id", isUserAuth, (req, res) => {
 // Public route
 router.get("/category/:category", (req, res) => {
   console.log("CATERGORY PARAMS", req.params.category);
-  Event.find({ eventCategory: req.params.category })
+  const todayDate = new Date().setHours(0, 0, 0, 0);
+  console.log("TODAY DATE SERVER ROUTE", todayDate);
+  Event.find({
+    $and: [
+      { eventCategory: req.params.category },
+      { eventDate: { $gte: todayDate } }
+    ]
+  })
     .sort({ eventDate: 1 })
     .sort({ timeStart: 1 })
     .then(events => {
