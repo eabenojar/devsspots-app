@@ -169,7 +169,30 @@
 .leaveButton {
   background-color: #e74040;
 }
-
+@media only screen and (max-width: 1100px) {
+  .container {
+    min-height: calc(100vh - 50px);
+    height: auto;
+    width: 100vw;
+    background-color: #eef7ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .details {
+    height: 600px;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 20px;
+  }
+  .mapContainer {
+    height: 600px;
+    width: 80%;
+  }
+}
 @media only screen and (max-width: 900px) {
   .container {
     min-height: calc(100vh - 50px);
