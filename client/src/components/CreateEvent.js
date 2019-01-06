@@ -232,6 +232,18 @@ class CreateEvent extends Component {
                   <option name="eventCategory" value="javascript">
                     JAVASCRIPT
                   </option>
+                  <option name="eventCategory" value="react">
+                    REACT
+                  </option>
+                  <option name="eventCategory" value="vue">
+                    VUE
+                  </option>
+                  <option name="eventCategory" value="angular">
+                    ANGULAR
+                  </option>
+                  <option name="eventCategory" value="nodejs">
+                    NODEJS
+                  </option>
                 </FormControl>
                 {this.props.error.eventCategory !== undefined ? (
                   <HelpBlock>{this.props.error.eventCategory}</HelpBlock>
