@@ -45,12 +45,20 @@ class HomePage extends Component {
           description:
             "Node.js is an open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser"
         }
-      ]
+      ],
+      key: ""
     };
     this.categoryEvents = this.categoryEvents.bind(this);
   }
   componentDidMount() {
     this.props.fetchUser();
+    console.log("MOUNT HOME PAGE", this.props);
+    if (this.props.location.state !== undefined) {
+      console.log("DID IT WORKED");
+      this.setState({
+        key: this.props.location.state.key
+      });
+    }
   }
   categoryEvents(item) {
     console.log("TEST", item);
@@ -61,7 +69,7 @@ class HomePage extends Component {
     });
   }
   render() {
-    console.log("HOMEPAGE PROPS", this.props);
+    console.log("HOMEPAGE PROPS", this.props, this.state);
     return (
       <div className={styles.main}>
         <div className={styles.titleSection}>

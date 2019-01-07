@@ -102,6 +102,7 @@ class CreateEvent extends Component {
       this.setState({
         toHome: true
       });
+
       // return <Redirect push to="/profile" />;
       // this.props.history.push("/");
     }
@@ -176,7 +177,14 @@ class CreateEvent extends Component {
       this.state.timeEnd
     );
     if (this.state.toHome === true) {
-      return <Redirect to="/" />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/",
+            state: { key: this.props.event.event[0]._id }
+          }}
+        />
+      );
     }
     const googleMap = this.props.auth.googleMaps.maps;
     console.log("RENDER REFESH MAP", googleMap);
