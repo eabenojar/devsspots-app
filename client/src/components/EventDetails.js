@@ -195,8 +195,9 @@ class EventDetails extends Component {
                 Developers going - {event.eventAttendees.length}
               </h1>
               <div />
-              {this.props.auth.user[0]._id !==
-              this.props.event.eventDetails[0].eventHost._id ? (
+              {this.props.auth.user === undefined ||
+              this.props.auth.user === "" ? null : this.props.auth.user[0]
+                  ._id !== this.props.event.eventDetails[0].eventHost._id ? (
                 <div>
                   <button
                     onClick={() =>
@@ -223,7 +224,7 @@ class EventDetails extends Component {
     }
   }
   render() {
-    // console.log("EVENT DETAILS PROPS", this.props);
+    console.log("EVENT DETAILS PROPS", this.props, this.props.auth);
 
     return (
       <div>

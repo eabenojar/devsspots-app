@@ -42,7 +42,7 @@ export default function(state = initialState, action) {
     case GET_EVENT_DETAILS:
       return {
         ...state,
-        eventDetails: [...state.eventDetails, action.payload]
+        eventDetails: [action.payload]
       };
 
     case JOIN_EVENT:

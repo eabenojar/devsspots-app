@@ -16,6 +16,7 @@ import { addEvent } from "../actions/eventActions";
 import Geosuggest from "react-geosuggest";
 import styles from "../styles/css/CreateEvent.module.css";
 import { fetchGoogleMaps } from "../actions/authAction";
+import { Redirect, withRouter } from "react-router-dom";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -37,7 +38,8 @@ class CreateEvent extends Component {
       timeStart: "",
       timeEnd: "",
       map: null,
-      error: {}
+      error: {},
+      toHome: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -96,7 +98,12 @@ class CreateEvent extends Component {
       this.setState({ error: nextProps.error });
     }
     if (nextProps.event.event.length > 0) {
-      this.props.history.push("/");
+      console.log("ITS LITYYYYY");
+      this.setState({
+        toHome: true
+      });
+      // return <Redirect push to="/profile" />;
+      // this.props.history.push("/");
     }
   }
   getValidationEvent() {
@@ -168,7 +175,9 @@ class CreateEvent extends Component {
       moment(this.state.timeEnd).format("hh:mm A"),
       this.state.timeEnd
     );
-
+    if (this.state.toHome === true) {
+      return <Redirect to="/" />;
+    }
     const googleMap = this.props.auth.googleMaps.maps;
     console.log("RENDER REFESH MAP", googleMap);
     if (window.google !== undefined) {
@@ -478,7 +487,9 @@ const mapStateToProps = state => {
     event: state.event
   };
 };
-export default connect(
-  mapStateToProps,
-  { addEvent, fetchGoogleMaps }
-)(CreateEvent);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { addEvent, fetchGoogleMaps }
+  )(CreateEvent)
+);
