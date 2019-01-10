@@ -146,10 +146,7 @@ class EventDetails extends Component {
     }
   }
   renderDetails() {
-    // console.log(
-    //   "RENDER DETAILS METHOD PROPS",
-    //   this.props.event.eventDetails[0]
-    // );
+
     if (
       this.props.event.eventDetails[0] === undefined ||
       this.props.event.eventDetails.length === 0
